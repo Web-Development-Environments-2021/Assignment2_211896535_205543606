@@ -28,11 +28,23 @@
     
 }
 
-#welcome-screen{
+#welcomescreen{
     display: block;
 }
 
 #register-screen{
+    display: none;
+}
+
+#Login-screen{
+    display: none;
+}
+
+#settings-screen{
+    display: none;
+}
+
+#game-screen{
     display: none;
 }
 

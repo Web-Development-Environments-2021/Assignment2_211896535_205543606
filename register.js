@@ -1,8 +1,8 @@
 			$(document).ready(function(){
-				jQuery.validator.addMethod("fullname-onlyletters", function(value, element) {
+				// jQuery.validator.addMethod("fullname-onlyletters", function(value, element) {
   				// allow only letters characters as the username part
-  				return this.optional( element ) || /^[a-zA-Z])$/.test( value );
-				}, 'Please enter a valid full name.');
+  				// return this.optional( element ) || /^[a-zA-Z])$/.test( value );
+				// }, 'Please enter a valid full name.');
 
 				$("#register-form").vaildate({
 					rules:{

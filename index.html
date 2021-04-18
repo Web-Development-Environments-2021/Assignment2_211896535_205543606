@@ -28,10 +28,10 @@
 
 		<div id="Menu-container">
 			<ul id="menu">
-				<li> <button onclick=switchScreens(welcome-screen) > Welcome</button></li>
-				<li><button onclick=switchScreens(register-screen)> Register</button></li>
-				<li><button onclick=switchScreens(Login-screen)> Log In</button></li>
-				<li><button onclick=switchScreens(settings-screen)> Settings</button></li>
+				<li> <button onClick={switchScreens("welcome-screen")}> Welcome</button></li>
+				<li><button onClick={switchScreens("register-screen")}> Register</button></li>
+				<li><button onClick={switchScreens("Login-screen")}> Log In</button></li>
+				<li><button onClick={switchScreens("settings-screen")}> Settings</button></li>
 				<li><button> About</button></li>
 			</ul>
 		</div>
@@ -163,10 +163,10 @@
 
 
 		<script>
-			function switchScreens(id) {
+			function switchScreens(id){
 				hideScreens();
 				$('#'+id).show();
-			} 
+			};
 			function hideScreens(){
 				$(".screen").hide();
 			}
