@@ -3,19 +3,47 @@
 	<head>
 		<script src="./jquery-3.4.1.slim.min.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
+		<link rel="stylesheet" href="style.css">
+		<title> Pacman B&M</title>
 	</head>
 
 	<body>
-		<div id="score">
-			<label for="lblScore">SCORE:</label>
-			<input id="lblScore" type="text" />
+		<div id="header">
+			<header>
+				<img id="logo" src="assets/logo1.png">
+				<h1 id="header-title">Pacman</h1>
+				<h3 id="personal_details">Ben Margalit & Mor Saranga</h3>
+			</header>
 		</div>
-		<div id="time">
-			<label for="lblTime">TIME:</label>
-			<input id="lblTime" type="text" />
+		<div id="Menu-container">
+			<ul id="menu">
+				<li>welcome</li>
+				<li>Register</li>
+				<li>Log In</li>
+				<li>Settings</li>
+				<li>About</li>
+			</ul>
 		</div>
-		<div id="game">
-			<canvas id="canvas" height="600" width="600"></canvas>
+		<div id="screens">
+			<div id="game-screen">
+				<div id="score">
+					<label for="lblScore">SCORE:</label>
+					<input id="lblScore" type="text" />
+				</div>
+				<div id="time">
+					<label for="lblTime">TIME:</label>
+					<input id="lblTime" type="text" />
+				</div>
+				<div id="game">
+					<canvas id="canvas" height="600" width="600"></canvas>
+				</div>
+			</div>
 		</div>
+		<div id="footer">
+			<footer id="footer">
+
+			</footer>
+		</div>
+	
 	</body>
 </html>
