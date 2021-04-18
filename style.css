@@ -1,4 +1,4 @@
-#logo{
+#logo1{
     display: inline-block;
     width: 50px;
     height: 50px;
@@ -35,6 +35,7 @@
 
 #footer{
     text-align: center;
+    background-color: gray;
 }
 
 #footer > #ben-logos {
@@ -47,4 +48,11 @@
 
 #footer > #mor-logos {
     display: inline-block;
+}
+#content{
+    text-align: center;
+}
+#logo2{
+    width: 200px;
+    height: 200px;
 }

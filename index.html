@@ -2,29 +2,112 @@
 <html>
 	<head>
 		<script src="./jquery-3.4.1.slim.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
+		<script type="text/javascript" src="./register.js"> </script>
 		<link rel="stylesheet" href="style.css">
 		<title> Pacman B&M</title>
 	</head>
 
 	<body>
+
+		<!--HEADER-->
+
 		<div id="header">
 			<header>
-				<img id="logo" src="assets/logo1.png">
+				<img id="logo1" src="assets/logo1.png">
 				<h1 id="header-title">Pacman</h1>
 				<h3 id="personal_details">Ben Margalit & Mor Saranga</h3>
 			</header>
 		</div>
+		
+		<!--MENU BAR-->
+
 		<div id="Menu-container">
 			<ul id="menu">
-				<li>welcome</li>
-				<li>Register</li>
-				<li>Log In</li>
-				<li>Settings</li>
-				<li>About</li>
+				<li> <button> Welcome</button></li>
+				<li><button> Register</button></li>
+				<li><button> Log In</button></li>
+				<li><button> Settings</button></li>
+				<li><button> About</button></li>
 			</ul>
 		</div>
-		<div id="screens">
+
+		<!--CONTENT-->
+
+		<div id="content">
+			<div id="welcome-screen">
+				<img id="logo2" src="assets/logo1.png">
+				</br>
+				<button id="btn-register"> Register</button>
+				<button  id="btn-Login"> Log In</button>
+			</div>
+
+			<!--Register-->
+
+			<div id="register-screen">
+				<form id ="register-form" action="something">
+					<div class="register-container">
+					  <h1>Register</h1>
+					  <p>Please fill in this form to create an account.</p>
+					  <hr>
+					  <label><b>Username</b></label>
+					  <input type="text" placeholder="Enter user name" name="username" id="username" required>
+					  <br>
+					  <label><b>Password</b></label>
+					  <input type="password" placeholder="Enter Password" name="password" id="password" required>
+					  <br>
+					  <label><b>Full name</b></label>
+					  <input type="text" placeholder="Enter Full name" name="fullname" id="fullname" required>
+					  <br>
+					  <label><b>E mail</b></label>
+					  <input type="email" placeholder="Enter E mail" name="email" id="email" required>
+					  <br>
+					  <label><b>date</b></label>
+					  <div class="select-date">
+						<select id="select-day"></select>
+						<select id="select-month">
+							  <option value="0">January
+							  <option value="1">February
+							  <option value="2">March
+							  <option value="3">April
+							  <option value="4">May
+							  <option value="5">June
+							  <option value="6">July
+							  <option value="7">August
+							  <option value="8">September
+							  <option value="9">October
+							  <option value="10">November
+							  <option value="11">December
+						</select>
+						<select id="select-year"></select>
+					  </div>
+					  <button type="submit" class="registerbtn">Register</button>
+					</div>
+				  </form>
+			</div>
+			<div id="Login-screen">
+				<form id ="register-form" method="GET" action="">
+					<div class="register-container">
+					  <h1>Log In</h1>
+					  <hr>
+					  <label><b>Username</b></label>
+					  <input type="text" placeholder="Enter user name" name="username" id="username" required>
+					  <br>
+					  <label><b>Password</b></label>
+					  <input type="password" placeholder="Enter Password" name="password" id="password" required>
+					  <br>
+					  <button type="submit" class="registerbtn">Log In</button>
+
+				
+			</div>
+			<div id="settings-screen">
+				
+			</div>
+			<div id="about-screen">
+				
+			</div>
 			<div id="game-screen">
 				<div id="score">
 					<label for="lblScore">SCORE:</label>
@@ -39,6 +122,9 @@
 				</div>
 			</div>
 		</div>
+
+		<!--FOOTER-->
+
 		<div id="footer">
 			<footer id="footer">
 				<div id="ben-logos">
@@ -55,7 +141,7 @@
 						<img id="github-logo-ben" src="assets/github-ben.png" width="25px" height="25px">
 					</a>
 				</div>
-				<h1 id="names"> Ben Margalit & Mor Saranga</h1>
+				<h4 id="names"> Ben Margalit & Mor Saranga</h4>
 				<div id="mor-logos">
 					<a href="https://www.linkedin.com/in/mor-saranga/">
 						<img id="linkein-logo-mor" src="assets/linkedin-mor.png" width="25px" height="25px">
@@ -72,6 +158,60 @@
 				</div>
 			</footer>
 		</div>
+		
+		<!--DATE PICKER SCRIPT-->
+		<script>
+			var daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31],
+			today = new Date(),
+			// default targetDate is christmas
+			targetDate = new Date(today.getFullYear(), 11, 25); 
+
+			setDate(targetDate);
+			setYears(100) // set the next five years in dropdown
+
+			$("#select-month").change(function() {
+			var monthIndex = $("#select-month").val();
+			setDays(monthIndex);
+			});
+
+			function setDate(date) {
+			setDays(date.getMonth());
+			$("#select-day").val(date.getDate());
+			$("#select-month").val(date.getMonth());
+			$("#select-year").val(date.getFullYear()); 
+			}
+
+			// make sure the number of days correspond with the selected month
+			function setDays(monthIndex) {
+			var optionCount = $('#select-day option').length,
+				daysCount = daysInMonth[monthIndex];
+			
+			if (optionCount < daysCount) {
+				for (var i = optionCount; i < daysCount; i++) {
+				$('#select-day')
+					.append($("<option></option>")
+					.attr("value", i + 1)
+					.text(i + 1)); 
+				}
+			}
+			else {
+				for (var i = daysCount; i < optionCount; i++) {
+				var optionItem = '#select-day option[value=' + (i+1) + ']';
+				$(optionItem).remove();
+				} 
+			} 
+			}
+
+			function setYears(val) {
+			var year = today.getFullYear();
+			for (var i = 0; i < val; i++) {
+				$('#select-year')
+					.append($("<option></option>")
+					.attr("value", year - i)
+					.text(year - i)); 
+				}
+			}
+		</script>
 	
 	</body>
 </html>
