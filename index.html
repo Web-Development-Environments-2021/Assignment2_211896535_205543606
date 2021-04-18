@@ -3,12 +3,12 @@
 	<head>
 		<script src="./jquery-3.4.1.slim.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.js"></script>
-		<script src="jquery-1.10.2.min.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
 		<script type="text/javascript" src="./register.js"> </script>
 		<link rel="stylesheet" href="style.css">
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
 		<title> Pacman B&M</title>
 	</head>
 
@@ -28,7 +28,7 @@
 
 		<div id="Menu-container">
 			<ul id="menu">
-				<li> <button onClick={switchScreens("welcome-screen")}> Welcome</button></li>
+				<li> <button onClick=switchScreens("welcome-screen")> Welcome</button></li>
 				<li><button onClick={switchScreens("register-screen")}> Register</button></li>
 				<li><button onClick={switchScreens("Login-screen")}> Log In</button></li>
 				<li><button onClick={switchScreens("settings-screen")}> Settings</button></li>
@@ -213,7 +213,7 @@
 				$(optionItem).remove();
 				} 
 			} 
-			}
+		}
 
 			function setYears(val) {
 			var year = today.getFullYear();
