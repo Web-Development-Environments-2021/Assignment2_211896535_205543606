@@ -25,9 +25,9 @@
 						email: "Please enter you email",
 						date: "Please enter your birth date"
 					},
-					submitHandler:function(){
-						
+					submitHandler:function(form){
+						form.submit();
 					}
-				})
+				});
 				
-			})
+			});

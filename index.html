@@ -4,6 +4,8 @@
 		<script src="./jquery-3.4.1.slim.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.js"></script>
+		<script src="jquery-1.10.2.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
 		<script type="text/javascript" src="./register.js"> </script>
 		<link rel="stylesheet" href="style.css">
@@ -26,10 +28,10 @@
 
 		<div id="Menu-container">
 			<ul id="menu">
-				<li> <button> Welcome</button></li>
-				<li><button> Register</button></li>
-				<li><button> Log In</button></li>
-				<li><button> Settings</button></li>
+				<li> <button onclick=switchScreens(welcome-screen) > Welcome</button></li>
+				<li><button onclick=switchScreens(register-screen)> Register</button></li>
+				<li><button onclick=switchScreens(Login-screen)> Log In</button></li>
+				<li><button onclick=switchScreens(settings-screen)> Settings</button></li>
 				<li><button> About</button></li>
 			</ul>
 		</div>
@@ -37,7 +39,7 @@
 		<!--CONTENT-->
 
 		<div id="content">
-			<div id="welcome-screen">
+			<div id="welcome-screen" class="screen">
 				<img id="logo2" src="assets/logo1.png">
 				</br>
 				<button id="btn-register"> Register</button>
@@ -46,23 +48,23 @@
 
 			<!--Register-->
 
-			<div id="register-screen">
+			<div id="register-screen" class="screen">
 				<form id ="register-form" action="something">
 					<div class="register-container">
 					  <h1>Register</h1>
 					  <p>Please fill in this form to create an account.</p>
 					  <hr>
 					  <label><b>Username</b></label>
-					  <input type="text" placeholder="Enter user name" name="username" id="username" required>
+					  <input type="text" autocomplete="false" placeholder="Enter user name" name="username" required>
 					  <br>
 					  <label><b>Password</b></label>
-					  <input type="password" placeholder="Enter Password" name="password" id="password" required>
+					  <input type="password" placeholder="Enter Password" name="password" required>
 					  <br>
 					  <label><b>Full name</b></label>
-					  <input type="text" placeholder="Enter Full name" name="fullname" id="fullname" required>
+					  <input type="text" placeholder="Enter Full name" name="fullname" required>
 					  <br>
 					  <label><b>E mail</b></label>
-					  <input type="email" placeholder="Enter E mail" name="email" id="email" required>
+					  <input type="email" placeholder="Enter E mail" name="email" required>
 					  <br>
 					  <label><b>date</b></label>
 					  <div class="select-date">
@@ -87,7 +89,7 @@
 					</div>
 				  </form>
 			</div>
-			<div id="Login-screen">
+			<div id="Login-screen" class="screen">
 				<form id ="register-form" method="GET" action="">
 					<div class="register-container">
 					  <h1>Log In</h1>
@@ -102,13 +104,13 @@
 
 				
 			</div>
-			<div id="settings-screen">
+			<div id="settings-screen" class="screen">
 				
 			</div>
 			<div id="about-screen">
 				
 			</div>
-			<div id="game-screen">
+			<div id="game-screen" class="screen">
 				<div id="score">
 					<label for="lblScore">SCORE:</label>
 					<input id="lblScore" type="text" />
@@ -158,6 +160,17 @@
 				</div>
 			</footer>
 		</div>
+
+
+		<script>
+			function switchScreens(id) {
+				hideScreens();
+				$('#'+id).show();
+			} 
+			function hideScreens(){
+				$(".screen").hide();
+			}
+		</script>
 		
 		<!--DATE PICKER SCRIPT-->
 		<script>

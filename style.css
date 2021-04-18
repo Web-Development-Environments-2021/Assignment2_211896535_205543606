@@ -18,15 +18,22 @@
 #menu > li{
     display: inline-block;
     padding: 10px;;
-    float: left;
-    
+    /* float: left; */
 }
 #menu > li.hover{
     display: inline-block;
     padding: 10px;;
-    float: left;
+    /* float: left; */
     background-color: rosybrown;
     
+}
+
+#welcome-screen{
+    display: block;
+}
+
+#register-screen{
+    display: none;
 }
 
 .a{
@@ -56,3 +63,5 @@
     width: 200px;
     height: 200px;
 }
+
+/* */ 
