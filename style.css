@@ -28,3 +28,23 @@
     background-color: rosybrown;
     
 }
+
+.a{
+    text-decoration: none;
+}
+
+#footer{
+    text-align: center;
+}
+
+#footer > #ben-logos {
+    display: inline-block;
+}
+
+#footer > #names{
+    display: inline-block;
+}
+
+#footer > #mor-logos {
+    display: inline-block;
+}
