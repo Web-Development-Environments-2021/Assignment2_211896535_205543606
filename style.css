@@ -62,10 +62,6 @@ html{
     display: none;
 }
 
-.a{
-    text-decoration: none;
-}
-
 .contact-logo{
     opacity: 0.6;
 }
@@ -73,6 +69,8 @@ html{
 .contact-logo:hover{
     opacity: 1;
 }
+
+
 
 #footer{
     text-align: center;
@@ -115,17 +113,24 @@ html{
 
 .social-links{
     list-style: none;
+    text-decoration: none;
     text-align: center;
 }
 
-.social-links > li{
+.social-links li{
     display: inline;
     text-align: center;
+    text-decoration: none;
 }
+
+a, a img, .a img:visited{
+    text-decoration: none;
+    outline: none;
+    border: 0px none transparent;
+}
+
 
 #logo2{
     width: 200px;
     height: 200px;
 }
-
-/* */ 
