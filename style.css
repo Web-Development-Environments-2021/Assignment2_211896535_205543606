@@ -1,13 +1,23 @@
+html{
+    background-color: rgb(175, 151, 159);
+}
+
+#header{
+    background-color: rgb(116, 96, 102);
+}
+
 #logo1{
     display: inline-block;
-    width: 50px;
-    height: 50px;
+    width: 37.5px;
+    height: 37.5px;
 }
 #header-title{
-    display: inline-block;
+    display: inline;
+    vertical-align: middle;
 }
 #personal_details{
-    display: inline-block;
+    display: inline;
+    vertical-align: middle;
 }
 #menu{
     list-style-type: none;
@@ -25,7 +35,11 @@
     padding: 10px;;
     /* float: left; */
     background-color: rosybrown;
-    
+}
+
+#content-container{
+    text-align: center;
+    height: max-content;
 }
 
 #welcomescreen{
@@ -52,25 +66,63 @@
     text-decoration: none;
 }
 
+.contact-logo{
+    opacity: 0.6;
+}
+
+.contact-logo:hover{
+    opacity: 1;
+}
+
 #footer{
     text-align: center;
-    background-color: gray;
+    background-color:#26272b;
+    padding:45px 0 20px;
+    font-size:15px;
+    color:#737373;
+    bottom: 0;
+    position:absolute;
+    width: 100%;
 }
 
-#footer > #ben-logos {
-    display: inline-block;
+#footer h6{
+    color:#fff;
+    font-size:12px;
+    text-transform:uppercase;
+    margin-top:5px;
+    letter-spacing:2px;
+    display:inline;
+    vertical-align: middle;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-#footer > #names{
+#footer-left{
+    width: 35%;
+    /* float: left; */
+    margin-bottom: 40px;
+    text-align: center;
     display: inline-block;
+    vertical-align: top;
+}
+#footer-right{
+    width: 35%;
+    /* float: right; */ 
+    margin-bottom: 40px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
 }
 
-#footer > #mor-logos {
-    display: inline-block;
-}
-#content{
+.social-links{
+    list-style: none;
     text-align: center;
 }
+
+.social-links > li{
+    display: inline;
+    text-align: center;
+}
+
 #logo2{
     width: 200px;
     height: 200px;
