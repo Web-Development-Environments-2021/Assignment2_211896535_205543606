@@ -1,0 +1,59 @@
+html{
+    background-color: rgb(175, 151, 159);
+}
+
+#header{
+    background-color: rgb(116, 96, 102);
+}
+
+#logo1{
+    display: inline-block;
+    width: 37.5px;
+    height: 37.5px;
+}
+#header-title{
+    display: inline;
+    vertical-align: middle;
+}
+#personal_details{
+    display: inline;
+    vertical-align: middle;
+}
+#menu{
+    list-style-type: none;
+    padding: 10px;;
+    overflow: hidden;
+    background-color: red;
+}
+#menu > li{
+    display: inline-block;
+    padding: 10px;;
+    /* float: left; */
+}
+#menu > li.hover{
+    display: inline-block;
+    padding: 10px;;
+    /* float: left; */
+    background-color: rosybrown;
+}
+
+#content-container{
+    text-align: center;
+    height: max-content;
+}
+
+#register-screen{
+    display: none;
+}
+
+#Login-screen{
+    display: none;
+}
+
+#settings-screen{
+    display: none;
+}
+
+#game-screen{
+    display: none;
+}

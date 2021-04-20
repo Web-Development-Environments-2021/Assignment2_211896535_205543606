@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" href="style.css">
-		<script src="./jquery-3.4.1.slim.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.js"></script>
-		<script type="text/javascript" src="./app.js"></script>
-		<script type="text/javascript" src="./register.js"> </script>
+		<link rel="stylesheet" href="styles/style.css">
+		<link rel="stylesheet" href="styles/footer.css">
+		<link rel="stylesheet" href="styles/welcome.css">
+		<link rel="stylesheet" href="styles/register.css">
+
+		<script type="text/javascript" src="scripts/jquery-3.4.1.slim.min.js"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+		<script type="text/javascript" src="scripts/app.js"></script>
+		<script type="text/javascript" src="scripts/register.js"> </script>
 		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 		<meta content="utf-8" http-equiv="encoding">
 		<title> Pacman B&M</title>
@@ -30,10 +33,11 @@
 
 		<div id="Menu-container">
 			<ul id="menu">
-				<li> <button onClick=switchScreens("welcome-screen")> Welcome</button></li>
-				<li><button onClick={switchScreens("register-screen")}> Register</button></li>
-				<li><button onClick={switchScreens("Login-screen")}> Log In</button></li>
-				<li><button onClick={switchScreens("settings-screen")}> Settings</button></li>
+				
+				<li> <button onClick="switchScreens(`welcome-screen`)"> Welcome</button></li>
+				<li><button onClick="switchScreens(`register-screen`)"> Register</button></li>
+				<li><button onClick="switchScreens(`Login-screen`)"> Log In</button></li>
+				<li><button onClick="switchScreens(`settings-screen`)"> Settings</button></li>
 				<li><button> About</button></li>
 			</ul>
 		</div>
@@ -46,8 +50,8 @@
 			<div id="welcome-screen" class="screen">
 				<img id="logo2" src="assets/logo2.png">
 				</br>
-				<button id="btn-register" onClick={switchScreens("register-screen")}> Register</button>
-				<button  id="btn-Login" onClick={switchScreens("Login-screen")}> Log In</button>
+				<button class=btn1 id="btn-register" onClick="switchScreens(`register-screen`)"><span class="btn1-text">Register</span></button>
+				<button class=btn1 id="btn-Login" onClick="switchScreens(`Login-screen`)"><span class="btn1-text">Login</span></button>
 			</div>
 
 			<!--Register-->
@@ -56,8 +60,8 @@
 				<form id ="register-form" action="register.js">
 					<div class="register-container">
 					  <h1>Register</h1>
-					  <p>Please fill in this form to create an account.</p>
-					  <hr>
+					  <!-- <p>Please fill in this form to create an account.</p>
+					  <hr> -->
 					  <label><b>Username:</b></label>
 					  <input id="username-input" type="text" autocomplete="false" placeholder="Enter user name" name="username" required>
 					  <br>
@@ -71,9 +75,9 @@
 					  <input id="email-input" type="email" placeholder="Enter Email" name="email" required>
 					  <br>
 					  <label><b>Birth Date:</b></label>
-					  <input id="birth-date-input" type="date" name="birth-date" id="birth-date" value="2021-01-01" required>
+					  <input id="birth-date-input" type="date" name="birth-date" id="birth-date" value="2021-01-01" min="1900-01-01" max="2021-01-01" required>
 					  <br> 
-					  <input id="submit-btn-input" type="submit" name="submit-btn">
+					  <input id="submit-btn-input" type="submit" value="Register" name="submit-btn">
 					</div>
 				</form>
 			</div>
@@ -200,59 +204,6 @@
 			}
 		</script>
 		
-		<!--DATE PICKER SCRIPT-->
-		<script>
-			var daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31],
-			today = new Date(),
-			// default targetDate is christmas
-			targetDate = new Date(today.getFullYear(), 11, 25); 
-
-			setDate(targetDate);
-			setYears(100) // set the next five years in dropdown
-
-			$("#select-month").change(function() {
-			var monthIndex = $("#select-month").val();
-			setDays(monthIndex);
-			});
-
-			function setDate(date) {
-			setDays(date.getMonth());
-			$("#select-day").val(date.getDate());
-			$("#select-month").val(date.getMonth());
-			$("#select-year").val(date.getFullYear()); 
-			}
-
-			// make sure the number of days correspond with the selected month
-			function setDays(monthIndex) {
-			var optionCount = $('#select-day option').length,
-				daysCount = daysInMonth[monthIndex];
-			
-			if (optionCount < daysCount) {
-				for (var i = optionCount; i < daysCount; i++) {
-				$('#select-day')
-					.append($("<option></option>")
-					.attr("value", i + 1)
-					.text(i + 1)); 
-				}
-			}
-			else {
-				for (var i = daysCount; i < optionCount; i++) {
-				var optionItem = '#select-day option[value=' + (i+1) + ']';
-				$(optionItem).remove();
-				} 
-			} 
-		}
-
-			function setYears(val) {
-			var year = today.getFullYear();
-			for (var i = 0; i < val; i++) {
-				$('#select-year')
-					.append($("<option></option>")
-					.attr("value", year - i)
-					.text(year - i)); 
-				}
-			}
-		</script>
 	
 	</body>
 </html>
