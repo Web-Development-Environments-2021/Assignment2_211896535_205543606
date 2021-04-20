@@ -1,12 +1,18 @@
 $(document).ready(function(){
 	localStorage.setItem('p', 'p');
 
+	$.validator.addMethod('strongPassword', function(value, element) {
+		return this.optional(element) 
+		  || value.length >= 6
+		  && /\d/.test(value)
+		  && /[a-z]/i.test(value);
+	  },)
+	
 	//REGISTER
-	$("#register_form").validate({
+	$("#register-form").validate({
 		rules: {
 			username: {
 				required: true,
-				validateUsername: true
 			},
 			password: {
 				required: true,
@@ -31,7 +37,7 @@ $(document).ready(function(){
 			},
 			password: {
 				required: "Please enter an password",
-				strongPassword: "password MUST contain at least one character and one number."
+				strongPassword: "Your password must be at least 6 characters long and contain at least one number and one char"
 			},
 			fullname: {
 				required: "Please enter a name.",
