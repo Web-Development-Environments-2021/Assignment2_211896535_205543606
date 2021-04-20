@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<!--LINKS TO CSS-->
 		<link rel="stylesheet" href="styles/style.css">
 		<link rel="stylesheet" href="styles/footer.css">
 		<link rel="stylesheet" href="styles/welcome.css">
 		<link rel="stylesheet" href="styles/register.css">
+		<link rel="stylesheet" href="styles/about.css">
 
+		<!--LINKS TO JS-->
 		<script type="text/javascript" src="scripts/jquery-3.4.1.slim.min.js"></script>
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 		<script type="text/javascript" src="scripts/app.js"></script>
 		<script type="text/javascript" src="scripts/register.js"> </script>
+
+		<!--LINKS TO ELSE-->
 		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 		<meta content="utf-8" http-equiv="encoding">
 		<title> Pacman B&M</title>
@@ -20,7 +25,6 @@
 	<body>
 
 		<!--HEADER-->
-
 		<div id="header">
 			<header>
 				<img id="logo1" src="assets/logo2.png">
@@ -31,7 +35,6 @@
 		</div>
 		
 		<!--MENU BAR-->
-
 		<div id="Menu-container">
 			<ul id="menu">
 				
@@ -39,7 +42,15 @@
 				<li><button onClick="switchScreens(`register-screen`)"> Register</button></li>
 				<li><button onClick="switchScreens(`Login-screen`)"> Log In</button></li>
 				<li><button onClick="switchScreens(`settings-screen`)"> Settings</button></li>
-				<li><button> About</button></li>
+				<li><button id="aboutBtn"> About</button></li>
+				<!--ABOUT-->
+				<div class="modal">
+  					<div class="modal-content">
+    					<span class="close-btn">&times;</span>
+   						<p>Ben Margalit</p>
+						<p>Mor Saranga</p>
+  					</div>
+				</div>
 			</ul>
 		</div>
 
@@ -78,16 +89,15 @@
 					  <label><b>Birth Date:</b></label>
 					  <input id="birth-date-input" type="date" name="birth-date" id="birth-date" value="2021-01-01" min="1900-01-01" max="2021-01-01" required>
 					  <br> 
-					  <input id="submit-btn-input" type="submit" value="Register" name="submit-btn">
+					  <input id="submit-btn-input" type="submit" value="Register" name="submit-btn" onClick="switchScreens(`Login-screen`)">
 					</div>
 				</form>
 			</div>
 
 			<!--Login-->
-
 			<div id="Login-screen" class="screen">
-				<form id ="register-form" method="GET" action="">
-					<div class="register-container">
+				<form id ="login-form" method="GET" action="">
+					<div class="login-container">
 					  <h1>Log In</h1>
 					  <hr>
 					  <label><b>Username</b></label>
@@ -96,25 +106,19 @@
 					  <label><b>Password</b></label>
 					  <input type="password" placeholder="Enter Password" name="password" id="password" required>
 					  <br>
-					  <button type="submit" class="registerbtn">Log In</button>
-
-				
+					  <button type="submit" class="loginBtn" onClick="switchScreens(`game-screen`)">Log In</button>
+			</div>
+				</form>
 			</div>
 
 			<!--Settings-->
-
 			<div id="settings-screen" class="screen">
 				
 			</div>
 
-			<!--About-->
-
-			<div id="about-screen">
+			
 				
-			</div>
-
 			<!--Game-->
-
 			<div id="game-screen" class="screen">
 				<div id="score">
 					<label for="lblScore">SCORE:</label>
@@ -204,7 +208,26 @@
 				$(".screen").hide();
 			}
 		</script>
-		
-	
+		<!--About modal script-->
+		<script>
+			let modalBtn = document.getElementById("aboutBtn")
+			let modal = document.querySelector(".modal")
+			let closeBtn = document.querySelector(".close-btn")
+			modalBtn.onclick = function(){
+ 				 modal.style.display = "block"
+			}
+		closeBtn.onclick = function(){
+ 			 modal.style.display = "none"
+		}
+		window.onclick = function(e){
+  			if(e.target == modal){
+   			 modal.style.display = "none"
+  			}
+			}
+			$(document).keydown(function(e) {
+ 		 var code = e.keyCode || e.which;
+  			if (code == 27) $(".modal").hide();
+			});
+		</script>
 	</body>
 </html>

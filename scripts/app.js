@@ -9,8 +9,13 @@ var interval;
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
+	setUpUserDict();
 	Start();
 });
+
+function setUpUserDict(){
+	var users ={"k":"k"}
+}
 
 function Start() {
 	board = new Array();
