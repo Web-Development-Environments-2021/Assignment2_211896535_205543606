@@ -1,5 +1,7 @@
 $(document).ready(function(){
-	localStorage.setItem('p', 'p');
+	localStorage.setItem('k', 'k');
+
+	
     // LOGIN 
 	$("#login-form").validate({
 		rules: {
@@ -8,7 +10,6 @@ $(document).ready(function(){
 			},
 			password: {
 				required: true,
-				strongPassword: true
 			}
 		},
 		messages: {

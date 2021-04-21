@@ -16,6 +16,9 @@
 		<script type="text/javascript" src="scripts/app.js"></script>
 		<script type="text/javascript" src="scripts/register.js"> </script>
 		<script type="text/javascript" src="scripts/login.js"> </script>
+		<script type="text/javascript" src="scripts/about.js"> </script>
+
+
 
 
 
@@ -70,7 +73,7 @@
 
 			<!--Register-->
 			<div id="register-screen" class="screen">
-				<form id ="register-form" action="register.js">
+				<form id ="register-form" >
 					<div class="register-container">
 					  <h1>Register</h1>
 					  <label><b>Username:</b></label>
@@ -88,14 +91,14 @@
 					  <label><b>Birth Date:</b></label>
 					  <input id="birth-date-input" type="date" name="birth-date" id="birth-date" value="2021-01-01" min="1900-01-01" max="2021-01-01" required>
 					  <br> 
-					  <input id="submit-btn-input" type="submit" value="Register" name="submit-btn" >
+					  <input id="submit-btn-input" type="submit" value="Register" name="submit-btn" onClick="switchScreens(`Login-screen`)" >
 					</div>
 				</form>
 			</div>
 
 			<!--Login-->
 			<div id="Login-screen" class="screen">
-				<form id ="login-form" action="login.js">
+				<form id ="login-form">
 					<div class="login-container">
 					  <h1>Log In</h1>
 					  <hr>
@@ -105,7 +108,7 @@
 					  <label><b>Password</b></label>
 					  <input type="password" placeholder="Enter Password" name="password" id="password" required>
 					  <br>
-					  <input type="submit" id="submit-login" class="loginBtn" value="Log In">
+					  <input type="submit" id="submit-login" class="loginBtn" value="Log In" onClick="switchScreens(`game-screen`)">
 					</div>
 				</form>
 			</div>
@@ -207,26 +210,6 @@
 				$(".screen").hide();
 			}
 		</script>
-		<!--About modal script-->
-		<script>
-			let modalBtn = document.getElementById("aboutBtn")
-			let modal = document.querySelector(".modal")
-			let closeBtn = document.querySelector(".close-btn")
-			modalBtn.onclick = function(){
- 				 modal.style.display = "block"
-			}
-		closeBtn.onclick = function(){
- 			 modal.style.display = "none"
-		}
-		window.onclick = function(e){
-  			if(e.target == modal){
-   			 modal.style.display = "none"
-  			}
-			}
-			$(document).keydown(function(e) {
- 		 var code = e.keyCode || e.which;
-  			if (code == 27) $(".modal").hide();
-			});
-		</script>
+		
 	</body>
 </html>

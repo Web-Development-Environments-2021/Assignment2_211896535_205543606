@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	localStorage.setItem('p', 'p');
+	localStorage.setItem('k', 'k');
 
 	$.validator.addMethod('strongPassword', function(value, element) {
 		return this.optional(element) 
@@ -33,7 +33,6 @@ $(document).ready(function(){
 		messages: {
 			username: {
 				required: "Please enter valid username address.",
-				validateUsername: "Username already taken."
 			},
 			password: {
 				required: "Please enter an password",
