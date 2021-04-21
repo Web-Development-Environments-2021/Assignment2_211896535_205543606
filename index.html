@@ -108,11 +108,6 @@
 				</form>
 			</div>
 
-			<!--Settings-->
-			<div id="settings-screen" class="screen">
-				
-			</div>
-
 			
 				
 			<!--Game-->
@@ -128,6 +123,38 @@
 				<div id="game">
 					<canvas id="canvas" height="600" width="600"></canvas>
 				</div>
+
+			<!--Settings-->
+			<div id="settings">
+				<form id ="settings-form">
+					<div class="settings-container">
+					  <h1>Game settings</h1>
+					  <hr>
+					  <label><b>Select game buttons</b></label>
+
+					  <label> select keyboard button for UP</label>
+					  <input type="button" value="ArrowUp" placeholder="Enter up key" name="moveUpBtn" id="moveUpBtn" required>
+					  <br>
+
+					  <label> select keyboard button for DOWN</label>
+					  <input type="button" value="ArrowDown" placeholder="Enter Down key" name="moveUpBtn" id="moveUpBtn" required>
+					  <br>
+
+					  <label> select keyboard button for LEFT</label>
+					  <input type="button" value="ArrowUp" placeholder="Enter up key" name="moveUpBtn" id="moveUpBtn" required>
+					  <br>
+
+					  <label> select keyboard button for RIGHT</label>
+					  <input type="button" value="ArrowUp" placeholder="Enter up key" name="moveUpBtn" id="moveUpBtn" required>
+					  <br>
+					  <label><b>Password</b></label>
+					  <input type="password" placeholder="Enter Password" name="password" id="password" required>
+					  <br>
+					  <input type="submit" id="submit-login" class="loginBtn" value="Log In" onClick="switchScreens(`game-screen`)">
+					</div>
+				</form>
+			</div>
+
 			</div>
 		</div>
 
