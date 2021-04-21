@@ -17,11 +17,6 @@
 		<script type="text/javascript" src="scripts/register.js"> </script>
 		<script type="text/javascript" src="scripts/login.js"> </script>
 		<script type="text/javascript" src="scripts/about.js"> </script>
-
-
-
-
-
 		<!--LINKS TO ELSE-->
 		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 		<meta content="utf-8" http-equiv="encoding">
@@ -209,6 +204,28 @@
 			function hideScreens(){
 				$(".screen").hide();
 			}
+		</script>
+		<script>
+			// about modal script
+			let aboutBtn = document.getElementById("aboutBtn")
+			let modal = document.querySelector(".modal")
+			let closeBtn = document.querySelector(".close-btn")
+
+		aboutBtn.onclick = function(){
+ 			modal.style.display = "block"
+		}
+		closeBtn.onclick = function(){
+ 			 modal.style.display = "none"
+		}
+		window.onclick = function(e){
+  			if(e.target == modal){
+   			 modal.style.display = "none"
+  			}
+			}
+			$(document).keydown(function(e) {
+ 		 var code = e.keyCode || e.which;
+  			if (code == 27) $(".modal").hide();
+			});
 		</script>
 		
 	</body>
