@@ -7,12 +7,23 @@ $(document).ready(function(){
 		  && /\d/.test(value)
 		  && /[a-z]/i.test(value);
 	  },)
+
+
+	//check if username already exists
+	$.validator.addMethod('validateUsername', function (value, element) {
+		is_valid = localStorage.getItem(value)
+		is_item = localStorage[value]
+		if(is_item==null)
+			return true;
+		else return false;
+	});
 	
 	//REGISTER
 	$("#register-form").validate({
 		rules: {
 			username: {
 				required: true,
+				validateUsername: true
 			},
 			password: {
 				required: true,
@@ -33,6 +44,7 @@ $(document).ready(function(){
 		messages: {
 			username: {
 				required: "Please enter valid username address.",
+				validateUsername: "this username already taken"
 			},
 			password: {
 				required: "Please enter an password",
@@ -51,7 +63,7 @@ $(document).ready(function(){
 			}
 		}
 		,submitHandler: function () {
-			//register();
+			register();
 			switchScreens(`Login-screen`)
 			//reset form details
 			let form = $("#register-form");
@@ -59,3 +71,10 @@ $(document).ready(function(){
 		}
 	});	
 });
+
+
+function register() {
+	let username = document.getElementById("username-input").value;
+	let password = document.getElementById("password-input").value;
+	localStorage.setItem(username, password);
+};
