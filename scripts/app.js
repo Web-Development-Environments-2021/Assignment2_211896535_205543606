@@ -17,6 +17,9 @@ function setUpUserDict(){
 	var users ={"k":"k"}
 }
 
+function login(){
+	
+}
 function Start() {
 	board = new Array();
 	score = 0;

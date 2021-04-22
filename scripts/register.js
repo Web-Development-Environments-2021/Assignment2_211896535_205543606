@@ -50,5 +50,12 @@ $(document).ready(function(){
 				required: "Please enter your birth date."
 			}
 		}
+		,submitHandler: function () {
+			//register();
+			switchScreens(`Login-screen`)
+			//reset form details
+			let form = $("#register-form");
+			form[0].reset();
+		}
 	});	
 });

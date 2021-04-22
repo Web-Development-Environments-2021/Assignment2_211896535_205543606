@@ -20,5 +20,11 @@ $(document).ready(function(){
 				required: "Please enter an password",
 			}
 		}
+		,submitHandler: function(){
+			//login();
+			switchScreens(`game-screen`)
+			let form = $("#login-form");
+			form[0].reset();
+		}
 	});	
 });
