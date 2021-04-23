@@ -36,10 +36,14 @@ $(document).ready(function(){
 			}
 		}
 		,submitHandler: function(){
-			//login();
+			login();
 			switchScreens(`game-screen`)
 			let form = $("#login-form");
 			form[0].reset();
 		}
 	});	
 });
+
+function login(){
+	username_curr = document.getElementById("username").value;
+}
