@@ -142,3 +142,49 @@ function updateSettingsKeys(setting){
     $(document).unbind();
 })  
 }
+function randomValues(){
+    
+var chosen_key_up="ArrowUp";
+document.getElementById("moveUpBtn").value = chosen_key_up;
+var chosen_key_down="ArrowDown";
+document.getElementById("moveDownBtn").value = chosen_key_down;
+var chosen_key_right="ArrowRight";
+document.getElementById("moveRightBtn").value = chosen_key_right;
+var chosen_key_left ="ArrowLeft";
+document.getElementById("moveLeftBtn").value = chosen_key_left;
+var chosen_key_code_up =38;
+var chosen_key_code_down=40;
+var chosen_key_code_left=37;
+var chosen_key_code_right=39;
+
+var chosen_num_of_food_points= getRandomInt(50,90)
+document.getElementById("food-points-scale").value=chosen_num_of_food_points
+document.getElementById("food-points-label").innerHTML=chosen_num_of_food_points
+var chosen_color5 =getRandomColor();
+document.getElementById("5-point-color").value=chosen_color5
+var chosen_color15= getRandomColor();
+document.getElementById("15-point-color").value=chosen_color15
+var chosen_color25 = getRandomColor();
+document.getElementById("25-point-color").value=chosen_color25
+var chosen_game_time = getRandomInt(60,360);
+document.getElementById("game-time-scale").value=chosen_game_time
+document.getElementById("game-time-label").innerHTML=chosen_game_time
+var chosen_num_of_monsters=getRandomInt(1,4);
+document.getElementById("monsters-scale").value=chosen_num_of_monsters
+document.getElementById("monsters-label").innerHTML=chosen_num_of_monsters
+
+}
+
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
