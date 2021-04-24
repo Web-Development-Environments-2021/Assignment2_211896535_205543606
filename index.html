@@ -2,12 +2,13 @@
 <html>
 	<head>
 		<!--LINKS TO CSS-->
+		<link rel="stylesheet" href="styles/login.css">
 		<link rel="stylesheet" href="styles/style.css">
 		<link rel="stylesheet" href="styles/footer.css">
 		<link rel="stylesheet" href="styles/welcome.css">
 		<link rel="stylesheet" href="styles/register.css">
 		<link rel="stylesheet" href="styles/about.css">
-		<link rel="stylesheet" href="styles/login.css">
+		
 
 
 		<!--LINKS TO JS-->
@@ -89,7 +90,7 @@
 					  <label class="form-part"><b>Birth Date:</b></label>
 					  <input class="form-part" id="birth-date-input" type="date" name="birth-date" id="birth-date" value="2021-01-01" min="1900-01-01" max="2021-01-01" required>
 					  <br> 
-					  <input class="btn1" id="submit-btn-input" type="submit" value="Register" name="submit-btn" >
+					  <input class="btn1" id="submit-btn-input" type="submit" value="Register" name="submit-btn">
 					</div>
 				</form>
 			</div>
@@ -101,13 +102,14 @@
 					  <h1>Log In</h1>
 					  <hr>
 					  <label><b>Username</b></label>
-					  <input type="text" placeholder="Enter user name" name="username" id="username" required>
+					  <input class="form-part" type="text" placeholder="Enter user name" name="username" id="username" required>
 					  <br>
 					  <label><b>Password</b></label>
-					  <input type="password" placeholder="Enter Password" name="password" id="password" required>
+					  <input class="form-part" type="password" placeholder="Enter Password" name="password" id="password" required>
 					  <br>
-					  <input type="submit" id="submit-login" class="loginBtn" value="Log In">
-					  <a onclick="switchScreens('register-screen')">Don't have an account?</a>
+					  <input class="btn1" type="submit" id="submit-login" class="loginBtn" value="Log In">
+					  <br>
+					  <a onclick="switchScreens('register-screen')">Don't have an account yet?</a>
 					</div>
 				</form>
 			</div>
