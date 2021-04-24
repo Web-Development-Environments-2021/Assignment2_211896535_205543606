@@ -6,15 +6,31 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
+var cur_username;
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
 	setUpUserDict();
-	Start();
+	//Start();
 });
 
 function setUpUserDict(){
 	var users ={"k":"k"}
+}
+
+// function login(){
+	
+// }
+
+// Game
+
+// function createBoard(){
+// 	context.fillStyle = "black";
+// 	context.fillRect(0, 0, canvas.width, canvas.height);
+// }
+
+function putObstacles(){
+	
 }
 
 function Start() {

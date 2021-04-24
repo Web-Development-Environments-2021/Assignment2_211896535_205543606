@@ -7,12 +7,27 @@ $(document).ready(function(){
 		  && /\d/.test(value)
 		  && /[a-z]/i.test(value);
 	  },)
+
+
+	//check if username already exists
+	$.validator.addMethod('validateUsername', function (value, element) {
+		is_valid = localStorage.getItem(value)
+		is_item = localStorage[value]
+		if(is_item==null)
+			return true;
+		else return false;
+	});
+
+	jQuery.validator.addMethod("lettersonly", function(value, element) {
+		return this.optional(element) || /^[a-z\s]+$/i.test(value);
+	},); 
 	
 	//REGISTER
 	$("#register-form").validate({
 		rules: {
 			username: {
 				required: true,
+				validateUsername: true
 			},
 			password: {
 				required: true,
@@ -33,6 +48,7 @@ $(document).ready(function(){
 		messages: {
 			username: {
 				required: "Please enter valid username address.",
+				validateUsername: "this username already taken"
 			},
 			password: {
 				required: "Please enter an password",
@@ -50,5 +66,19 @@ $(document).ready(function(){
 				required: "Please enter your birth date."
 			}
 		}
+		,submitHandler: function () {
+			register();
+			switchScreens(`Login-screen`)
+			//reset form details
+			let form = $("#register-form");
+			form[0].reset();
+		}
 	});	
 });
+
+
+function register() {
+	let username = document.getElementById("username-input").value;
+	let password = document.getElementById("password-input").value;
+	localStorage.setItem(username, password);
+};
