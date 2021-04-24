@@ -11,7 +11,8 @@ let food_remain;
 let pacman_remain;
 let cnt;
 let rows_num = 10;
-let cols_num = 10; 
+let cols_num = 10;
+let lastKey;
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
@@ -47,7 +48,10 @@ function drawBoard(){
 	 * P - Pacman
 	 * E - EMPTY
 	 */
-	food_remain = chosen_num_of_food_points;
+
+	 //get the food num from the settings
+	// food_remain = chosen_num_of_food_points;
+	food_remain = 50;
 	pacman_remain = 1;
 	cnt = 100;
 
@@ -181,23 +185,23 @@ function Draw() {
 
 function UpdatePosition() {
 	board[shape.i][shape.j] = "E";
-	var x = GetKeyPressed();
-	if (x == 1) {
+	lastKey = GetKeyPressed();
+	if (lastKey == 1) {
 		if (shape.j > 0 && board[shape.i][shape.j - 1] != "W") {
 			shape.j--;
 		}
 	}
-	if (x == 2) {
+	if (lastKey == 2) {
 		if (shape.j < 9 && board[shape.i][shape.j + 1] != "W") {
 			shape.j++;
 		}
 	}
-	if (x == 3) {
+	if (lastKey == 3) {
 		if (shape.i > 0 && board[shape.i - 1][shape.j] != "W") {
 			shape.i--;
 		}
 	}
-	if (x == 4) {
+	if (lastKey == 4) {
 		if (shape.i < 9 && board[shape.i + 1][shape.j] != "W") {
 			shape.i++;
 		}

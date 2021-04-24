@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
     // SETTINGS 
 	$("#settings-form").validate({
@@ -68,13 +67,9 @@ $(document).ready(function(){
 		}
 		,submitHandler: function(){
 			Start();
-			//switchScreens(`game-screen`)
-			//let form = $("#login-form");
-			//form[0].reset();
 		}
 	});	
 });
-
 
 let chosen_key_up;
 let chosen_key_down;
@@ -143,7 +138,6 @@ function updateSettingsKeys(setting){
 })  
 }
 function randomValues(){
-    
     chosen_key_up="ArrowUp";
     document.getElementById("moveUpBtn").value = chosen_key_up;
     chosen_key_down="ArrowDown";
@@ -168,7 +162,6 @@ function randomValues(){
     chosen_num_of_monsters=getRandomInt(1,4);
     document.getElementById("monsters-scale").value=chosen_num_of_monsters;
     document.getElementById("monsters-label").innerHTML=chosen_num_of_monsters;
-
 }
 
 function getRandomInt(min, max) {
