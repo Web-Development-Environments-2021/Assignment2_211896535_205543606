@@ -71,6 +71,10 @@
       background-position: 0 0;
 }
 
+.btn1:hover{
+    background: var(--base-color);
+}
+
 .btn1-text::before {
       transform-origin: 0 0;
       transform: scale3d(1, 1, 1);

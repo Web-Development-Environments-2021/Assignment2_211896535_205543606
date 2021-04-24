@@ -76,25 +76,25 @@ $(document).ready(function(){
 });
 
 
-var chosen_key_up;
-var chosen_key_down;
-var chosen_key_right;
-var chosen_key_left ;
-var chosen_key_code_up;
-var chosen_key_code_down;
-var chosen_key_code_left;
-var chosen_key_code_right;
-var chosen_num_of_food_points;
-var chosen_color5;
-var chosen_color15;
-var chosen_color25;
-var chosen_game_time;
-var chosen_num_of_monsters;
+let chosen_key_up;
+let chosen_key_down;
+let chosen_key_right;
+let chosen_key_left ;
+let chosen_key_code_up = 38;
+let chosen_key_code_down = 40;
+let chosen_key_code_left = 37;
+let chosen_key_code_right = 39;
+let chosen_num_of_food_points;
+let chosen_color5;
+let chosen_color15;
+let chosen_color25;
+let chosen_game_time;
+let chosen_num_of_monsters;
 
 function updateSettings(setting){
     switch(setting){
         case "FOOD":
-            chosen_num_of_food_points=document.getElementById("food-points-scale").value
+            chosen_num_of_food_points=parseInt(document.getElementById("food-points-scale").value)
             break;
         case "COLOR5":
             chosen_color5=document.getElementById("5-point-color").value
@@ -144,34 +144,30 @@ function updateSettingsKeys(setting){
 }
 function randomValues(){
     
-    var chosen_key_up="ArrowUp";
+    chosen_key_up="ArrowUp";
     document.getElementById("moveUpBtn").value = chosen_key_up;
-    var chosen_key_down="ArrowDown";
+    chosen_key_down="ArrowDown";
     document.getElementById("moveDownBtn").value = chosen_key_down;
-    var chosen_key_right="ArrowRight";
+    chosen_key_right="ArrowRight";
     document.getElementById("moveRightBtn").value = chosen_key_right;
-    var chosen_key_left ="ArrowLeft";
+    chosen_key_left ="ArrowLeft";
     document.getElementById("moveLeftBtn").value = chosen_key_left;
-    var chosen_key_code_up =38;
-    var chosen_key_code_down=40;
-    var chosen_key_code_left=37;
-    var chosen_key_code_right=39;
 
-    var chosen_num_of_food_points= getRandomInt(50,90)
-    document.getElementById("food-points-scale").value=chosen_num_of_food_points
-    document.getElementById("food-points-label").innerHTML=chosen_num_of_food_points
-    var chosen_color5 =getRandomColor();
-    document.getElementById("5-point-color").value=chosen_color5
-    var chosen_color15= getRandomColor();
-    document.getElementById("15-point-color").value=chosen_color15
-    var chosen_color25 = getRandomColor();
-    document.getElementById("25-point-color").value=chosen_color25
-    var chosen_game_time = getRandomInt(60,360);
-    document.getElementById("game-time-scale").value=chosen_game_time
-    document.getElementById("game-time-label").innerHTML=chosen_game_time
-    var chosen_num_of_monsters=getRandomInt(1,4);
-    document.getElementById("monsters-scale").value=chosen_num_of_monsters
-    document.getElementById("monsters-label").innerHTML=chosen_num_of_monsters
+    chosen_num_of_food_points= getRandomInt(50,90);
+    document.getElementById("food-points-scale").value=chosen_num_of_food_points;
+    document.getElementById("food-points-label").innerHTML=chosen_num_of_food_points;
+    chosen_color5 =getRandomColor();
+    document.getElementById("5-point-color").value=chosen_color5;
+    chosen_color15= getRandomColor();
+    document.getElementById("15-point-color").value=chosen_color15;
+    chosen_color25 = getRandomColor();
+    document.getElementById("25-point-color").value=chosen_color25;
+    chosen_game_time = getRandomInt(60,360);
+    document.getElementById("game-time-scale").value=chosen_game_time;
+    document.getElementById("game-time-label").innerHTML=chosen_game_time;
+    chosen_num_of_monsters=getRandomInt(1,4);
+    document.getElementById("monsters-scale").value=chosen_num_of_monsters;
+    document.getElementById("monsters-label").innerHTML=chosen_num_of_monsters;
 
 }
 
