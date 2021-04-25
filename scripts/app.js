@@ -1,5 +1,6 @@
 let context;
 let shape = new Object();
+let pacman = new Object();
 let board;
 let score;
 let pac_color = "yellow";
@@ -10,9 +11,10 @@ let cur_username;
 let food_remain;
 let pacman_remain;
 let cnt;
-let rows_num = 15;
-let cols_num = 15;
+let rows_num = 10;
+let cols_num = 20;
 let lastKey;
+let pac_direction;
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
@@ -55,10 +57,10 @@ function drawBoard(){
 	pacman_remain = 1;
 	cnt = 100;
 
-	for (var i = 0; i < rows_num; i++) {
+	for (var i = 0; i < cols_num; i++) {
 		board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
-		for (var j = 0; j < cols_num; j++) {
+		for (var j = 0; j < rows_num; j++) {
 			if (
 				(i == 0) || (j==0) ||
 				(i == 3 && j == 3) ||
@@ -66,8 +68,8 @@ function drawBoard(){
 				(i == 3 && j == 5) ||
 				(i == 6 && j == 1) ||
 				(i == 6 && j == 2) ||
-				(i == rows_num-1) ||
-				(j== cols_num-1)
+				(i == cols_num-1) ||
+				(j== rows_num-1)
 			) {
 				board[i][j] = "W";
 			} else {
@@ -119,11 +121,11 @@ function Start() {
 }
 
 function findRandomEmptyCell(board) {
-	let i = getRandomInt(0,rows_num-1);
-	let j = getRandomInt(0,cols_num-1);
+	let i = getRandomInt(0,cols_num-1);
+	let j = getRandomInt(0,rows_num-1);
 	while (board[i][j] != "E") {
-		i = getRandomInt(0,rows_num-1);
-		j = getRandomInt(0,cols_num-1);
+		i = getRandomInt(0,cols_num-1);
+		j = getRandomInt(0,rows_num-1);
 	}
 	return [i, j];
 }
@@ -153,33 +155,56 @@ function GetKeyPressed() {
 	}
 }
 
+function DrawPacman(center){
+	context.beginPath();
+	context.arc(center.x, center.y, 10, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+	context.lineTo(center.x, center.y);
+	context.fillStyle = pac_color; //color
+	context.fill();
+	context.beginPath();
+	context.arc(center.x + 5, center.y - 10, 1, 0, 2 * Math.PI); // circle
+	context.fillStyle = "black"; //color
+	context.fill();
+}
+
 function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
 	lblTime.value = time_elapsed;
-	for (var i = 0; i < rows_num; i++) {
-		for (var j = 0; j < cols_num; j++) {
+	let pac_img = new Image();
+	let pac_src = "";
+	for (var i = 0; i < cols_num; i++) {
+		for (var j = 0; j < rows_num; j++) {
 			var center = new Object();
-			center.x = i * 60 + 30;
-			center.y = j * 60 + 30;
+			center.x = i * 30 + 30;
+			center.y = j * 30 + 30;
 			if (board[i][j] == "P") {
-				context.beginPath();
-				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
-				context.lineTo(center.x, center.y);
-				context.fillStyle = pac_color; //color
-				context.fill();
-				context.beginPath();
-				context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
-				context.fillStyle = "black"; //color
-				context.fill();
+				DrawPacman(center);
+				// if (pac_direction == "U"){
+				// 	pac_src = "./assets/pacman2-up.png";
+				// }
+				// else if (pac_direction == "D"){
+				// 	pac_src = "./assets/pacman2-down.png";
+				// }
+				// else if (pac_direction == "R"){
+				// 	pac_src = "./assets/pacman2-right.png";
+				// }
+				// else{
+				// 	pac_src = "./assets/pacman2-left.png";
+				// }
+				// pac_img.onload = function(){
+				// 	context.drawImage(pac_img,center.x,center.y,30,30);
+				// }
+				// pac_img.src = pac_src;
+
 			} else if (board[i][j] == "F5") {
 				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
 				context.fillStyle = "black"; //color
 				context.fill();
 			} else if (board[i][j] == "W") {
 				context.beginPath();
-				context.rect(center.x - 30, center.y - 30, 60, 60);
+				context.rect(center.x - 10, center.y - 10, 30, 30);
 				context.fillStyle = "grey"; //color
 				context.fill();
 			}
@@ -192,25 +217,29 @@ function UpdatePosition() {
 	lastKey = GetKeyPressed();
 	// UP
 	if (lastKey == 1) {
+		pac_direction = "U";
 		if (shape.j > 0 && board[shape.i][shape.j - 1] != "W") {
 			shape.j--;
 		}
 	}
 	// DOWN
 	if (lastKey == 2) {
-		if (shape.j < cols_num-1 && board[shape.i][shape.j + 1] != "W") {
+		pac_direction = "D";
+		if (shape.j < rows_num-1 && board[shape.i][shape.j + 1] != "W") {
 			shape.j++;
 		}
 	}
 	// LEFT
 	if (lastKey == 3) {
+		pac_direction = "L";
 		if (shape.i > 0 && board[shape.i - 1][shape.j] != "W") {
 			shape.i--;
 		}
 	}
 	// RIGHT
 	if (lastKey == 4) {
-		if (shape.i < rows_num-1 && board[shape.i + 1][shape.j] != "W") {
+		pac_direction = "R";
+		if (shape.i < cols_num-1 && board[shape.i + 1][shape.j] != "W") {
 			shape.i++;
 		}
 	}
