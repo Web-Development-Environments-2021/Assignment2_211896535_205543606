@@ -183,10 +183,9 @@ function Draw() {
 				context.fillStyle = small_food.color; //color
 				context.fill();
 			} else if (board.arr[i][j] == "W") {
-				context.beginPath();
-				context.rect(center.x - 10, center.y - 10, 30, 30);
-				context.fillStyle = "grey"; //color
-				context.fill();
+				wall_img = new Image(10,10);
+				wall_img.src = "./assets/wall.png";
+				context.drawImage(wall_img,center.x-15, center.y-15, board.cell_width, board.cell_height);
 			}
 		}
 	}
@@ -196,7 +195,7 @@ function UpdatePosition() {
 	board.arr[pacman.i][pacman.j] = "E";
 	lastKey = GetKeyPressed();
 	if(lastKey == undefined){
-		return;
+		lastKey = 0;
 	}
 	// UP
 	if (lastKey == 1) {

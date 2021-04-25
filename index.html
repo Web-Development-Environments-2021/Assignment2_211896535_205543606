@@ -5,6 +5,7 @@
 		<link rel="stylesheet" href="styles/login.css">
 		<link rel="stylesheet" href="styles/game.css">
 		<link rel="stylesheet" href="styles/style.css">
+		<link rel="stylesheet" href="styles/settings.css">
 		<link rel="stylesheet" href="styles/footer.css">
 		<link rel="stylesheet" href="styles/home.css">
 		<link rel="stylesheet" href="styles/register.css">
@@ -33,32 +34,32 @@
 	</head>
 
 	<body>
-		<!--HEADER-->
-		<div id="header">
+		<div id="header-container">
+			<!--HEADER-->
 			<header>
 				<center>
 					<img id="logo3" src="assets/title.png">
 				</center>
 				<h3 id="personal_details">Ben Margalit & Mor Saranga</h3>
 			</header>
-		</div>
-		
-		<!--MENU BAR-->
-		<div id="Menu-container">
-			<ul id="menu">	
-				<li><button class="btn1" data-text="color" onClick="switchScreens(`home-screen`)"> Home</button></li>
-				<li><button class="btn1" data-text="color" onClick="switchScreens(`register-screen`)"> Register</button></li>
-				<li><button class="btn1" data-text="color" onClick="switchScreens(`Login-screen`)"> Login</button></li>
-				<li><button class="btn1" data-text="color" id="aboutBtn"> About</button></li>
-				<!--ABOUT-->
-				<div class="modal">
-  					<div class="modal-content">
-    					<span class="close-btn">&times;</span>
-   						<p>Ben Margalit</p>
-						<p>Mor Saranga</p>
-  					</div>
-				</div>
-			</ul>
+
+			<!--MENU BAR-->
+			<div id="Menu-container">
+				<ul id="menu">	
+					<li><button class="btn1" data-text="color" onClick="switchScreens(`home-screen`)"> Home</button></li>
+					<li><button class="btn1" data-text="color" onClick="switchScreens(`register-screen`)"> Register</button></li>
+					<li><button class="btn1" data-text="color" onClick="switchScreens(`Login-screen`)"> Login</button></li>
+					<li><button class="btn1" data-text="color" id="aboutBtn"> About</button></li>
+					<!--ABOUT-->
+					<div class="modal">
+						<div class="modal-content">
+							<span class="close-btn">&times;</span>
+							<p>Ben Margalit</p>
+							<p>Mor Saranga</p>
+						</div>
+					</div>
+				</ul>
+			</div>
 		</div>
 
 		<!--CONTENT-->
@@ -66,7 +67,7 @@
 
 			<!--Home-->
 			<div id="home-screen" class="screen">
-				<img id="logo2" src="assets/home2.jpeg">
+				<img id="logo2" src="assets/home2.png">
 				</br>
 				<button class=btn1 id="btn-register" onClick="switchScreens(`register-screen`)"><span class="btn1-text">Register</span></button>
 				<button class=btn1 id="btn-Login" onClick="switchScreens(`Login-screen`)"><span class="btn1-text">Login</span></button>
@@ -163,55 +164,67 @@
 				<div id="settings-change">
 					<form id ="settings-form">
 						<div class="settings-container">
-						<h1>Game settings</h1>
-						<hr>
-						<label><b>Select game buttons</b></label>
-						<br>
-						<label> select keyboard button for UP</label>
-						<input type="button" value="ArrowUp" placeholder="Enter Up key" name="moveUpBtn" id="moveUpBtn" onclick="updateSettingsKeys(`UP`)" required>
-						<br>
-						<label> select keyboard button for DOWN</label>
-						<input type="button" value="ArrowDown" placeholder="Enter Down key" name="moveDownBtn" id="moveDownBtn"onclick="updateSettingsKeys(`DOWN`)" required>
-						<br>
-						<label> select keyboard button for LEFT</label>
-						<input type="button" value="ArrowLeft" placeholder="Enter Left key" name="moveLeftBtn" id="moveLeftBtn"onclick="updateSettingsKeys(`LEFT`)" required>
-						<br>
-						<label> select keyboard button for RIGHT</label>
-						<input type="button" value="ArrowRight" placeholder="Enter Right key" name="moveRightBtn" id="moveRightBtn" onclick="updateSettingsKeys(`RIGHT`)" required>
-						<br>
-						<label><b>Number of Food points:</b></label>
-						<br>
-						<label>50</label>
-						<input type="range" id="food-points-scale" name="foodPointsScale" min="50" max="90" value="70" step="1" onchange="setValFromScale('food-points-label','food-points-scale');updateSettings(`FOOD`);" required>
-						<label>90</label>
-						<br>
-						<label id="food-points-label" > </label>
-						<br>
-						<label><b>select colors of food points:</b></label>
-						<br>
-						<label> select color for 5 points ball</label>
-						<input type="color" id="5-point-color" name="pointsColor5" onchange="updateSettings(`COLOR5`)" required>
-						<br>
-						<label> select color for 15 points ball</label>
-						<input type="color" id="15-point-color" name="pointsColor15" onchange="updateSettings(`COLOR15`)" required>
-						<br>
-						<label> select color for 25 points ball</label>
-						<input type="color" id="25-point-color" name="pointsColor25" onchange="updateSettings(`COLOR25`)" required>
-						<br>
+						<h1>Game Settings</h1>
+							<label><b>Select game buttons</b></label>
+							<br>
 
-						<label><b> select time of the game:</b></label>
-						<br>
-						<input type="range" id="game-time-scale" name="gameTimeScale" min="60" max="360" value="90" step="1" onchange="setValFromScale('game-time-label','game-time-scale');updateSettings(`TIME`);" required>
-						<br>
-						<label id="game-time-label" > </label>
-						<br>
+							<ul id="keyboards-select">
+								<li>
+									<input class="keyboard-option" type="button" value="⇧" placeholder="Enter Up key" name="moveUpBtn" id="moveUpBtn" onclick="updateSettingsKeys(`UP`)" required>
+								</li>
+								<br>
+								<li>
+									<input class="keyboard-option" type="button" value="⇦" placeholder="Enter Left key" name="moveLeftBtn" id="moveLeftBtn"onclick="updateSettingsKeys(`LEFT`)" required>
+								</li>
+								<li>
+									<input class="keyboard-option" type="button" value="⇩" placeholder="Enter Down key" name="moveDownBtn" id="moveDownBtn"onclick="updateSettingsKeys(`DOWN`)" required>
+								</li>
 
-						<label><b> selct num of monsters:</b></label>
-						<br>
-						<input type="range" id="monsters-scale" name="monstersScale" min="1" max="4" value="2" step="1" onchange="setValFromScale('monsters-label','monsters-scale');updateSettings(`MONSTERS`);" required>
-						<br>
-						<label id="monsters-label" > </label>
-						<br>
+								<li>
+									<input class="keyboard-option" type="button" value="➪" placeholder="Enter Right key" name="moveRightBtn" id="moveRightBtn" onclick="updateSettingsKeys(`RIGHT`)" required>
+								</li>	
+							</ul>
+							<!-- <label> select keyboard button for UP</label>
+							<br>
+							<label> select keyboard button for DOWN</label>
+							<br>
+							<label> select keyboard button for LEFT</label>
+							<br>
+							<label> select keyboard button for RIGHT</label>
+							<br> -->
+							<label><b>Number of Food points:</b></label>
+							<br>
+							<label>50</label>
+							<input type="range" id="food-points-scale" name="foodPointsScale" min="50" max="90" value="70" step="1" onchange="setValFromScale('food-points-label','food-points-scale');updateSettings(`FOOD`);" required>
+							<label>90</label>
+							<br>
+							<label id="food-points-label" > </label>
+							<br>
+							<label><b>select colors of food points:</b></label>
+							<br>
+							<label> select color for 5 points ball</label>
+							<input type="color" id="5-point-color" name="pointsColor5" onchange="updateSettings(`COLOR5`)" required>
+							<br>
+							<label> select color for 15 points ball</label>
+							<input type="color" id="15-point-color" name="pointsColor15" onchange="updateSettings(`COLOR15`)" required>
+							<br>
+							<label> select color for 25 points ball</label>
+							<input type="color" id="25-point-color" name="pointsColor25" onchange="updateSettings(`COLOR25`)" required>
+							<br>
+
+							<label><b> select time of the game:</b></label>
+							<br>
+							<input type="range" id="game-time-scale" name="gameTimeScale" min="60" max="360" value="90" step="1" onchange="setValFromScale('game-time-label','game-time-scale');updateSettings(`TIME`);" required>
+							<br>
+							<label id="game-time-label" > </label>
+							<br>
+
+							<label><b> selct num of monsters:</b></label>
+							<br>
+							<input type="range" id="monsters-scale" name="monstersScale" min="1" max="4" value="2" step="1" onchange="setValFromScale('monsters-label','monsters-scale');updateSettings(`MONSTERS`);" required>
+							<br>
+							<label id="monsters-label" > </label>
+							<br>
 						<input class="btn1" type="submit" id="submit-settings" value="Start Game">
 						</div>
 					</form>
