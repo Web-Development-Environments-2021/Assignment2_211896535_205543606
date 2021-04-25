@@ -6,12 +6,10 @@
 		<link rel="stylesheet" href="styles/game.css">
 		<link rel="stylesheet" href="styles/style.css">
 		<link rel="stylesheet" href="styles/footer.css">
-		<link rel="stylesheet" href="styles/welcome.css">
+		<link rel="stylesheet" href="styles/home.css">
 		<link rel="stylesheet" href="styles/register.css">
 		<link rel="stylesheet" href="styles/about.css">
 		
-
-
 		<!--LINKS TO JS-->
 		<script type="text/javascript" src="scripts/sounds.js"> </script>
 		<script type="text/javascript" src="scripts/board.js"> </script>
@@ -38,21 +36,20 @@
 		<!--HEADER-->
 		<div id="header">
 			<header>
-				<img id="logo1" src="assets/logo2.png">
-				<h1 id="header-title">Pacman</h1>
-				</br>
+				<center>
+					<img id="logo3" src="assets/title.png">
+				</center>
 				<h3 id="personal_details">Ben Margalit & Mor Saranga</h3>
 			</header>
 		</div>
 		
 		<!--MENU BAR-->
 		<div id="Menu-container">
-			<ul id="menu">
-				
-				<li> <button onClick="switchScreens(`welcome-screen`)"> Welcome</button></li>
-				<li><button onClick="switchScreens(`register-screen`)"> Register</button></li>
-				<li><button onClick="switchScreens(`Login-screen`)"> Log In</button></li>
-				<li><button id="aboutBtn"> About</button></li>
+			<ul id="menu">	
+				<li><button class="btn1" data-text="color" onClick="switchScreens(`home-screen`)"> Home</button></li>
+				<li><button class="btn1" data-text="color" onClick="switchScreens(`register-screen`)"> Register</button></li>
+				<li><button class="btn1" data-text="color" onClick="switchScreens(`Login-screen`)"> Login</button></li>
+				<li><button class="btn1" data-text="color" id="aboutBtn"> About</button></li>
 				<!--ABOUT-->
 				<div class="modal">
   					<div class="modal-content">
@@ -67,8 +64,8 @@
 		<!--CONTENT-->
 		<div id="content-container">
 
-			<!--Welcome-->
-			<div id="welcome-screen" class="screen">
+			<!--Home-->
+			<div id="home-screen" class="screen">
 				<img id="logo2" src="assets/logo2.png">
 				</br>
 				<button class=btn1 id="btn-register" onClick="switchScreens(`register-screen`)"><span class="btn1-text">Register</span></button>
@@ -77,25 +74,52 @@
 
 			<!--Register-->
 			<div id="register-screen" class="screen">
-				<form id ="register-form" >
+				<form id ="register-form">
 					<div class="register-container">
-					  <h1 class="form-part">Register</h1>
-					  <label class="form-part"><b>Username:</b></label>
-					  <input class="form-part" id="username-input" type="text" autocomplete="false" placeholder="Enter user name" name="username" required>
-					  <br>
-					  <label class="form-part"><b>Password:</b></label>
-					  <input class="form-part" id="password-input" type="password" placeholder="Enter Password" name="password" required>
-					  <br>
-					  <label class="form-part"><b>Full name:</b></label>
-					  <input class="form-part" id="fullname-input" type="text" placeholder="Enter Full name" name="fullname" required>
-					  <br>
-					  <label class="form-part"><b>Email:</b></label>
-					  <input class="form-part" id="email-input" type="email" placeholder="Enter Email" name="email" required>
-					  <br>
-					  <label class="form-part"><b>Birth Date:</b></label>
-					  <input class="form-part" id="birth-date-input" type="date" name="birth-date" id="birth-date" value="2021-01-01" min="1900-01-01" max="2021-01-01" required>
-					  <br> 
-					  <input class="btn1" id="submit-btn-input" type="submit" value="Register" name="submit-btn">
+						<h1 class="form-part">Register</h1>
+						<table id="register-table" align="center">
+							<tr>
+								<th>
+									<label class="form-part"><b>Username:</b></label>
+								</th>
+								<th>
+									<input class="form-part" id="username-input" type="text" autocomplete="false" placeholder="Enter user name" name="username" required>
+								</th>
+							</tr>
+							<tr>
+								<th>
+									<label class="form-part"><b>Password:</b></label>
+								</th>
+								<th>
+									<input class="form-part" id="password-input" type="password" placeholder="Enter Password" name="password" required>
+								</th>
+							</tr>
+							<tr>
+								<th>
+									<label class="form-part"><b>Full name:</b></label>
+								</th>
+								<th>
+									<input class="form-part" id="fullname-input" type="text" placeholder="Enter Full name" name="fullname" required>
+								</th>
+							</tr>
+							<tr>
+								<th>
+									<label class="form-part"><b>Email:</b></label>
+								</th>
+								<th>
+									<input class="form-part" id="email-input" type="email" placeholder="Enter Email" name="email" required>
+								</th>
+							</tr>
+							<tr>
+								<th>
+									<label class="form-part"><b>Birth Date:</b></label>
+								</th>
+								<th>
+									<input class="form-part" id="birth-date-input" type="date" name="birth-date" id="birth-date" value="2021-01-01" min="1900-01-01" max="2021-01-01" required>
+								</th>
+							</tr>
+						</table>
+						<input class="btn1" id="submit-btn-input" type="submit" value="Register" name="submit-btn">
 					</div>
 				</form>
 			</div>
@@ -104,14 +128,25 @@
 			<div id="Login-screen" class="screen">
 				<form id ="login-form">
 					<div class="login-container">
-					  <h1>Log In</h1>
-					  <hr>
-					  <label><b>Username</b></label>
-					  <input class="form-part" type="text" placeholder="Enter user name" name="username" id="username" required>
-					  <br>
-					  <label><b>Password</b></label>
-					  <input class="form-part" type="password" placeholder="Enter Password" name="password" id="password" required>
-					  <br>
+						<h1>Log In</h1>
+						<table id="login-table" align="center">
+							<tr>
+								<th>
+									<label><b>Username</b></label>
+								</th>
+								<th>
+									<input class="form-part" type="text" placeholder="Enter user name" name="username" id="username" required>
+								</th>
+							</tr>
+							<tr>
+								<th>
+									<label><b>Password</b></label>
+								</th>
+								<th>
+									<input class="form-part" type="password" placeholder="Enter Password" name="password" id="password" required>
+								</th>
+							</tr>
+						</table>
 					  <input class="btn1" type="submit" id="submit-login" class="loginBtn" value="Log In">
 					  <br>
 					  <a onclick="switchScreens('register-screen')">Don't have an account yet?</a>
@@ -177,11 +212,11 @@
 						<br>
 						<label id="monsters-label" > </label>
 						<br>
-						<input type="submit" id="submit-settings" value="start game">
+						<input class="btn1" type="submit" id="submit-settings" value="Start Game">
 						</div>
 					</form>
 					<br>
-					<button id="randomBtn" onclick="randomValues()">Random</button>
+					<button class="btn1" id="randomBtn" onclick="randomValues()">Random</button>
 
 				</div>
 

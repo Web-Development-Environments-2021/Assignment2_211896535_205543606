@@ -1,6 +1,6 @@
-#welcome-screen{
+#home-screen{
     display: block;
-    height: 800px;
+    height: 500px;
     overflow: hidden;
     flex-wrap: wrap;
     justify-content: center;
@@ -8,20 +8,21 @@
     font-family: 'Anton', sans-serif;
     background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
 }
-
+/* 
 :root {
     --base-color: rgb(97, 86, 86);
     --hover-color: rgb(163, 157, 128);
-  }
+  } */
 
 
 
 #logo2{
+    margin: 5em;
     width: 200px;
     height: 200px;
 }
 
-.btn1 {
+/* .btn1 {
     display: inline-block;
     justify-content: center;
     align-items: center;
@@ -78,4 +79,4 @@
 .btn1-text::before {
       transform-origin: 0 0;
       transform: scale3d(1, 1, 1);
-}
+} */

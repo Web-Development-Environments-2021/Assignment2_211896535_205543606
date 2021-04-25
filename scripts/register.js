@@ -80,5 +80,10 @@ $(document).ready(function(){
 function register() {
 	let username = document.getElementById("username-input").value;
 	let password = document.getElementById("password-input").value;
-	localStorage.setItem(username, password);
+	if (username != null || password != null){
+		localStorage.setItem(username, password);
+	}
+	else{
+		console.log("error: password or username are null");
+	}
 };
