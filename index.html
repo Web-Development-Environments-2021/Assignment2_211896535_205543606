@@ -13,6 +13,10 @@
 
 
 		<!--LINKS TO JS-->
+		<script type="text/javascript" src="scripts/sounds.js"> </script>
+		<script type="text/javascript" src="scripts/board.js"> </script>
+		<script type="text/javascript" src="scripts/pacman.js"> </script>
+		<script type="text/javascript" src="scripts/food.js"> </script>
 		<script type="text/javascript" src="scripts/jquery-3.4.1.slim.min.js"></script>
 		<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.3.min.js"></script>
 		<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
@@ -160,7 +164,7 @@
 						<input type="color" id="25-point-color" name="pointsColor25" onchange="updateSettings(`COLOR25`)" required>
 						<br>
 
-						<label><b> selct time of the game:</b></label>
+						<label><b> select time of the game:</b></label>
 						<br>
 						<input type="range" id="game-time-scale" name="gameTimeScale" min="60" max="360" value="90" step="1" onchange="setValFromScale('game-time-label','game-time-scale');updateSettings(`TIME`);" required>
 						<br>
@@ -188,15 +192,22 @@
 				<div id="time">
 					<label for="lblTime">TIME:</label>
 					<input id="lblTime" type="text" />
+					<br>
+					<label for="timer"> COUNTDOWN TIMER:</label>
+					<input id="timer" readonly type="text" />
+				</div>
+				<div id="username-title">
+					<label>Username:</label>
+					<label id="username_title"> </label>
 				</div>
 				<div id="game">
-					<canvas id="canvas" width="1000" height="1000"></canvas>
+					<canvas id="canvas" width="800" height="600"></canvas>
 				</div>
 			</div>
-
+<!-- 
 			<div id="settings-show">
 				
-			</div>
+			</div> -->
 		</div>
 
 		<!--FOOTER-->
@@ -282,9 +293,10 @@
 		</script>
 
 		<script>
-			function randButton(){
-				randomValues();
+			function startButton(){
 				$("#settings-change").hide();
+				$("#canvas").show();
+				Start();
 			}
 		</script>
 		

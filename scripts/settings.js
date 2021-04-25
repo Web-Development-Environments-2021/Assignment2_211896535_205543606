@@ -66,7 +66,7 @@ $(document).ready(function(){
             }
 		}
 		,submitHandler: function(){
-			Start();
+			startButton();
 		}
 	});	
 });
@@ -83,7 +83,7 @@ let chosen_num_of_food_points;
 let chosen_color5;
 let chosen_color15;
 let chosen_color25;
-let chosen_game_time;
+let chosen_game_time = 10;
 let chosen_num_of_monsters;
 
 function updateSettings(setting){

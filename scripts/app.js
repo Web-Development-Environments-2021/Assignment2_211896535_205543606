@@ -1,20 +1,17 @@
 let context;
-let shape = new Object();
-let pacman = new Object();
-let board;
+let pacman = new Pacman();
+let small_food = new SmallFood();
+let med_food = new MediumFood();
+let big_food = new BigFood();
+let board = new Board();
 let score;
-let pac_color = "yellow";
 let start_time;
 let time_elapsed;
 let interval;
 let cur_username;
-let food_remain;
-let pacman_remain;
+// let mySound = new sound("bounce.mp3");
 let cnt;
-let rows_num = 10;
-let cols_num = 20;
 let lastKey;
-let pac_direction;
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
@@ -38,13 +35,8 @@ function login(){
 
 // Game
 
-// function createBoard(){
-// 	context.fillStyle = "black";
-// 	context.fillRect(0, 0, canvas.width, canvas.height);
-// }
 
 function drawBoard(){
-	board = new Array();
 	/** W - WALL
 	 * F5 - Food 5
 	 * P - Pacman
@@ -52,15 +44,15 @@ function drawBoard(){
 	 */
 
 	 //get the food num from the settings
-	// food_remain = chosen_num_of_food_points;
-	food_remain = 50;
-	pacman_remain = 1;
-	cnt = 100;
+	small_food.remain = 50;
+	pacman.lives_remain = 1;
+	cnt = 375;
+	board.arr = new Array();
 
-	for (var i = 0; i < cols_num; i++) {
-		board[i] = new Array();
+	for (var i = 0; i < board.cols_num; i++) {
+		board.arr[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
-		for (var j = 0; j < rows_num; j++) {
+		for (var j = 0; j < board.rows_num; j++) {
 			if (
 				(i == 0) || (j==0) ||
 				(i == 3 && j == 3) ||
@@ -68,40 +60,43 @@ function drawBoard(){
 				(i == 3 && j == 5) ||
 				(i == 6 && j == 1) ||
 				(i == 6 && j == 2) ||
-				(i == cols_num-1) ||
-				(j== rows_num-1)
-			) {
-				board[i][j] = "W";
+				(i == board.cols_num-1) ||
+				(j== board.rows_num-1)
+			){
+				board.arr[i][j] = "W";
 			} else {
 				var randomNum = Math.random();
-				if (randomNum <= (1.0 * food_remain) / cnt) {
-					board[i][j] = "F5";
+				if (randomNum <= (1.0 * small_food.remain) / cnt) {
+					board.arr[i][j] = "F5";
 
-					food_remain--;
-				} else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
-					shape.i = i;
-					shape.j = j;
-					pacman_remain--;
-					board[i][j] = "P";
+					small_food.remain--;
+				} else if (randomNum < (1.0 * (pacman.lives_remain + small_food.remain)) / cnt) {
+					pacman.i = i;
+					pacman.j = j;
+					pacman.lives_remain--;
+					board.arr[i][j] = "P";
 				} else {
-					board[i][j] = "E";
+					board.arr[i][j] = "E";
 				}
 				cnt--;
 			}
 		}
 	}
-	while (food_remain > 0) {
-		var emptyCell = findRandomEmptyCell(board);
-		board[emptyCell[0]][emptyCell[1]] = "F5";
-		food_remain--;
+	while (small_food.remain > 0) {
+		let emptyCell = findRandomEmptyCell(board);
+		board.arr[emptyCell[0]][emptyCell[1]] = "F5";
+		small_food.remain--;
 	}	score = 0;
 }
 
 function Start() {
 	drawBoard();
-	
+	// mySound.play();
 	start_time = new Date();
-	
+	startTimer(chosen_game_time, document.getElementById("timer"));
+	document.getElementById("username_title").innerHTML= username_curr;
+	small_food.color = chosen_color5;
+
 	keysDown = {};
 	addEventListener(
 		"keydown",
@@ -117,15 +112,15 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 250);
+	interval = setInterval(UpdatePosition, 150);
 }
 
 function findRandomEmptyCell(board) {
-	let i = getRandomInt(0,cols_num-1);
-	let j = getRandomInt(0,rows_num-1);
-	while (board[i][j] != "E") {
-		i = getRandomInt(0,cols_num-1);
-		j = getRandomInt(0,rows_num-1);
+	let i = getRandomInt(0,board.cols_num-1);
+	let j = getRandomInt(0,board.rows_num-1);
+	while (board.arr[i][j] != "E") {
+		i = getRandomInt(0,board.cols_num-1);
+		j = getRandomInt(0,board.rows_num-1);
 	}
 	return [i, j];
 }
@@ -156,53 +151,38 @@ function GetKeyPressed() {
 }
 
 function DrawPacman(center){
-	context.beginPath();
-	context.arc(center.x, center.y, 10, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
-	context.lineTo(center.x, center.y);
-	context.fillStyle = pac_color; //color
-	context.fill();
-	context.beginPath();
-	context.arc(center.x + 5, center.y - 10, 1, 0, 2 * Math.PI); // circle
-	context.fillStyle = "black"; //color
-	context.fill();
+	if (pacman.direction == "U"){
+		context.drawImage(pacman.img_up, center.x-15, center.y-15, board.cell_width, board.cell_height);
+	}
+	else if (pacman.direction == "D"){
+		context.drawImage(pacman.img_down, center.x-15, center.y-15, board.cell_width, board.cell_height);
+	}
+	else if (pacman.direction == "R"){
+		context.drawImage(pacman.img_right, center.x-15, center.y-15, board.cell_width, board.cell_height);
+	}
+	else{
+		context.drawImage(pacman.img_left, center.x-15, center.y-15, board.cell_width, board.cell_height);
+	}
 }
 
 function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
 	lblTime.value = time_elapsed;
-	let pac_img = new Image();
-	let pac_src = "";
-	for (var i = 0; i < cols_num; i++) {
-		for (var j = 0; j < rows_num; j++) {
-			var center = new Object();
+	for (let i = 0; i < board.cols_num; i++) {
+		for (let j = 0; j < board.rows_num; j++) {
+			let center = new Object();
 			center.x = i * 30 + 30;
 			center.y = j * 30 + 30;
-			if (board[i][j] == "P") {
+			if (board.arr[i][j] == "P") {
 				DrawPacman(center);
-				// if (pac_direction == "U"){
-				// 	pac_src = "./assets/pacman2-up.png";
-				// }
-				// else if (pac_direction == "D"){
-				// 	pac_src = "./assets/pacman2-down.png";
-				// }
-				// else if (pac_direction == "R"){
-				// 	pac_src = "./assets/pacman2-right.png";
-				// }
-				// else{
-				// 	pac_src = "./assets/pacman2-left.png";
-				// }
-				// pac_img.onload = function(){
-				// 	context.drawImage(pac_img,center.x,center.y,30,30);
-				// }
-				// pac_img.src = pac_src;
 
-			} else if (board[i][j] == "F5") {
+			} else if (board.arr[i][j] == "F5") {
 				context.beginPath();
 				context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
-				context.fillStyle = "black"; //color
+				context.fillStyle = small_food.color; //color
 				context.fill();
-			} else if (board[i][j] == "W") {
+			} else if (board.arr[i][j] == "W") {
 				context.beginPath();
 				context.rect(center.x - 10, center.y - 10, 30, 30);
 				context.fillStyle = "grey"; //color
@@ -213,44 +193,44 @@ function Draw() {
 }
 
 function UpdatePosition() {
-	board[shape.i][shape.j] = "E";
+	board.arr[pacman.i][pacman.j] = "E";
 	lastKey = GetKeyPressed();
 	// UP
 	if (lastKey == 1) {
-		pac_direction = "U";
-		if (shape.j > 0 && board[shape.i][shape.j - 1] != "W") {
-			shape.j--;
+		pacman.direction = "U";
+		if (pacman.j > 0 && board.arr[pacman.i][pacman.j - 1] != "W") {
+			pacman.j--;
 		}
 	}
 	// DOWN
 	if (lastKey == 2) {
-		pac_direction = "D";
-		if (shape.j < rows_num-1 && board[shape.i][shape.j + 1] != "W") {
-			shape.j++;
+		pacman.direction = "D";
+		if (pacman.j < board.rows_num-1 && board.arr[pacman.i][pacman.j + 1] != "W") {
+			pacman.j++;
 		}
 	}
 	// LEFT
 	if (lastKey == 3) {
-		pac_direction = "L";
-		if (shape.i > 0 && board[shape.i - 1][shape.j] != "W") {
-			shape.i--;
+		pacman.direction = "L";
+		if (pacman.i > 0 && board.arr[pacman.i - 1][pacman.j] != "W") {
+			pacman.i--;
 		}
 	}
 	// RIGHT
 	if (lastKey == 4) {
-		pac_direction = "R";
-		if (shape.i < cols_num-1 && board[shape.i + 1][shape.j] != "W") {
-			shape.i++;
+		pacman.direction = "R";
+		if (pacman.i < board.cols_num-1 && board.arr[pacman.i + 1][pacman.j] != "W") {
+			pacman.i++;
 		}
 	}
-	if (board[shape.i][shape.j] == "F5") {
+	if (board.arr[pacman.i][pacman.j] == "F5") {
 		score++;
 	}
-	board[shape.i][shape.j] = "P";
+	board.arr[pacman.i][pacman.j] = "P";
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
 	if (score >= 20 && time_elapsed <= 10) {
-		pac_color = "green";
+		pacman.color = "green";
 	}
 	if (score == 50) {
 		window.clearInterval(interval);
@@ -258,4 +238,21 @@ function UpdatePosition() {
 	} else {
 		Draw();
 	}
+}
+
+function startTimer(duration, display) {
+	var timer = duration, minutes, seconds;
+	setInterval(function () {
+		minutes = parseInt(timer / 60, 10)
+		seconds = parseInt(timer % 60, 10);
+
+		minutes = minutes < 10 ? "0" + minutes : minutes;
+		seconds = seconds < 10 ? "0" + seconds : seconds;
+
+		display.value = minutes + ":" + seconds;
+
+		if (--timer < 0) {
+			window.alert("game over!");
+		}
+	}, 1000);
 }
