@@ -1,9 +1,9 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 @import url('https://fonts.googleapis.com/css?family=Inconsolata|Lato:300,400,700');
 
-html{
-    /* background-color: rgb(175, 151, 159); */
-}
+/* html{
+    /* background-color: rgb(175, 151, 159); 
+}*/
 
 body{
     background-color: #345;
@@ -13,9 +13,6 @@ body{
 	font-size: 62.5%;
 	padding: 0 20px;
 	box-sizing: border-box;
-}
-
-#header{
 }
 
 #logo3{
