@@ -135,7 +135,9 @@ function updateSettingsKeys(setting){
             break;
     }
     $(document).unbind();
-})  
+});
+
+
 }
 function randomValues(){
     chosen_key_up="ArrowUp";

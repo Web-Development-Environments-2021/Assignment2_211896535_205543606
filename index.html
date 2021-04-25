@@ -3,6 +3,7 @@
 	<head>
 		<!--LINKS TO CSS-->
 		<link rel="stylesheet" href="styles/login.css">
+		<link rel="stylesheet" href="styles/game.css">
 		<link rel="stylesheet" href="styles/style.css">
 		<link rel="stylesheet" href="styles/footer.css">
 		<link rel="stylesheet" href="styles/welcome.css">
@@ -120,7 +121,7 @@
 
 
 				<!--Settings-->
-				<div id="settings">
+				<div id="settings-change">
 					<form id ="settings-form">
 						<div class="settings-container">
 						<h1>Game settings</h1>
@@ -176,7 +177,7 @@
 						</div>
 					</form>
 					<br>
-					<button id="randomBtn" onclick="randomValues()">Random</button>
+					<button id="randomBtn" onclick="randButton()">Random</button>
 
 				</div>
 
@@ -189,8 +190,12 @@
 					<input id="lblTime" type="text" />
 				</div>
 				<div id="game">
-					<canvas id="canvas" height="1000" width="1000"></canvas>
+					<canvas id="canvas" width="1000" height="1000"></canvas>
 				</div>
+			</div>
+
+			<div id="settings-show">
+				
 			</div>
 		</div>
 
@@ -273,6 +278,13 @@
 			function setValFromScale(label,scale){
 				valfrom = document.getElementById(scale).value
 				document.getElementById(label).innerHTML = valfrom
+			}
+		</script>
+
+		<script>
+			function randButton(){
+				randomValues();
+				$("#settings-change").hide();
 			}
 		</script>
 		

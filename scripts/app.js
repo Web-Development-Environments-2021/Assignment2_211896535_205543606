@@ -10,8 +10,8 @@ let cur_username;
 let food_remain;
 let pacman_remain;
 let cnt;
-let rows_num = 10;
-let cols_num = 10;
+let rows_num = 15;
+let cols_num = 15;
 let lastKey;
 
 $(document).ready(function() {
@@ -135,15 +135,19 @@ function getRandomInt(min, max) {
 }
 
 function GetKeyPressed() {
+	// UP
 	if (keysDown[chosen_key_code_up]) {
 		return 1;
 	}
+	// DOWN
 	if (keysDown[chosen_key_code_down]) {
 		return 2;
 	}
+	// LEFT
 	if (keysDown[chosen_key_code_left]) {
 		return 3;
 	}
+	// RIGHT
 	if (keysDown[chosen_key_code_right]) {
 		return 4;
 	}
@@ -186,23 +190,27 @@ function Draw() {
 function UpdatePosition() {
 	board[shape.i][shape.j] = "E";
 	lastKey = GetKeyPressed();
+	// UP
 	if (lastKey == 1) {
 		if (shape.j > 0 && board[shape.i][shape.j - 1] != "W") {
 			shape.j--;
 		}
 	}
+	// DOWN
 	if (lastKey == 2) {
-		if (shape.j < 9 && board[shape.i][shape.j + 1] != "W") {
+		if (shape.j < cols_num-1 && board[shape.i][shape.j + 1] != "W") {
 			shape.j++;
 		}
 	}
+	// LEFT
 	if (lastKey == 3) {
 		if (shape.i > 0 && board[shape.i - 1][shape.j] != "W") {
 			shape.i--;
 		}
 	}
+	// RIGHT
 	if (lastKey == 4) {
-		if (shape.i < 9 && board[shape.i + 1][shape.j] != "W") {
+		if (shape.i < rows_num-1 && board[shape.i + 1][shape.j] != "W") {
 			shape.i++;
 		}
 	}
