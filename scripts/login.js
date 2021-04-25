@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	localStorage.setItem('k', 'k');
 
-	//check if password match user
+	//Add method to check if the password matches the user
 	$.validator.addMethod('validateUser', function (password, element) {
 		let input_username = document.getElementById("username").value;
 		let localstorage_password = localStorage.getItem(input_username);
@@ -14,8 +14,7 @@ $(document).ready(function(){
 		return false;
 	});
 
-	
-    // LOGIN 
+    // LOGIN validation
 	$("#login-form").validate({
 		rules: {
 			username: {
@@ -28,11 +27,11 @@ $(document).ready(function(){
 		},
 		messages: {
 			username: {
-				required: "Please enter username",
+				required: "Please enter your Username",
 			},
 			password: {
-				required: "Please enter an password",
-				validateUser: "password or username is incorrect"
+				required: "Please enter your Password",
+				validateUser: "Password or Username are incorrect"
 			}
 		}
 		,submitHandler: function(){
@@ -44,6 +43,13 @@ $(document).ready(function(){
 	});	
 });
 
+// Save the username
 function login(){
-	username_curr = document.getElementById("username").value;
+	let try_username = document.getElementById("username").value;
+	if(try_username != null){
+		username_curr = try_username;
+	}
+	else{
+		console.log("Username is null");
+	}
 }

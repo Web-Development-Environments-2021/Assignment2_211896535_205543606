@@ -195,6 +195,9 @@ function Draw() {
 function UpdatePosition() {
 	board.arr[pacman.i][pacman.j] = "E";
 	lastKey = GetKeyPressed();
+	if(lastKey == undefined){
+		return;
+	}
 	// UP
 	if (lastKey == 1) {
 		pacman.direction = "U";

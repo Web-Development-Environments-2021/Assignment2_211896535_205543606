@@ -66,7 +66,7 @@
 
 			<!--Home-->
 			<div id="home-screen" class="screen">
-				<img id="logo2" src="assets/logo2.png">
+				<img id="logo2" src="assets/home2.jpeg">
 				</br>
 				<button class=btn1 id="btn-register" onClick="switchScreens(`register-screen`)"><span class="btn1-text">Register</span></button>
 				<button class=btn1 id="btn-Login" onClick="switchScreens(`Login-screen`)"><span class="btn1-text">Login</span></button>
@@ -79,47 +79,47 @@
 						<h1 class="form-part">Register</h1>
 						<table id="register-table" align="center">
 							<tr>
-								<th>
-									<label class="form-part"><b>Username:</b></label>
+								<th class="form-part">
+									<label><b>Username:</b></label>
 								</th>
-								<th>
-									<input class="form-part" id="username-input" type="text" autocomplete="false" placeholder="Enter user name" name="username" required>
-								</th>
-							</tr>
-							<tr>
-								<th>
-									<label class="form-part"><b>Password:</b></label>
-								</th>
-								<th>
-									<input class="form-part" id="password-input" type="password" placeholder="Enter Password" name="password" required>
+								<th class="form-part">
+									<input class="input-text" id="username-input" type="text" autocomplete="false" placeholder="Enter user name" name="username" required>
 								</th>
 							</tr>
 							<tr>
-								<th>
-									<label class="form-part"><b>Full name:</b></label>
+								<th class="form-part">
+									<label><b>Password:</b></label>
 								</th>
-								<th>
-									<input class="form-part" id="fullname-input" type="text" placeholder="Enter Full name" name="fullname" required>
-								</th>
-							</tr>
-							<tr>
-								<th>
-									<label class="form-part"><b>Email:</b></label>
-								</th>
-								<th>
-									<input class="form-part" id="email-input" type="email" placeholder="Enter Email" name="email" required>
+								<th class="form-part">
+									<input class="input-text" id="password-input" type="password" placeholder="Enter Password" name="password" required>
 								</th>
 							</tr>
 							<tr>
-								<th>
-									<label class="form-part"><b>Birth Date:</b></label>
+								<th class="form-part">
+									<label><b>Full name:</b></label>
 								</th>
-								<th>
-									<input class="form-part" id="birth-date-input" type="date" name="birth-date" id="birth-date" value="2021-01-01" min="1900-01-01" max="2021-01-01" required>
+								<th class="form-part">
+									<input class="input-text" id="fullname-input" type="text" placeholder="Enter Full name" name="fullname" required>
+								</th>
+							</tr>
+							<tr>
+								<th class="form-part">
+									<label><b>Email:</b></label>
+								</th>
+								<th class="form-part">
+									<input class="input-text" id="email-input" type="email" placeholder="Enter Email" name="email" required>
+								</th>
+							</tr>
+							<tr>
+								<th class="form-part">
+									<label><b>Birth Date:</b></label>
+								</th>
+								<th class="form-part">
+									<input class="input-text" id="birth-date-input" type="date" name="birth-date" id="birth-date" value="2021-01-01" min="1900-01-01" max="2021-01-01" required>
 								</th>
 							</tr>
 						</table>
-						<input class="btn1" id="submit-btn-input" type="submit" value="Register" name="submit-btn">
+						<input class="btn1" id="submit-btn-register" type="submit" value="Register" name="submit-btn">
 					</div>
 				</form>
 			</div>
@@ -131,19 +131,19 @@
 						<h1>Log In</h1>
 						<table id="login-table" align="center">
 							<tr>
-								<th>
+								<th class="form-part">
 									<label><b>Username</b></label>
 								</th>
-								<th>
-									<input class="form-part" type="text" placeholder="Enter user name" name="username" id="username" required>
+								<th class="form-part">
+									<input class="input-text" type="text" placeholder="Enter user name" name="username" id="username" required>
 								</th>
 							</tr>
 							<tr>
-								<th>
+								<th class="form-part">
 									<label><b>Password</b></label>
 								</th>
-								<th>
-									<input class="form-part" type="password" placeholder="Enter Password" name="password" id="password" required>
+								<th class="form-part">
+									<input class="input-text" type="password" placeholder="Enter Password" name="password" id="password" required>
 								</th>
 							</tr>
 						</table>

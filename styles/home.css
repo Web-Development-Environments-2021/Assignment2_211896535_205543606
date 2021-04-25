@@ -8,75 +8,10 @@
     font-family: 'Anton', sans-serif;
     background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
 }
-/* 
-:root {
-    --base-color: rgb(97, 86, 86);
-    --hover-color: rgb(163, 157, 128);
-  } */
-
 
 
 #logo2{
     margin: 5em;
-    width: 200px;
+    width: 350px;
     height: 200px;
 }
-
-/* .btn1 {
-    display: inline-block;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    width: 150px;
-    height: 50px;
-    margin: 10px;
-    border: 5px solid var(--base-color);
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-.btn1-text {
-    font-weight: bold;
-    text-transform:uppercase;
-    position: relative;
-    color: transparent;
-    background-image: linear-gradient(
-        90deg,
-        var(--hover-color) 0%,
-        var(--hover-color) 50%,
-        var(--base-color) 50%,
-        var(--base-color) 100%
-    );
-    background-repeat: repeat;
-    background-size: 200%;
-    background-position: 100% 0;
-    -webkit-background-clip: text;
-    background-clip: text;
-    transition: background-position 300ms;      
-}
-
-.btn1::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--base-color);
-    transform-origin: 100% 0;
-    transform: scale3d(0, 1, 1);
-    transition: transform 300ms;
-}
-
-.btn1:hover > .btn1-text {
-      background-position: 0 0;
-}
-
-.btn1:hover{
-    background: var(--base-color);
-}
-
-.btn1-text::before {
-      transform-origin: 0 0;
-      transform: scale3d(1, 1, 1);
-} */
