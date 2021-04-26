@@ -9,46 +9,35 @@ let start_time;
 let time_elapsed;
 let interval;
 let cur_username;
+let food_remain;
+let try_remain;
 // let mySound = new sound("bounce.mp3");
 let cnt;
 let lastKey;
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
-	setUpUserDict();
-
 	window.addEventListener("keydown", function(e) {
 		if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
 			e.preventDefault();
 		}
 	}, false);
-	//Start();
 });
 
-function setUpUserDict(){
-	var users ={"k":"k"}
-}
 
-function login(){
-	
-}
-
-// Game
-
-
-function drawBoard(){
+function createBoard(){
 	/** W - WALL
 	 * F5 - Food 5
 	 * P - Pacman
 	 * E - EMPTY
 	 */
-
 	 //get the food num from the settings
-	small_food.remain = 50;
+	//small_food.remain = chosen_num_of_food_points*0.6;
+	//med_food.remain =  chosen_num_of_food_points*0.3;
+	//big_food.remain =  chosen_num_of_food_points*0.1;
 	pacman.lives_remain = 1;
-	cnt = 375;
 	board.arr = new Array();
-
+	food_remain = chosen_num_of_food_points
 	for (var i = 0; i < board.cols_num; i++) {
 		board.arr[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
@@ -62,41 +51,74 @@ function drawBoard(){
 				(i == 6 && j == 2) ||
 				(i == board.cols_num-1) ||
 				(j== board.rows_num-1)
-			){
+			)
+			{
 				board.arr[i][j] = "W";
-			} else {
+			} 
+			//else board.arr[i][j]="E"
+			else {
 				var randomNum = Math.random();
-				if (randomNum <= (1.0 * small_food.remain) / cnt) {
-					board.arr[i][j] = "F5";
-
-					small_food.remain--;
-				} else if (randomNum < (1.0 * (pacman.lives_remain + small_food.remain)) / cnt) {
+				if (randomNum <= (1.0 * food_remain) / board.cnt) 
+				{
+					const random_food = Math.random();
+					if(random_food<=0.6){
+						board.arr[i][j] = "F5";
+						//small_food.remain--;
+					}
+					else if(random_food>0.6 && random_food<=0.9){
+						board.arr[i][j] = "F15";
+						//small_food.remain--;
+					}
+					else{
+						board.arr[i][j] = "F25";
+						//small_food.remain--;
+					}
+					food_remain--	
+				} 
+				else if (randomNum < (1.0 * (pacman.lives_remain + food_remain)) / board.cnt) {
 					pacman.i = i;
 					pacman.j = j;
 					pacman.lives_remain--;
 					board.arr[i][j] = "P";
-				} else {
+				} 
+				else {
 					board.arr[i][j] = "E";
 				}
-				cnt--;
+				board.cnt--;
 			}
 		}
 	}
-	while (small_food.remain > 0) {
+	while (food_remain > 0) {
 		let emptyCell = findRandomEmptyCell(board);
-		board.arr[emptyCell[0]][emptyCell[1]] = "F5";
-		small_food.remain--;
-	}	score = 0;
+		//board.arr[emptyCell[0]][emptyCell[1]] = "F5";
+		//small_food.remain--;
+		const random_food = Math.random();
+		if(random_food<=0.6){
+			board.arr[emptyCell[0]][emptyCell[0]] = "F5";
+			//small_food.remain--;
+		}
+		else if(random_food>0.6 && random_food<=0.9){
+			board.arr[emptyCell[0]][emptyCell[0]] = "F15";
+			//small_food.remain--;
+		}
+		else{
+			board.arr[emptyCell[0]][emptyCell[0]] = "F25";
+			//small_food.remain--;
+		}
+		food_remain--
+	}
+		score = 0;
 }
 
 function Start() {
-	drawBoard();
+	createBoard();
 	// mySound.play();
 	start_time = new Date();
 	startTimer(chosen_game_time, document.getElementById("timer"));
 	document.getElementById("username_title").innerHTML= username_curr;
 	small_food.color = chosen_color5;
-
+	med_food.color = chosen_color15;
+	big_food.color = chosen_color25;
 	keysDown = {};
 	addEventListener(
 		"keydown",
@@ -176,13 +198,25 @@ function Draw() {
 			center.y = j * 30 + 30;
 			if (board.arr[i][j] == "P") {
 				DrawPacman(center);
-
-			} else if (board.arr[i][j] == "F5") {
+			} 
+			else if (board.arr[i][j] == "F5") {
 				context.beginPath();
-				context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, 4, 0, 2 * Math.PI); // circle
 				context.fillStyle = small_food.color; //color
 				context.fill();
-			} else if (board.arr[i][j] == "W") {
+			} else if (board.arr[i][j] == "F15") {
+				context.beginPath();
+				context.arc(center.x, center.y, 8, 0, 2 * Math.PI); // circle
+				context.fillStyle = med_food.color; //color
+				context.fill();
+			}
+			else if (board.arr[i][j] == "F25") {
+				context.beginPath();
+				context.arc(center.x, center.y, 12, 0, 2 * Math.PI); // circle
+				context.fillStyle = big_food.color; //color
+				context.fill();
+			}
+			else if (board.arr[i][j] == "W") {
 				wall_img = new Image(10,10);
 				wall_img.src = "./assets/wall.png";
 				context.drawImage(wall_img,center.x-15, center.y-15, board.cell_width, board.cell_height);
@@ -190,8 +224,10 @@ function Draw() {
 		}
 	}
 }
-
 function UpdatePosition() {
+	if (pacman.i==undefined || pacman.j==undefined){
+		return
+	}
 	board.arr[pacman.i][pacman.j] = "E";
 	lastKey = GetKeyPressed();
 	if(lastKey == undefined){
@@ -254,7 +290,8 @@ function startTimer(duration, display) {
 		display.value = minutes + ":" + seconds;
 
 		if (--timer < 0) {
-			window.alert("game over!");
+			//window.alert("game over!");
+			var ben =null
 		}
 	}, 1000);
 }

@@ -148,7 +148,6 @@ function randomValues(){
     document.getElementById("moveRightBtn").value = chosen_key_right;
     chosen_key_left ="ArrowLeft";
     document.getElementById("moveLeftBtn").value = chosen_key_left;
-
     chosen_num_of_food_points= getRandomInt(50,90);
     document.getElementById("food-points-scale").value=chosen_num_of_food_points;
     document.getElementById("food-points-label").innerHTML=chosen_num_of_food_points;
