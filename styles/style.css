@@ -18,7 +18,7 @@ html{
 
 body{
     background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-    max-width: 95%;
+    max-width: 98%;
     max-height: 90%;
     justify-content: center;
     margin: auto;    
@@ -60,6 +60,10 @@ body{
     padding: 0px;
 }
 
+#game{
+    width:1100px;
+}
+
 .btn1{
     color: rgba(255,255,255,1);
 	background: none;
@@ -99,6 +103,7 @@ body{
 #content-container{
     text-align: center;
     height: max-content;
+    width: 100%;
 }
 
 #register-screen{

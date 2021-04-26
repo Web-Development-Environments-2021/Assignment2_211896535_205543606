@@ -146,7 +146,6 @@
 			<!--Game-->
 			<div id="game-screen" class="screen">
 
-
 				<!--Settings-->
 				<div id="settings-change">
 					<form id ="settings-form">
@@ -171,14 +170,6 @@
 									<input class="keyboard-option" type="button" value="➪" placeholder="Enter Right key" name="moveRightBtn" id="moveRightBtn" onclick="updateSettingsKeys(`RIGHT`)" required>
 								</li>	
 							</ul>
-							<!-- <label> select keyboard button for UP</label>
-							<br>
-							<label> select keyboard button for DOWN</label>
-							<br>
-							<label> select keyboard button for LEFT</label>
-							<br>
-							<label> select keyboard button for RIGHT</label>
-							<br> -->
 							<label><b>Number of Food points:</b></label>
 							<br>
 							<label>50</label>
@@ -219,30 +210,76 @@
 					<button class="btn1" id="randomBtn" onclick="randomValues()">Random</button>
 
 				</div>
-
-				<div id="score">
-					<label for="lblScore">SCORE:</label>
-					<input id="lblScore" type="text" />
-				</div>
-				<div id="time">
-					<label for="lblTime">TIME:</label>
-					<input id="lblTime" type="text" />
-					<br>
-					<label for="timer"> COUNTDOWN TIMER:</label>
-					<input id="timer" readonly type="text" />
-				</div>
-				<div id="username-title">
-					<label>Username:</label>
-					<label id="username_title"> </label>
-				</div>
-				<div id="game">
-					<canvas id="canvas" width="950" height="600"></canvas>
+				<div id="game-container">
+					<div id="score">
+						<label for="lblScore">SCORE:</label>
+						<input id="lblScore" type="text" />
+					</div>
+					<div id="time">
+						<label for="lblTime">TIME:</label>
+						<input id="lblTime" type="text" />
+						<br>
+						<label for="timer"> COUNTDOWN TIMER:</label>
+						<input id="timer" readonly type="text" />
+					</div>
+					<div id="username-title">
+						<label>Username:</label>
+						<label id="username_title"> </label>
+					</div>
+					<div id="settings-show">
+						<ul id="show-keys-chosen-list">
+							<li id="show-key-up-chosen">
+								<label id="show-key-up-chosen-name">Up:</label>
+								<label id="show-key-up-chosen-val"></label>
+							</li>
+							<br>
+							<li id="show-key-left-chosen">
+								<label id="show-key-left-chosen-name">Left:</label>
+								<label id="show-key-left-chosen-val"></label>
+							</li>
+							<li id="show-key-right-chosen">
+								<label id="show-key-right-chosen-name">Right:</label>
+								<label id="show-key-right-chosen-val"></label>
+							</li>
+							<br>
+							<li id="show-key-down-chosen">
+								<label id="show-key-down-chosen-name">Down:</label>
+								<label id="show-key-down-chosen-val"></label>
+							</li>
+						</ul>
+						<table id="set-show-table" align="center">
+							<tr>
+								<th>
+									<label id="total-food-count-name">Total num of food:</label>
+								</th>
+								<th>
+									<label id="total-food-count-val"></label>
+								</th>
+							</tr>
+							<tr>
+								<th>
+									<label id="total-ghosts-count-name">Total num of ghosts:</label>
+								</th>
+								<th>
+									<label id="total-ghosts-count-val"></label>
+								</th>
+							</tr>
+							<tr>
+								<th>
+									<label id="5-points-color-name">Total num of ghosts:</label>
+								</th>
+								<th>
+									<label id="5-points-color-val"></label>
+								</th>
+							</tr>
+						</table>
+						<button id="new-game-set-show" class="btn1" onclick="newGameShowSettings()">New Game</button>
+					</div>
+					<div id="game">
+						<canvas id="canvas" width="850" height="600"></canvas>
+					</div>
 				</div>
 			</div>
-<!-- 
-			<div id="settings-show">
-				
-			</div> -->
 		</div>
 
 		<!--FOOTER-->
@@ -330,7 +367,8 @@
 		<script>
 			function startButton(){
 				$("#settings-change").hide();
-				$("#canvas").show();
+				showSettings();
+				$("#game-container").show();
 				Start();
 			}
 		</script>

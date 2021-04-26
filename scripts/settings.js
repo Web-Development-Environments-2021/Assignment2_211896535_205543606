@@ -140,13 +140,13 @@ function updateSettingsKeys(setting){
 
 }
 function randomValues(){
-    chosen_key_up="ArrowUp";
+    chosen_key_up="⇧";
     document.getElementById("moveUpBtn").value = chosen_key_up;
-    chosen_key_down="ArrowDown";
+    chosen_key_down="⇩";
     document.getElementById("moveDownBtn").value = chosen_key_down;
-    chosen_key_right="ArrowRight";
+    chosen_key_right="➪";
     document.getElementById("moveRightBtn").value = chosen_key_right;
-    chosen_key_left ="ArrowLeft";
+    chosen_key_left ="⇦";
     document.getElementById("moveLeftBtn").value = chosen_key_left;
     chosen_num_of_food_points= getRandomInt(50,90);
     document.getElementById("food-points-scale").value=chosen_num_of_food_points;
@@ -178,3 +178,20 @@ function getRandomColor() {
     }
     return color;
   }
+
+function showSettings(){
+    // if(chosen_key_up == || chosen_key_down == || chosen_key_left == || chosen_key_right)
+    document.getElementById("show-key-up-chosen-val").innerHTML= chosen_key_up;
+    document.getElementById("show-key-down-chosen-val").innerHTML= chosen_key_down;
+    document.getElementById("show-key-left-chosen-val").innerHTML= chosen_key_left;
+    document.getElementById("show-key-right-chosen-val").innerHTML= chosen_key_right;
+    document.getElementById("total-food-count-val").innerHTML= chosen_num_of_food_points;
+    document.getElementById("total-ghosts-count-val").innerHTML= chosen_num_of_monsters;
+
+
+}
+
+function newGameShowSettings(){
+    $("#game-container").hide();
+    $("#settings-change").show();
+}
