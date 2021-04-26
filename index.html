@@ -181,13 +181,13 @@
 							<label><b>select colors of food points:</b></label>
 							<br>
 							<label> select color for 5 points ball</label>
-							<input type="color" id="5-point-color" name="pointsColor5" onchange="updateSettings(`COLOR5`)" required>
+							<input class="color-set" type="color" id="5-point-color" name="pointsColor5" onchange="updateSettings(`COLOR5`)" required>
 							<br>
 							<label> select color for 15 points ball</label>
-							<input type="color" id="15-point-color" name="pointsColor15" onchange="updateSettings(`COLOR15`)" required>
+							<input class="color-set" type="color" id="15-point-color" name="pointsColor15" onchange="updateSettings(`COLOR15`)" required>
 							<br>
 							<label> select color for 25 points ball</label>
-							<input type="color" id="25-point-color" name="pointsColor25" onchange="updateSettings(`COLOR25`)" required>
+							<input class="color-set" type="color" id="25-point-color" name="pointsColor25" onchange="updateSettings(`COLOR25`)" required>
 							<br>
 
 							<label><b> select time of the game:</b></label>
@@ -266,10 +266,26 @@
 							</tr>
 							<tr>
 								<th>
-									<label id="5-points-color-name">Total num of ghosts:</label>
+									<label id="5-points-color-name">5 points:</label>
 								</th>
 								<th>
-									<label id="5-points-color-val"></label>
+									<input class="color-set" id="5-points-color-val" type="color" disabled>
+								</th>
+							</tr>
+							<tr>
+								<th>
+									<label id="15-points-color-name">15 points:</label>
+								</th>
+								<th>
+									<input class="color-set" id="15-points-color-val" type="color" disabled>
+								</th>
+							</tr>
+							<tr>
+								<th>
+									<label id="25-points-color-name">15 points:</label>
+								</th>
+								<th>
+									<input class="color-set" id="25-points-color-val" type="color" disabled>
 								</th>
 							</tr>
 						</table>

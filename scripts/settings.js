@@ -187,8 +187,9 @@ function showSettings(){
     document.getElementById("show-key-right-chosen-val").innerHTML= chosen_key_right;
     document.getElementById("total-food-count-val").innerHTML= chosen_num_of_food_points;
     document.getElementById("total-ghosts-count-val").innerHTML= chosen_num_of_monsters;
-
-
+    document.getElementById("5-points-color-val").value=chosen_color5;
+    document.getElementById("15-points-color-val").value=chosen_color15;
+    document.getElementById("25-points-color-val").value=chosen_color25;
 }
 
 function newGameShowSettings(){
