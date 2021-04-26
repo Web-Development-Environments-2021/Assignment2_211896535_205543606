@@ -139,9 +139,14 @@ function createBoard(){
 	board.arr[13][16]="E"
 
 }
+function createMovingDoll(){
+	let dollCell = findRandomEmptyCell(board);
+	board.arr[dollCell[0]][dollCell[1]] = "D";
+}
 
 function Start() {
 	createBoard();
+	createMovingDoll();
 	// mySound.play();
 	start_time = new Date();
 	startTimer(chosen_game_time, document.getElementById("timer"));
@@ -256,6 +261,11 @@ function Draw() {
 				teleport_img.src = "./assets/teleport.jpg";
 				context.drawImage(teleport_img,center.x-15, center.y-15, board.cell_width, board.cell_height);
 			}
+			else if(board.arr[i][j] == "D"){
+				doll_img = new Image(10,10);
+				doll_img.src = "./assets/doll.png";
+				context.drawImage(doll_img,center.x-15, center.y-15, board.cell_width, board.cell_height);
+			}
 		}
 	}
 }
@@ -317,6 +327,9 @@ function UpdatePosition() {
 			pacman.i++;
 		}
 	}
+	if(board.arr[pacman.i][pacman.j] == "D"){
+		score+=50
+	}
 	if (board.arr[pacman.i][pacman.j] == "F5") {
 		score+=5;
 	}
@@ -358,4 +371,7 @@ function startTimer(duration, display) {
 			var ben =null
 		}
 	}, 1000);
+}
+function getRandomNeighbor(){
+	
 }
