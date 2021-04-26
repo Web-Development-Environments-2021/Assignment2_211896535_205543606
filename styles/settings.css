@@ -36,29 +36,22 @@
     text-align: center;
 }
 
+#settings-change{
+    font-size: 1.2em;
+}
+
 #settings-show{
+    background-color: rgb(70, 108, 139);
     display: inline-block;
     position:absolute;
     width: 10%;
-    height: 900px;
+    height: 300px;
     text-align: center;
-    padding: 3px;
-    /* font-size: 15px;
-    text-align: center;
-    background-color: #FADAD7;
-    border: #FADAD7 solid 3px;
-    border-radius: 10px;
-    padding: 10px 20px 10px 10px; */
+    left: 20px;
+    margin-top: 15px;
 }
 
 #game{
-    display: inline-block;
-}
-
-.color-show{
-    height: 25px;
-    width: 25px;
-    border-radius: 50%;
     display: inline-block;
 }
 
@@ -87,4 +80,9 @@
     background: none;
     width: 25px;
     height:30px;
+}
+
+.divider{
+    height:auto;
+    display:inline-block;
 }

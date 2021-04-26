@@ -162,13 +162,14 @@
 								<li>
 									<input class="keyboard-option" type="button" value="⇦" placeholder="Enter Left key" name="moveLeftBtn" id="moveLeftBtn"onclick="updateSettingsKeys(`LEFT`)" required>
 								</li>
-								<li>
-									<input class="keyboard-option" type="button" value="⇩" placeholder="Enter Down key" name="moveDownBtn" id="moveDownBtn"onclick="updateSettingsKeys(`DOWN`)" required>
-								</li>
-
+								<div class="divider" width="40px"></div>
 								<li>
 									<input class="keyboard-option" type="button" value="➪" placeholder="Enter Right key" name="moveRightBtn" id="moveRightBtn" onclick="updateSettingsKeys(`RIGHT`)" required>
 								</li>	
+								<br>
+								<li>
+									<input class="keyboard-option" type="button" value="⇩" placeholder="Enter Down key" name="moveDownBtn" id="moveDownBtn"onclick="updateSettingsKeys(`DOWN`)" required>
+								</li>
 							</ul>
 							<label><b>Number of Food points:</b></label>
 							<br>
@@ -237,6 +238,7 @@
 								<label id="show-key-left-chosen-name">Left:</label>
 								<label id="show-key-left-chosen-val"></label>
 							</li>
+							<div class="divider width="10px"></div>
 							<li id="show-key-right-chosen">
 								<label id="show-key-right-chosen-name">Right:</label>
 								<label id="show-key-right-chosen-val"></label>
