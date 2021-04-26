@@ -17,7 +17,6 @@ $(document).ready(function(){
             modal.style.display = "none"
         }
     }
-
     $(document).keydown(function(e) {
     var code = e.keyCode || e.which;
     if (code == 27)

@@ -79,12 +79,12 @@ let chosen_key_code_up = 38;
 let chosen_key_code_down = 40;
 let chosen_key_code_left = 37;
 let chosen_key_code_right = 39;
-let chosen_num_of_food_points;
-let chosen_color5;
-let chosen_color15;
-let chosen_color25;
-let chosen_game_time = 10;
-let chosen_num_of_monsters;
+let chosen_num_of_food_points=50;
+let chosen_color5 = "#dc143c"
+let chosen_color15 = "#00FFFF";
+let chosen_color25 = "#7FFF00"
+let chosen_game_time = 100;
+let chosen_num_of_monsters=4;
 
 function updateSettings(setting){
     switch(setting){
