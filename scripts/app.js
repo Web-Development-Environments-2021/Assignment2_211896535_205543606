@@ -72,7 +72,9 @@ function createBoard(){
 			{
 				board.arr[i][j] = "W";
 			} 
-			//else board.arr[i][j]="E"
+			else if(i==13 && j==8){
+				board.arr[i][j] = "T";
+			}
 			else {
 				var randomNum = Math.random();
 				if (randomNum <= (1.0 * food_remain) / board.cnt) 
@@ -202,16 +204,16 @@ function GetKeyPressed() {
 
 function DrawPacman(center){
 	if (pacman.direction == "U"){
-		context.drawImage(pacman.img_up, center.x-15, center.y-15, board.cell_width, board.cell_height);
+		context.drawImage(pacman.img_up, center.x-10, center.y-10, board.cell_width*0.7, 0.7*board.cell_height);
 	}
 	else if (pacman.direction == "D"){
-		context.drawImage(pacman.img_down, center.x-15, center.y-15, board.cell_width, board.cell_height);
+		context.drawImage(pacman.img_down, center.x-10, center.y-10, board.cell_width*0.7,0.7* board.cell_height);
 	}
 	else if (pacman.direction == "R"){
-		context.drawImage(pacman.img_right, center.x-15, center.y-15, board.cell_width, board.cell_height);
+		context.drawImage(pacman.img_right, center.x-10, center.y-10, board.cell_width*0.7,0.7* board.cell_height);
 	}
 	else{
-		context.drawImage(pacman.img_left, center.x-15, center.y-15, board.cell_width, board.cell_height);
+		context.drawImage(pacman.img_left, center.x-10, center.y-10, board.cell_width*0.7,0.7* board.cell_height);
 	}
 }
 
@@ -249,14 +251,24 @@ function Draw() {
 				wall_img.src = "./assets/wall.png";
 				context.drawImage(wall_img,center.x-15, center.y-15, board.cell_width, board.cell_height);
 			}
+			else if (board.arr[i][j] == "T") {
+				teleport_img = new Image(10,10);
+				teleport_img.src = "./assets/teleport.jpg";
+				context.drawImage(teleport_img,center.x-15, center.y-15, board.cell_width, board.cell_height);
+			}
 		}
 	}
 }
+// // set empty for teleport
+// board.arr[0][8]="E" 
+// board.arr[26][8]="E"
+// board.arr[13][0]="E"
 function UpdatePosition() {
 	if (pacman.i==undefined || pacman.j==undefined){
 		return
 	}
 	board.arr[pacman.i][pacman.j] = "E";
+	board.arr[13][8] = "T";
 	lastKey = GetKeyPressed();
 	if(lastKey == undefined){
 		lastKey = 0;
@@ -264,27 +276,43 @@ function UpdatePosition() {
 	// UP
 	if (lastKey == 1) {
 		pacman.direction = "U";
-		if (pacman.j > 0 && board.arr[pacman.i][pacman.j - 1] != "W") {
+		if(pacman.i==13 && pacman.j==0){
+			pacman.i = 13 
+			pacman.j= 16
+		}
+		else if (pacman.j > 0 && board.arr[pacman.i][pacman.j - 1] != "W") {
 			pacman.j--;
 		}
 	}
 	// DOWN
 	if (lastKey == 2) {
 		pacman.direction = "D";
-		if (pacman.j < board.rows_num-1 && board.arr[pacman.i][pacman.j + 1] != "W") {
+		if(pacman.i==13 && pacman.j==16){
+			pacman.i = 13 
+			pacman.j= 0
+		}
+		else if (pacman.j < board.rows_num-1 && board.arr[pacman.i][pacman.j + 1] != "W") {
 			pacman.j++;
 		}
 	}
 	// LEFT
 	if (lastKey == 3) {
 		pacman.direction = "L";
-		if (pacman.i > 0 && board.arr[pacman.i - 1][pacman.j] != "W") {
+		if(pacman.i==0 && pacman.j==8){
+			pacman.i = 26 
+			pacman.j= 8
+		}
+		else if (pacman.i > 0 && board.arr[pacman.i - 1][pacman.j] != "W") {
 			pacman.i--;
 		}
 	}
 	// RIGHT
 	if (lastKey == 4) {
 		pacman.direction = "R";
+		if(pacman.i==26 && pacman.j==8){
+			pacman.i = 0 
+			pacman.j= 8
+		}
 		if (pacman.i < board.cols_num-1 && board.arr[pacman.i + 1][pacman.j] != "W") {
 			pacman.i++;
 		}
@@ -298,13 +326,15 @@ function UpdatePosition() {
 	if (board.arr[pacman.i][pacman.j] == "F25") {
 		score+=25;
 	}
+	if(board.arr[pacman.i][pacman.j] == "T"){
+		let emptyCell = findRandomEmptyCell(board);
+		pacman.i=emptyCell[0]
+		pacman.j=emptyCell[1]
+	}
 	board.arr[pacman.i][pacman.j] = "P";
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
-	if (score >= 20 && time_elapsed <= 10) {
-		pacman.color = "green";
-	}
-	if (score == 50) {
+	if (score == 1000) {
 		window.clearInterval(interval);
 		window.alert("Game completed");
 	} else {
