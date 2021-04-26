@@ -24,7 +24,6 @@ $(document).ready(function() {
 	}, false);
 });
 
-
 function createBoard(){
 	/** W - WALL
 	 * F5 - Food 5
@@ -75,12 +74,12 @@ function createBoard(){
 					}
 					food_remain--	
 				} 
-				else if (randomNum < (1.0 * (pacman.lives_remain + food_remain)) / board.cnt) {
-					pacman.i = i;
-					pacman.j = j;
-					pacman.lives_remain--;
-					board.arr[i][j] = "P";
-				} 
+				// else if (randomNum < (1.0 * (pacman.lives_remain + food_remain)) / board.cnt) {
+				// 	pacman.i = i;
+				// 	pacman.j = j;
+				// 	pacman.lives_remain--;
+				// 	board.arr[i][j] = "P";
+				// } 
 				else {
 					board.arr[i][j] = "E";
 				}
@@ -94,20 +93,23 @@ function createBoard(){
 		//small_food.remain--;
 		const random_food = Math.random();
 		if(random_food<=0.6){
-			board.arr[emptyCell[0]][emptyCell[0]] = "F5";
+			board.arr[emptyCell[0]][emptyCell[1]] = "F5";
 			//small_food.remain--;
 		}
 		else if(random_food>0.6 && random_food<=0.9){
-			board.arr[emptyCell[0]][emptyCell[0]] = "F15";
+			board.arr[emptyCell[0]][emptyCell[1]] = "F15";
 			//small_food.remain--;
 		}
 		else{
-			board.arr[emptyCell[0]][emptyCell[0]] = "F25";
+			board.arr[emptyCell[0]][emptyCell[1]] = "F25";
 			//small_food.remain--;
 		}
 		food_remain--
 	}
+	let pacman_cell = findRandomEmptyCell(board);
 		score = 0;
+		pacman.i=pacman_cell[0]
+		pacman.j=pacman_cell[1]
 }
 
 function Start() {
