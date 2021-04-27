@@ -161,6 +161,11 @@ function updateSettingsKeys(setting){
     $(document).unbind();
 });
 
+function setValFromScale(label,scale){
+    valfrom = document.getElementById(scale).value
+    document.getElementById(label).innerHTML = valfrom
+}
+
 }
 function randomValues(){
     chosen_key_up="⇧";
