@@ -14,11 +14,11 @@
 /* About Content/Box */
 #about-content {
   text-align: left;
-  background-color: #0083c0;
+  background: url("../assets/darkbg.jpg");
   margin: 15% auto; 
   padding: 20px;
   border: 1px solid #888;
-  width: 50%; 
+  width: 25%; 
   height: 50%;
 }
 
@@ -36,4 +36,28 @@
   color: rgb(196, 161, 161);
   text-decoration: none;
   cursor: pointer;
+}
+
+.image-container {
+  position: relative;
+}
+
+.image-container img {
+  width: 300px;
+  height: auto;
+}
+
+#about-us-title{
+  text-align: center;
+  color: rgba(255,255,255,1);
+	letter-spacing: 0.35em;
+	font-size: 0.7em;
+  text-transform: uppercase;
+}
+
+#about-us-p{
+  text-align: center;
+  color: rgba(255,255,255,1);
+	letter-spacing: 0.35em;
+	font-size: 0.7em;
 }
