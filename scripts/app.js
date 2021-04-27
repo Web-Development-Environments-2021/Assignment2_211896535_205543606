@@ -11,7 +11,8 @@ let cur_username;
 let food_remain;
 let try_remain;
 let gameSound = new Audio("assets/pacmanremix.mp3");
-let quackSound = new Audio("assets/quack.mp3"); 
+let quackSound = new Audio("assets/quack.mp3");
+let teleportSound = new Audio("assets/teleport.mp3");
 let lastKey;
 let ghost_array;
 let curr_i
@@ -275,18 +276,43 @@ function Draw() {
 			}
 			else if (board.arr[i][j] == "T") {
 				teleport_img = new Image(10,10);
-				teleport_img.src = "./assets/teleport.jpg";
+				teleport_img.src = "./assets/teleport.png";
 				context.drawImage(teleport_img,center.x-15, center.y-15, board.cell_width, board.cell_height);
 			}
 			else if(board.arr[i][j] == "D"){
 				doll_img = new Image(10,10);
-				doll_img.src = "./assets/doll.png";
+				doll_img.src = "./assets/candy.png";
 				context.drawImage(doll_img,center.x-15, center.y-15, board.cell_width, board.cell_height);
 			}
 			else if(board.arr[i][j] == "G"){
-				doll_img = new Image(10,10);
-				doll_img.src = "./assets/ghost1.png";
-				context.drawImage(doll_img,center.x-15, center.y-15, 0.75*board.cell_width, 0.75*board.cell_height);
+				DrawGhost(center,i,j);
+			}
+		}
+	}
+}
+
+function DrawGhost(center,col_pos,row_pos){
+	for(let k=0; k<ghost_array.length; k++){
+		if(ghost_array[k].i == col_pos && ghost_array[k].j == row_pos){
+			if(ghost_array[k].color == "RED"){
+				ghost_img = new Image(10,10);
+				ghost_img.src = "./assets/ghost1-right.png";
+				context.drawImage(ghost_img,center.x-15, center.y-15, 0.75*board.cell_width, 0.75*board.cell_height);
+			}
+			else if(ghost_array[k].color == "GREEN"){
+				ghost_img = new Image(10,10);
+				ghost_img.src = "./assets/ghost2-right.png";
+				context.drawImage(ghost_img,center.x-15, center.y-15, 0.75*board.cell_width, 0.75*board.cell_height);
+			}
+			else if(ghost_array[k].color == "BLUE"){
+				ghost_img = new Image(10,10);
+				ghost_img.src = "./assets/ghost3-right.png";
+				context.drawImage(ghost_img,center.x-15, center.y-15, 0.75*board.cell_width, 0.75*board.cell_height);
+			}
+			else if(ghost_array[k].color == "PINK"){
+				ghost_img = new Image(10,10);
+				ghost_img.src = "./assets/ghost4-right.png";
+				context.drawImage(ghost_img,center.x-15, center.y-15, 0.75*board.cell_width, 0.75*board.cell_height);
 			}
 		}
 	}
@@ -367,6 +393,7 @@ function UpdatePosition() {
 		score+=25;
 	}
 	if(board.arr[pacman.i][pacman.j] == "T"){
+		teleportSound.play();
 		let emptyCell = findRandomEmptyCell(board);
 		pacman.i=emptyCell[0]
 		pacman.j=emptyCell[1]
