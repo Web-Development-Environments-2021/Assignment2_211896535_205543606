@@ -542,8 +542,6 @@ function startTimer(duration, display) {
 }
 function endGame(){
 	resetGame();
-	let closeBtn;
-	if(pacman.lives_remain <= 0){
 		modal = document.getElementById("losing-ghost-modal");
 		document.getElementById("losing-ghost-score-val").innerHTML=score;
 		closeBtn = document.getElementById("close-ghost-lose-btn");
