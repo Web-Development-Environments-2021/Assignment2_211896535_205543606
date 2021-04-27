@@ -62,7 +62,7 @@ $(document).ready(function(){
                 required: "enter game time"
             },
             monstersScale:{
-                required: "enter monster num"
+                required: "enter monster"
             }
 		}
 		,submitHandler: function(){
@@ -71,20 +71,20 @@ $(document).ready(function(){
 	});	
 });
 
-let chosen_key_up;
-let chosen_key_down;
-let chosen_key_right;
-let chosen_key_left ;
+let chosen_key_up="⇧";
+let chosen_key_down="⇩";
+let chosen_key_right = "➪";
+let chosen_key_left= "⇦" ;
 let chosen_key_code_up = 38;
 let chosen_key_code_down = 40;
 let chosen_key_code_left = 37;
 let chosen_key_code_right = 39;
-let chosen_num_of_food_points=50;
+let chosen_num_of_food_points=60;
 let chosen_color5 = "#dc143c"
 let chosen_color15 = "#00FFFF";
 let chosen_color25 = "#7FFF00"
-let chosen_game_time = 100;
-let chosen_num_of_monsters=4;
+let chosen_game_time = 60;
+let chosen_num_of_monsters=2;
 
 function updateSettings(setting){
     switch(setting){

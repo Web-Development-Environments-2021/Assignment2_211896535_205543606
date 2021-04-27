@@ -153,7 +153,6 @@
 						<h1>Game Settings</h1>
 							<label><b>Select game buttons</b></label>
 							<br>
-
 							<ul id="keyboards-select">
 								<li>
 									<input class="keyboard-option" type="button" value="⇧" placeholder="Enter Up key" name="moveUpBtn" id="moveUpBtn" onclick="updateSettingsKeys(`UP`)" required>
@@ -174,7 +173,7 @@
 							<label><b>Number of Food points:</b></label>
 							<br>
 							<label>50</label>
-							<input type="range" id="food-points-scale" name="foodPointsScale" min="50" max="90" value="70" step="1" onchange="setValFromScale('food-points-label','food-points-scale');updateSettings(`FOOD`);" required>
+							<input type="range" id="food-points-scale" name="foodPointsScale" min="50" value="60" max="90" step="1" onchange="setValFromScale('food-points-label','food-points-scale');updateSettings(`FOOD`);" required>
 							<label>90</label>
 							<br>
 							<label id="food-points-label" > </label>
@@ -190,17 +189,15 @@
 							<label> select color for 25 points ball</label>
 							<input class="color-set" type="color" id="25-point-color" name="pointsColor25" onchange="updateSettings(`COLOR25`)" required>
 							<br>
-
 							<label><b> select time of the game:</b></label>
 							<br>
-							<input type="range" id="game-time-scale" name="gameTimeScale" min="60" max="360" value="90" step="1" onchange="setValFromScale('game-time-label','game-time-scale');updateSettings(`TIME`);" required>
+							<input type="range" id="game-time-scale" name="gameTimeScale" min="60" value="60" max="360" step="1" onchange="setValFromScale('game-time-label','game-time-scale');updateSettings(`TIME`);" required>
 							<br>
 							<label id="game-time-label" > </label>
 							<br>
-
 							<label><b> selct num of monsters:</b></label>
 							<br>
-							<input type="range" id="monsters-scale" name="monstersScale" min="1" max="4" value="2" step="1" onchange="setValFromScale('monsters-label','monsters-scale');updateSettings(`MONSTERS`);" required>
+							<input type="range" id="monsters-scale" name="monstersScale" min="1" value="2" max="4" step="1" onchange="setValFromScale('monsters-label','monsters-scale');updateSettings(`MONSTERS`);" required>
 							<br>
 							<label id="monsters-label" > </label>
 							<br>
@@ -433,7 +430,5 @@
 		<script type="text/javascript" src="scripts/login.js"> </script>
 		<script type="text/javascript" src="scripts/about.js"> </script>
 		<script type="text/javascript" src="scripts/settings.js"> </script>
-
-		
 	</body>
 </html>
