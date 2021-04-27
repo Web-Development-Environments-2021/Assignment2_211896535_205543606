@@ -38,20 +38,21 @@
 				<li><button id="register-menu-btn" class="btn1" data-text="color" onClick="switchScreens(`register-screen`)"> Register</button></li>
 				<li><button id="login-menu-btn" class="btn1" data-text="color" onClick="switchScreens(`Login-screen`)"> Login</button></li>
 				<li><button id="about-menu-btn" class="btn1" data-text="color"> About</button></li>
-				<!--ABOUT-->
-				<div id="about-modal" class="modal">
-					<div id="about-content" class="modal-content">
-						<span id="about-close-btn" class="close-btn1">&times;</span>
-						<h2 id="about-us-title">About Us</h2>
-						<p id="about-us-p">This Game was made by Ben Margalit and Mor Saranga</p>
-						<div class="image-container">
-							<center>
-								<img class="modal-img" src="assets/us.jpg" width=300px>
-							</center>
-						</div>
-					</div>
-				</div>
 			</ul>
+		</div>
+
+		<!--ABOUT-->
+		<div id="about-modal" class="modal">
+			<div id="about-content" class="modal-content">
+				<span id="about-close-btn" class="close-btn1">&times;</span>
+				<h2 id="about-us-title">About Us</h2>
+				<p id="about-us-p">This Game was made by Ben Margalit and Mor Saranga</p>
+				<div class="image-container">
+					<center>
+						<img class="modal-img" src="assets/us.jpg" width=300px>
+					</center>
+				</div>
+			</div>
 		</div>
 
 		<!--CONTENT-->
@@ -398,13 +399,13 @@
 		</div>
 
 		<!--LINKS TO JS-->
+		<script type="text/javascript" src="scripts/jquery-3.4.1.slim.min.js"></script>
 		<script type="text/javascript" src="scripts/sounds.js"> </script>
 		<script type="text/javascript" src="scripts/doll.js"> </script>
 		<script type="text/javascript" src="scripts/board.js"> </script>
 		<script type="text/javascript" src="scripts/pacman.js"> </script>
 		<script type="text/javascript" src="scripts/ghost.js"> </script>
 		<script type="text/javascript" src="scripts/food.js"> </script>
-		<script type="text/javascript" src="scripts/jquery-3.4.1.slim.min.js"></script>
 		<script type="text/javascript" src="scripts/jquery-2.1.3.min.js"></script>
 		<script type="text/javascript" src="scripts/jquery.validate.min.js"></script>
 		<script type="text/javascript" src="scripts/additional-methods.min.js"></script>
@@ -414,5 +415,6 @@
 		<script type="text/javascript" src="scripts/login.js"> </script>
 		<script type="text/javascript" src="scripts/about.js"> </script>
 		<script type="text/javascript" src="scripts/settings.js"> </script>
+
 	</body>
 </html>

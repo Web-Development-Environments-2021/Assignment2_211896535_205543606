@@ -2,7 +2,7 @@ $(document).ready(function(){
 	localStorage.setItem('k', 'k');
 
 	$.validator.addMethod('strongPassword', function(value, element) {
-		return this.optional(element) 
+		return this.optional(element)
 		  || value.length >= 6
 		  && /\d/.test(value)
 		  && /[a-z]/i.test(value);
@@ -11,8 +11,8 @@ $(document).ready(function(){
 
 	//check if username already exists
 	$.validator.addMethod('validateUsername', function (value, element) {
-		is_valid = localStorage.getItem(value)
-		is_item = localStorage[value]
+		is_valid = localStorage.getItem(value);
+		is_item = localStorage[value];
 		if(is_item==null)
 			return true;
 		else return false;
@@ -68,7 +68,7 @@ $(document).ready(function(){
 		}
 		,submitHandler: function () {
 			register();
-			switchScreens(`Login-screen`)
+			switchScreens(`Login-screen`);
 			//reset form details
 			let form = $("#register-form");
 			form[0].reset();

@@ -2,33 +2,28 @@
 @import url('https://fonts.googleapis.com/css?family=Inconsolata|Lato:300,400,700');
 
 html{
-    /* background: url("../assets/bg1.png"); */
     background: url("../assets/bg2.jpeg");
-
-
-    /* background-color: #345; */
-	/*background-image: linear-gradient(to bottom, #0009, transparent); */
 }
 
 #header-container{
-    padding: 5px;
     background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-    /* overflow: hidden; */
+    height: 130px;
+    padding-top: 10px;
+    margin-bottom: 10px;
 }
 
 body{
-    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    background-color: #1b2735;
     max-width: 98%;
-    max-height: 90%;
+    max-height: 100%;
     justify-content: center;
-    margin: auto;    
+    /* margin: auto;     */
     align-items: center;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
 	color: #eee;
 	font-family: 'Lato', sans-serif;
 	font-size: 62.5%;
-	padding: 0 20px;
-	box-sizing: border-box;
+	/* box-sizing: border-box; */
 }
 
 #logo3{
@@ -39,23 +34,44 @@ body{
 }
 
 #personal_details{
-    vertical-align: middle;
+    vertical-align:top;
     font-family: 'Lato', sans-serif;
     text-transform: uppercase;
     letter-spacing:2px;
-    display: flex;
+    /* display: flex; */
 	justify-content: center;
+    text-align: center;
 }
-#menu{
-	/* border-bottom: 1px solid #0003; */
-	/* box-shadow: 0 0 32px #0003; */
+
+#Menu-container{
+    margin: 0;
+    background-color: #1b2735;
+    height: 60px;
+    padding-top: 20px;
+}
+
+#Menu-container > #menu{
+    margin: 0;
+    padding-top: 20px;
+    background-color: #1b2735;
+    padding: 0 0px;
+    height: 60px;
+    line-height: 60px;
 	font-size: 2em;
 	font-weight: 300;
     text-align: center;
-    justify-content: center;
-    width: 100%;
 }
-#menu > li{
+
+#Menu-container > #menu.fixed {
+    background-color: #1b2735;
+    z-index: 10000;
+    top: 0;
+    left:0;
+    right: 0;;
+    position: fixed;
+}
+
+#Menu-container > #menu > li{
     display: inline-block;
     padding: 0px;
 }
@@ -68,7 +84,7 @@ body{
     color: rgba(255,255,255,1);
 	background: none;
 	border-radius: 0;
-	padding: 1.2em 5em;
+	padding: 0.5em 4em;
 	letter-spacing: 0.35em;
 	font-size: 0.7em;
 	transition: background-color 0.3s, box-shadow 0.3s, color 0.3s;
@@ -103,7 +119,13 @@ body{
 #content-container{
     text-align: center;
     height: max-content;
+    padding-top: 10px;
+    padding-bottom: 10px;
     width: 100%;
+    display: flex;
+    flex-flow: row;
+    justify-content :center;
+    font-size: 100%;
 }
 
 #register-screen{
