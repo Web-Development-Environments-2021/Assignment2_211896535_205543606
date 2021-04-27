@@ -398,8 +398,7 @@ function updateGhostPosition(){
 			resetGame();
 			if(pacman.lives_remain >0){
 				resetAfterCaught();
-			}
-			
+			}	
 		} 
 		else {
 			Draw();
@@ -410,22 +409,37 @@ function updateGhostPosition(){
 function resetAfterCaught(){
 	pacman.lives_remain--;
 	score-=10;
+	for (let i=0; i<ghost_array.length; i++){
+		ghost_array[i].prevCell = "E";
+	}
 
 	reset_arr = board.arr;
 	for(let i=0; i<board.cols_num; i++){
 		for(let j=0; j<board.rows_num; j++){
-			if(board.arr[i][j] == "G" || board.arr[i][j] == "P"){
-				reset_arr[i][j]=="E";
+			if(board.arr[i][j] == "G" || board.arr[i][j] == "P" || board.arr[i][j] == "D"){
+				reset_arr[i][j]="E";
 			}
 		}
 	}
-	if (!doly.eaten){
-		createMovingDoll();
+
+	let startingPoints=[[1,1],[1,15],[25,1],[25,15]];
+	let colorGhosts = ["RED","GREEN","BLUE","PINK"];
+	for (i=0;i<ghost_array.length;i++){
+		board.arr[startingPoints[i][0]][startingPoints[i][1]]="G";
+		ghost_array[i]=new Ghost(colorGhosts[i]);
+		ghost_array[i].i=startingPoints[i][0]
+		ghost_array[i].j = startingPoints[i][1]
+		ghost_array[i].prevCell="E"
 	}
-	createGhosts();	pacman.interval = setInterval(updatePosition,150);
+	board.arr = reset_arr;
+	let pacman_cell = findRandomEmptyCell(board);
+	pacman.i=pacman_cell[0];
+	pacman.j=pacman_cell[1];
+
+	createMovingDoll();
+	pacman.interval = setInterval(UpdatePosition, 150);
 	interval2 = setInterval(updateGhostPosition,350);
 	interval3 = setInterval(updateDollPosition,200);
-
 }
 
 function updateDollPosition(){
@@ -540,8 +554,11 @@ function startTimer(duration, display) {
 		--timer;
 	}, 1000);
 }
+
 function endGame(){
 	resetGame();
+
+	if(pacman.lives_remain == 0){
 		modal = document.getElementById("losing-ghost-modal");
 		document.getElementById("losing-ghost-score-val").innerHTML=score;
 		closeBtn = document.getElementById("close-ghost-lose-btn");
@@ -581,5 +598,5 @@ function resetGame(){
 	window.clearInterval(pacman.interval);
 	window.clearInterval(interval2);
 
-	winner.clearInterval(interval3);
+	window.clearInterval(interval3);
 }
