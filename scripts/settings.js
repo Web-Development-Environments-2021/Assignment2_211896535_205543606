@@ -216,6 +216,10 @@ function showSettings(){
 }
 
 function newGameShowSettings(){
+    if(pacman != undefined){
+        resetGame();
+    }
+    $(".modal").hide();
     $("#game-container").hide();
     $("#settings-change").show();
 }

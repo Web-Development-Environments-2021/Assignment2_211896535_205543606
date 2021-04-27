@@ -210,15 +210,15 @@
 				</div>
 				<div id="game-container">
 					<div id="score">
-						<label for="lblScore">SCORE:</label>
-						<input id="lblScore" type="text" />
+						<label for="lblScore-text">SCORE:</label>
+						<label id="lblScore_val" type="text"></label>
 					</div>
 					<div id="time">
 						<label for="lblTime">TIME:</label>
-						<input id="lblTime" type="text" />
+						<label id="lblTime_val" type="text"></label>
 						<br>
 						<label for="timer"> COUNTDOWN TIMER:</label>
-						<input id="timer" readonly type="text" />
+						<label id="timer" type="text"></label>
 					</div>
 					<div id="username-title">
 						<label>Username:</label>
@@ -303,6 +303,8 @@
 					<p>Game Over, Loser</p>
 					<label id="losing-ghost-score-text">Your Score:</label>
 					<label id="losing-ghost-score-val"></label>
+					<br>
+					<button id="new-game-losing-ghost" class="btn1" onclick="newGameShowSettings()">New Game</button>
 			</div>
 		</div>
 		<div id="win-time-modal" class="modal">
@@ -311,6 +313,8 @@
 				<p>Winner!</p>
 				<label id="win-time-score-text">Your Score: </label>
 				<label id="win-time-score-val"></label>
+				<br>
+				<button id="new-game-win-time" class="btn1" onclick="newGameShowSettings()">New Game</button>
 			</div>
 		</div>
 		<div id="lose-time-modal">
@@ -320,6 +324,8 @@
 				<label id="lose-time-score-text1">You can do better than</label>
 				<label id="lose-time-score-val"></label>
 				<label id="lose-time-score-text2"> points</label>
+				<br>
+				<button id="new-game-win-lose" class="btn1" onclick="newGameShowSettings()">New Game</button>
 			</div>
 		</div>
 
@@ -422,9 +428,9 @@
 		<script type="text/javascript" src="scripts/ghost.js"> </script>
 		<script type="text/javascript" src="scripts/food.js"> </script>
 		<script type="text/javascript" src="scripts/jquery-3.4.1.slim.min.js"></script>
-		<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.3.min.js"></script>
-		<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
-		<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js"></script>
+		<script type="text/javascript" src="scripts/jquery-2.1.3.min.js"></script>
+		<script type="text/javascript" src="scripts/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="additional-methods.min.js"></script>
 		<script type="text/javascript" src="scripts/app.js"></script>
 		<script type="text/javascript" src="scripts/register.js"> </script>
 		<script type="text/javascript" src="scripts/login.js"> </script>

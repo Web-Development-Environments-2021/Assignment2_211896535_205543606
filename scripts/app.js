@@ -240,8 +240,8 @@ function DrawPacman(center){
 
 function Draw() {
 	canvas.width = canvas.width; //clean board
-	lblScore.value = score;
-	lblTime.value = time_elapsed;
+	lblScore_val.innerHTML = score;
+	lblTime_val.innerHTML = time_elapsed;
 	for (let i = 0; i < board.cols_num; i++) {
 		for (let j = 0; j < board.rows_num; j++) {
 			let center = new Object();
@@ -549,7 +549,7 @@ function startTimer(duration, display) {
 		minutes = minutes < 10 ? "0" + minutes : minutes;
 		seconds = seconds < 10 ? "0" + seconds : seconds;
 
-		display.value = minutes + ":" + seconds;
+		display.innerHTML = minutes + ":" + seconds;
 
 		--timer;
 	}, 1000);
@@ -582,11 +582,12 @@ function endGame(){
 		modal.style.display = "none"
 	}
 
-	window.onclick = function(e){
-		if(e.target == modal){
-			modal.style.display = "none"
-		}
-	}
+    window.addEventListener("click", function(event) {
+        if(event.target == modal){
+            modal.style.display = "none"
+        }
+    });
+
 	$(document).keydown(function(e) {
 	var code = e.keyCode || e.which;
 	if (code == 27)
@@ -597,6 +598,8 @@ function endGame(){
 function resetGame(){
 	window.clearInterval(pacman.interval);
 	window.clearInterval(interval2);
-
 	window.clearInterval(interval3);
+	if(timer != undefined && timer != null){
+		window.clearInterval(timer);
+	}
 }

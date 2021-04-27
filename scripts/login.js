@@ -36,7 +36,8 @@ $(document).ready(function(){
 		}
 		,submitHandler: function(){
 			login();
-			switchScreens(`game-screen`)
+			newGameShowSettings();
+			switchScreens(`game-screen`);
 			let form = $("#login-form");
 			form[0].reset();
 		}

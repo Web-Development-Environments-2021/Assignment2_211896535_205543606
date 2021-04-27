@@ -47,23 +47,23 @@ $(document).ready(function(){
 		},
 		messages: {
 			username: {
-				required: "Please enter valid username address.",
-				validateUsername: "this username already taken"
+				required: "Please enter valid username",
+				validateUsername: "This username already taken"
 			},
 			password: {
 				required: "Please enter an password",
-				strongPassword: "Your password must be at least 6 characters long and contain at least one number and one char"
+				strongPassword: "Password must be at least 6 characters long and contain at least one number"
 			},
 			fullname: {
 				required: "Please enter a name.",
 				lettersonly: "Full name can be only letters."
 			},
 			email: {
-				required: "Please enter an email address....",
+				required: "Please enter an email address",
 				email: "Please enter a valid email."
 			},
 			birthdate: {
-				required: "Please enter your birth date."
+				required: "Please enter your birth date"
 			}
 		}
 		,submitHandler: function () {
