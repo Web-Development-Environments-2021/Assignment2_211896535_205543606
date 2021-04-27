@@ -10,8 +10,8 @@ let time_elapsed;
 let cur_username;
 let food_remain;
 let try_remain;
-// let mySound = new sound("bounce.mp3");
-let cnt;
+let gameSound = new Audio("assets/pacmanremix.mp3");
+let quackSound = new Audio("assets/quack.mp3"); 
 let lastKey;
 let ghost_array;
 let curr_i
@@ -162,7 +162,8 @@ function Start() {
 	createBoard();
 	createMovingDoll();
 	createGhosts();
-	// mySound.play();
+	gameSound.currentTime = 0;
+	gameSound.play();
 	start_time = new Date();
 	startTimer(chosen_game_time, document.getElementById("timer"));
 	document.getElementById("username_title").innerHTML= username_curr;
@@ -297,6 +298,16 @@ function UpdatePosition() {
 	}
 	board.arr[pacman.i][pacman.j] = "E";
 	board.arr[13][8] = "T";
+
+	if(board.arr[pacman.i][pacman.j] == "D"){
+		// score+=50
+		window.clearInterval(interval3);
+		doly.prevCell= "E";
+		// if(board.arr[pacman.i][pacman.j] == "P"){
+			
+		// }
+	}
+
 	lastKey = GetKeyPressed();
 	if(lastKey == undefined){
 		lastKey = 0;
@@ -345,9 +356,7 @@ function UpdatePosition() {
 			pacman.i++;
 		}
 	}
-	if(board.arr[pacman.i][pacman.j] == "D"){
-		score+=50
-	}
+	
 	if (board.arr[pacman.i][pacman.j] == "F5") {
 		score+=5;
 	}
@@ -395,6 +404,8 @@ function updateGhostPosition(){
 		else 
 			board.arr[ghost_array[i].i][ghost_array[i].j] = "G";
 		if (pacmanCaught()) {
+			quackSound.currentTime = 0;
+			quackSound.play();
 			resetGame();
 			if(pacman.lives_remain >0){
 				resetAfterCaught();
@@ -407,6 +418,7 @@ function updateGhostPosition(){
 }
 
 function resetAfterCaught(){
+	gameSound.play();
 	pacman.lives_remain--;
 	score-=10;
 	for (let i=0; i<ghost_array.length; i++){
@@ -447,28 +459,31 @@ function updateDollPosition(){
 		return
 	}
 	board.arr[doly.i][doly.j]=doly.prevCell;
-	//DO A STEP!!!!!!!!!!!!!!!
-	let step =makeRandomValidStep(doly.i,doly.j);
-	doly.i=step[0];
-	doly.j=step[1];
-	// if ghosts touch telport
-	if(board.arr[doly.i][doly.j] == "T"){
-		let emptyCell = findRandomEmptyCell(board);
-		doly.i=emptyCell[0]
-		doly.j=emptyCell[1]
-	}
 
 	//if pac touch doll
 	if(board.arr[doly.i][doly.j] == "P"){
-		score+=50
-		clearInterval(interval3);
+		score+=50;
+		window.clearInterval(interval3);
+		doly.prevCell= "E";
 	}
-	
-	doly.prevCell= board.arr[doly.i][doly.j]
-		if (doly.prevCell=="G")
-			board.arr[doly.i][doly.j] = "E";
-		else 
-			board.arr[doly.i][doly.j] = "D";
+	else{
+		//DO A STEP!!!!!!!!!!!!!!!
+		let step =makeRandomValidStep(doly.i,doly.j);
+		doly.i=step[0];
+		doly.j=step[1];
+		// if Doly touch telport
+		if(board.arr[doly.i][doly.j] == "T"){
+			let emptyCell = findRandomEmptyCell(board);
+			doly.i=emptyCell[0]
+			doly.j=emptyCell[1]
+		}
+		
+		doly.prevCell= board.arr[doly.i][doly.j]
+			if (doly.prevCell=="G")
+				board.arr[doly.i][doly.j] = "E";
+			else 
+				board.arr[doly.i][doly.j] = "D";
+	}
 		Draw();
 }	
 	
@@ -595,7 +610,9 @@ function endGame(){
 	});
 }
 
+
 function resetGame(){
+	gameSound.pause();
 	window.clearInterval(pacman.interval);
 	window.clearInterval(interval2);
 	window.clearInterval(interval3);
@@ -603,3 +620,4 @@ function resetGame(){
 		window.clearInterval(timer);
 	}
 }
+
