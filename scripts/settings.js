@@ -35,34 +35,34 @@ $(document).ready(function(){
 		},
 		messages: {
             moveUpBtn: {
-				required: "A",
+				required: "enter up btn",
 			},
 			moveDownBtn: {
-				required: "A",
+				required: "enter down btn",
 			},
             moveRightBtn: {
-				required: "A",
+				required: "enter right btn",
 			},
 			moveLeftBtn: {
-				required: "true",
+				required: "enter left btn",
 			},
             foodPointsScale:{
-                required: "true"
+                required: "enter food points"
             },
             pointsColor5:{
-                required: "true"
+                required: "enter color"
             },
             pointsColor15:{
-                required: "true"
+                required: "enter color"
             },
             pointsColor25:{
-                required: "true"
+                required: "enter color"
             },
             gameTimeScale:{
-                required: "true"
+                required: "enter game time"
             },
             monstersScale:{
-                required: "true"
+                required: "enter monster num"
             }
 		}
 		,submitHandler: function(){

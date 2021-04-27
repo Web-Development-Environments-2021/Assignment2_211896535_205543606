@@ -7,7 +7,6 @@ let board = new Board();
 let score;
 let start_time;
 let time_elapsed;
-// let interval;
 let cur_username;
 let food_remain;
 let try_remain;
@@ -17,6 +16,7 @@ let lastKey;
 let ghost_array;
 let curr_i
 let curr_j
+let doly;
 
 
 $(document).ready(function() {
@@ -31,14 +31,14 @@ $(document).ready(function() {
 function createBoard(){
 	/** W - WALL
 	 * F5 - Food 5
-	 * P - Pacman
+	 * F15 - 
+od 15
+	 * F25 - Food 25	 * P - Pacoman
 	 * E - EMPTY
+	 * D -DOLL
+	 * G - GHOST 
 	 */
 	 //get the food num from the settings
-	//small_food.remain = chosen_num_of_food_points*0.6;
-	//med_food.remain =  chosen_num_of_food_points*0.3;
-	//big_food.remain =  chosen_num_of_food_points*0.1;
-	pacman.lives_remain = 5;
 	board.arr = new Array();
 	food_remain = chosen_num_of_food_points
 	for (var i = 0; i < board.cols_num; i++) {
@@ -112,20 +112,15 @@ function createBoard(){
 	}
 	while (food_remain > 0) {
 		let emptyCell = findRandomEmptyCell(board);
-		//board.arr[emptyCell[0]][emptyCell[1]] = "F5";
-		//small_food.remain--;
 		const random_food = Math.random();
 		if(random_food<=0.6){
 			board.arr[emptyCell[0]][emptyCell[1]] = "F5";
-			//small_food.remain--;
 		}
 		else if(random_food>0.6 && random_food<=0.9){
 			board.arr[emptyCell[0]][emptyCell[1]] = "F15";
-			//small_food.remain--;
 		}
 		else{
 			board.arr[emptyCell[0]][emptyCell[1]] = "F25";
-			//small_food.remain--;
 		}
 		food_remain--
 	}
@@ -141,8 +136,11 @@ function createBoard(){
 
 }
 function createMovingDoll(){
+	doly.prevCell="E";
 	let dollCell = findRandomEmptyCell(board);
 	board.arr[dollCell[0]][dollCell[1]] = "D";
+	doly.i=dollCell[0];
+	doly.j=dollCell[1];
 }
 
 function createGhosts(){
@@ -159,6 +157,8 @@ function createGhosts(){
 }
 function Start() {
 	pacman = new Pacman();
+	pacman.lives_remain = 5;
+	doly= new Doll();
 	createBoard();
 	createMovingDoll();
 	createGhosts();
@@ -185,6 +185,7 @@ function Start() {
 		false
 	);
 	interval2 = setInterval(updateGhostPosition,350);
+	interval3 = setInterval(updateDollPosition,100);
 }
 
 function findRandomEmptyCell(board) {
@@ -394,15 +395,69 @@ function updateGhostPosition(){
 		else 
 			board.arr[ghost_array[i].i][ghost_array[i].j] = "G";
 		if (pacmanCaught()) {
-			window.clearInterval(pacman.interval);
-			window.clearInterval(interval2);
-			// window.alert("Pacman caught");
+			resetGame();
+			if(pacman.lives_remain >0){
+				resetAfterCaught();
+			}
+			
 		} 
 		else {
 			Draw();
 		}
 	}	
 }
+
+function resetAfterCaught(){
+	pacman.lives_remain--;
+	score-=10;
+
+	reset_arr = board.arr;
+	for(let i=0; i<board.cols_num; i++){
+		for(let j=0; j<board.rows_num; j++){
+			if(board.arr[i][j] == "G" || board.arr[i][j] == "P"){
+				reset_arr[i][j]=="E";
+			}
+		}
+	}
+	if (!doly.eaten){
+		createMovingDoll();
+	}
+	createGhosts();	pacman.interval = setInterval(updatePosition,150);
+	interval2 = setInterval(updateGhostPosition,350);
+	interval3 = setInterval(updateDollPosition,200);
+
+}
+
+function updateDollPosition(){
+	if (doly==undefined){
+		return
+	}
+	board.arr[doly.i][doly.j]=doly.prevCell;
+	//DO A STEP!!!!!!!!!!!!!!!
+	let step =makeRandomValidStep(doly.i,doly.j);
+	doly.i=step[0];
+	doly.j=step[1];
+	// if ghosts touch telport
+	if(board.arr[doly.i][doly.j] == "T"){
+		let emptyCell = findRandomEmptyCell(board);
+		doly.i=emptyCell[0]
+		doly.j=emptyCell[1]
+	}
+
+	//if pac touch doll
+	if(board.arr[doly.i][doly.j] == "P"){
+		score+=50
+		clearInterval(interval3);
+	}
+	
+	doly.prevCell= board.arr[doly.i][doly.j]
+		if (doly.prevCell=="G")
+			board.arr[doly.i][doly.j] = "E";
+		else 
+			board.arr[doly.i][doly.j] = "D";
+		Draw();
+}	
+	
 function pacmanCaught(){
 	for (k=0;k<ghost_array.length;k++){
 		if(pacman.i==ghost_array[k].i && pacman.j==ghost_array[k].j)
@@ -414,26 +469,47 @@ function pacmanCaught(){
 function makeGhostStep(curr_i,curr_j){
 	let goodSteps=new Array();
 	//UP
-	if (board.arr[curr_i][curr_j+1]!="W" && board.arr[curr_i][curr_j+1]!="G" &&  goodStep(curr_i,curr_j,curr_i,curr_j+1))
+	if (board.arr[curr_i][curr_j+1]!="W" && board.arr[curr_i][curr_j+1]!="G"&& board.arr[curr_i][curr_j+1]!="D"  &&  goodStep(curr_i,curr_j,curr_i,curr_j+1))
 		goodSteps.push([curr_i,curr_j+1]);
 	//DOWN
-	if (board.arr[curr_i][curr_j-1]!="W"  && board.arr[curr_i][curr_j-1]!="G" && goodStep(curr_i,curr_j,curr_i,curr_j-1))
+	if (board.arr[curr_i][curr_j-1]!="W"  && board.arr[curr_i][curr_j-1]!="G" && board.arr[curr_i][curr_j-1]!="D" && goodStep(curr_i,curr_j,curr_i,curr_j-1))
 		goodSteps.push([curr_i,curr_j-1]);
 	//LEFT
-	if (board.arr[curr_i-1][curr_j]!="W"   && board.arr[curr_i-1][curr_j]!="G" && goodStep(curr_i,curr_j,curr_i-1,curr_j))
+	if (board.arr[curr_i-1][curr_j]!="W"   && board.arr[curr_i-1][curr_j]!="G" && board.arr[curr_i-1][curr_j]!="D" && goodStep(curr_i,curr_j,curr_i-1,curr_j))
 		goodSteps.push([curr_i-1,curr_j]);
 	//RIGHT
-	if (board.arr[curr_i+1][curr_j]!="W" && board.arr[curr_i+1][curr_j]!="G" && goodStep(curr_i,curr_j,curr_i+1,curr_j))
+	if (board.arr[curr_i+1][curr_j]!="W" && board.arr[curr_i+1][curr_j]!="G" && board.arr[curr_i+1][curr_j]!="D" && goodStep(curr_i,curr_j,curr_i+1,curr_j))
 		goodSteps.push([curr_i+1,curr_j]);
 
 	if (goodSteps.length==0){
-		return [curr_i,curr_j];
+		return  makeRandomValidStep(curr_i,curr_j);
 	}
 	let rand_int = getRandomInt(0,goodSteps.length-1)
 	let random_good_step = goodSteps[rand_int]
 	return random_good_step;
 }
-func
+function makeRandomValidStep(curr_i,curr_j){
+	let validSteps=new Array();
+	//UP
+	if (curr_j+1<board.rows_num-1 &&board.arr[curr_i][curr_j+1]!="W" && board.arr[curr_i][curr_j+1]!="G"  && board.arr[curr_i][curr_j+1]!="D" )
+		validSteps.push([curr_i,curr_j+1]);
+	//DOWN
+	if (curr_j-1>1&& board.arr[curr_i][curr_j-1]!="W"  && board.arr[curr_i][curr_j-1]!="G" && board.arr[curr_i][curr_j-1]!="D" )
+		validSteps.push([curr_i,curr_j-1]);
+	//LEFT
+	if (curr_i>1 && board.arr[curr_i-1][curr_j]!="W"   && board.arr[curr_i-1][curr_j]!="G"  && board.arr[curr_i-1][curr_j]!="D")
+		validSteps.push([curr_i-1,curr_j]);
+	//RIGHT
+	if (curr_j<board.cols_num-1 && board.arr[curr_i+1][curr_j]!="W" && board.arr[curr_i+1][curr_j]!="G" && board.arr[curr_i+1][curr_j]!="D")
+		validSteps.push([curr_i+1,curr_j]);
+
+	if (validSteps.length==0){
+		return [curr_i,curr_j];
+	}
+	let rand_int = getRandomInt(0,validSteps.length-1)
+	let random_valid_step = validSteps[rand_int]
+	return random_valid_step;
+}
 //check if get ghost closer to pacman
 function goodStep(curr_i,curr_j,next_i,next_j){
 	let i_distance = curr_i - pacman.i;
@@ -448,9 +524,10 @@ function goodStep(curr_i,curr_j,next_i,next_j){
 		return true;
 	else
 		return false;
-}
+	}
 function startTimer(duration, display) {
 	var timer = duration, minutes, seconds;
+	window.clearInterval(timer);
 	setInterval(function () {
 		minutes = parseInt(timer / 60, 10)
 		seconds = parseInt(timer % 60, 10);
@@ -460,22 +537,11 @@ function startTimer(duration, display) {
 
 		display.value = minutes + ":" + seconds;
 
-		// if (pacman.lives_remain <= 0 || timer<=0 ) {
-		// 	window.alert("game over!");
-		// 	//var ben =null
-		// }
 		--timer;
 	}, 1000);
 }
-function getRandomNeighbor(){
-	
-}
-
 function endGame(){
-	window.clearInterval(pacman.interval);
-	window.clearInterval(interval2);
-
-	let modal;
+	resetGame();
 	let closeBtn;
 	if(pacman.lives_remain <= 0){
 		modal = document.getElementById("losing-ghost-modal");
@@ -515,4 +581,7 @@ function endGame(){
 
 function resetGame(){
 	window.clearInterval(pacman.interval);
+	window.clearInterval(interval2);
+
+	winner.clearInterval(interval3);
 }
