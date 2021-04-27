@@ -1,5 +1,5 @@
 let context;
-let pacman = new Pacman();
+let pacman;
 let small_food = new SmallFood();
 let med_food = new MediumFood();
 let big_food = new BigFood();
@@ -7,13 +7,17 @@ let board = new Board();
 let score;
 let start_time;
 let time_elapsed;
-let interval;
+// let interval;
 let cur_username;
 let food_remain;
 let try_remain;
 // let mySound = new sound("bounce.mp3");
 let cnt;
 let lastKey;
+let ghost_array;
+let curr_i
+let curr_j
+
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
@@ -34,7 +38,7 @@ function createBoard(){
 	//small_food.remain = chosen_num_of_food_points*0.6;
 	//med_food.remain =  chosen_num_of_food_points*0.3;
 	//big_food.remain =  chosen_num_of_food_points*0.1;
-	pacman.lives_remain = 1;
+	pacman.lives_remain = 5;
 	board.arr = new Array();
 	food_remain = chosen_num_of_food_points
 	for (var i = 0; i < board.cols_num; i++) {
@@ -44,7 +48,6 @@ function createBoard(){
 			if (
 				// 
 				(i == 0) || (j==0) || 	(i == board.cols_num-1) || (j== board.rows_num-1)||
-			
 				(i == 3 && j == 3) || (i==3&&j==4) || (i==3&&j==5) || (i==3&&j==6)|| 
 				(i==4&&j==3) || (i==5&&j==3) || (i==6&&j==3)||
 				(i == 3 && j == 13) || (i==3&&j==12) || (i==3&&j==11) || (i==3&&j==10)||
@@ -130,8 +133,6 @@ function createBoard(){
 		score = 0;
 		pacman.i=pacman_cell[0]
 		pacman.j=pacman_cell[1]
-
-
 	// set empty for teleport
 	board.arr[0][8]="E"
 	board.arr[26][8]="E"
@@ -144,9 +145,23 @@ function createMovingDoll(){
 	board.arr[dollCell[0]][dollCell[1]] = "D";
 }
 
+function createGhosts(){
+	ghost_array = new Array(chosen_num_of_monsters);
+	let startingPoints=[[1,1],[1,15],[25,1],[25,15]]
+	let colorGhosts = ["RED","GREEN","BLUE","PINK"]
+	for (i=0;i<ghost_array.length;i++){
+		board.arr[startingPoints[i][0]][startingPoints[i][1]]="G";
+		ghost_array[i]=new Ghost(colorGhosts[i]);
+		ghost_array[i].i=startingPoints[i][0]
+		ghost_array[i].j = startingPoints[i][1]
+		ghost_array[i].prevCell="E"
+	}
+}
 function Start() {
+	pacman = new Pacman();
 	createBoard();
 	createMovingDoll();
+	createGhosts();
 	// mySound.play();
 	start_time = new Date();
 	startTimer(chosen_game_time, document.getElementById("timer"));
@@ -169,7 +184,7 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 150);
+	interval2 = setInterval(updateGhostPosition,350);
 }
 
 function findRandomEmptyCell(board) {
@@ -266,13 +281,15 @@ function Draw() {
 				doll_img.src = "./assets/doll.png";
 				context.drawImage(doll_img,center.x-15, center.y-15, board.cell_width, board.cell_height);
 			}
+			else if(board.arr[i][j] == "G"){
+				doll_img = new Image(10,10);
+				doll_img.src = "./assets/ghost1.png";
+				context.drawImage(doll_img,center.x-15, center.y-15, 0.75*board.cell_width, 0.75*board.cell_height);
+			}
 		}
 	}
 }
-// // set empty for teleport
-// board.arr[0][8]="E" 
-// board.arr[26][8]="E"
-// board.arr[13][0]="E"
+
 function UpdatePosition() {
 	if (pacman.i==undefined || pacman.j==undefined){
 		return
@@ -347,14 +364,91 @@ function UpdatePosition() {
 	board.arr[pacman.i][pacman.j] = "P";
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
-	if (score == 1000) {
-		window.clearInterval(interval);
-		window.alert("Game completed");
-	} else {
+	if(pacman.lives_remain <= 0 || time_elapsed >= chosen_game_time){
+		endGame();
+	}
+	else{
 		Draw();
 	}
 }
+function updateGhostPosition(){
+	if (ghost_array==undefined){
+		return
+	}
+	// set the cell as prev cell
+	for (i=0;i<ghost_array.length;i++){
+		board.arr[ghost_array[i].i][ghost_array[i].j]=ghost_array[i].prevCell;
+		//DO A STEP!!!!!!!!!!!!!!!
+		let step =makeGhostStep(ghost_array[i].i,ghost_array[i].j);
+		ghost_array[i].i=step[0];
+		ghost_array[i].j=step[1];
+		// if ghosts touch telport
+		if(board.arr[ghost_array[i].i][ghost_array[i].j] == "T"){
+			let emptyCell = findRandomEmptyCell(board);
+			ghost_array[i].i=emptyCell[0]
+			ghost_array[i].j=emptyCell[1]
+		}
+		ghost_array[i].prevCell= board.arr[ghost_array[i].i][ghost_array[i].j]
+		if (ghost_array[i].prevCell=="G")
+			board.arr[ghost_array[i].i][ghost_array[i].j] = "E";
+		else 
+			board.arr[ghost_array[i].i][ghost_array[i].j] = "G";
+		if (pacmanCaught()) {
+			window.clearInterval(pacman.interval);
+			window.clearInterval(interval2);
+			// window.alert("Pacman caught");
+		} 
+		else {
+			Draw();
+		}
+	}	
+}
+function pacmanCaught(){
+	for (k=0;k<ghost_array.length;k++){
+		if(pacman.i==ghost_array[k].i && pacman.j==ghost_array[k].j)
+			return true
+	}
+	return false
+}
+// return a good step [x,y] to make
+function makeGhostStep(curr_i,curr_j){
+	let goodSteps=new Array();
+	//UP
+	if (board.arr[curr_i][curr_j+1]!="W" && board.arr[curr_i][curr_j+1]!="G" &&  goodStep(curr_i,curr_j,curr_i,curr_j+1))
+		goodSteps.push([curr_i,curr_j+1]);
+	//DOWN
+	if (board.arr[curr_i][curr_j-1]!="W"  && board.arr[curr_i][curr_j-1]!="G" && goodStep(curr_i,curr_j,curr_i,curr_j-1))
+		goodSteps.push([curr_i,curr_j-1]);
+	//LEFT
+	if (board.arr[curr_i-1][curr_j]!="W"   && board.arr[curr_i-1][curr_j]!="G" && goodStep(curr_i,curr_j,curr_i-1,curr_j))
+		goodSteps.push([curr_i-1,curr_j]);
+	//RIGHT
+	if (board.arr[curr_i+1][curr_j]!="W" && board.arr[curr_i+1][curr_j]!="G" && goodStep(curr_i,curr_j,curr_i+1,curr_j))
+		goodSteps.push([curr_i+1,curr_j]);
 
+	if (goodSteps.length==0){
+		return [curr_i,curr_j];
+	}
+	let rand_int = getRandomInt(0,goodSteps.length-1)
+	let random_good_step = goodSteps[rand_int]
+	return random_good_step;
+}
+func
+//check if get ghost closer to pacman
+function goodStep(curr_i,curr_j,next_i,next_j){
+	let i_distance = curr_i - pacman.i;
+	let j_distance = curr_j - pacman.j;
+
+	let old_distance = Math.abs(i_distance) + Math.abs(j_distance);
+
+	i_distance = next_i - pacman.i;
+	j_distance = next_j - pacman.j;
+	let new_distance = Math.abs(i_distance) + Math.abs(j_distance);
+	if(old_distance >= new_distance)
+		return true;
+	else
+		return false;
+}
 function startTimer(duration, display) {
 	var timer = duration, minutes, seconds;
 	setInterval(function () {
@@ -366,12 +460,59 @@ function startTimer(duration, display) {
 
 		display.value = minutes + ":" + seconds;
 
-		if (--timer < 0) {
-			//window.alert("game over!");
-			var ben =null
-		}
+		// if (pacman.lives_remain <= 0 || timer<=0 ) {
+		// 	window.alert("game over!");
+		// 	//var ben =null
+		// }
+		--timer;
 	}, 1000);
 }
 function getRandomNeighbor(){
 	
+}
+
+function endGame(){
+	window.clearInterval(pacman.interval);
+	window.clearInterval(interval2);
+
+	let modal;
+	let closeBtn;
+	if(pacman.lives_remain <= 0){
+		modal = document.getElementById("losing-ghost-modal");
+		document.getElementById("losing-ghost-score-val").innerHTML=score;
+		closeBtn = document.getElementById("close-ghost-lose-btn");
+		modal.style.display = "block";
+	}
+	else if(time_elapsed >= chosen_game_time){
+		if (score >=100){
+			modal = document.getElementById("win-time-modal");
+			document.getElementById("win-time-score-val").innerHTML = score;
+			closeBtn = document.getElementById("close-win-time-btn");
+			modal.style.display = "block";
+		}
+		else{
+			modal = document.getElementById("lose-time-modal");
+			document.getElementById("lose-time-score-val").innerHTML = score;
+			closeBtn = document.getElementById("close-lose-time-btn");
+			modal.style.display = "block";
+		}
+	}
+	closeBtn.onclick = function(){
+		modal.style.display = "none"
+	}
+
+	window.onclick = function(e){
+		if(e.target == modal){
+			modal.style.display = "none"
+		}
+	}
+	$(document).keydown(function(e) {
+	var code = e.keyCode || e.which;
+	if (code == 27)
+		$(".modal").hide();
+	});
+}
+
+function resetGame(){
+	window.clearInterval(pacman.interval);
 }

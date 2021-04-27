@@ -1,8 +1,8 @@
 $(document).ready(function(){
     // about modal script
-    let aboutBtn = document.getElementById("aboutBtn")
-    let modal = document.querySelector(".modal")
-    let closeBtn = document.querySelector(".close-btn")
+    let aboutBtn = document.getElementById("about-menu-btn");
+    let modal = document.getElementById("about-modal");
+    let closeBtn = document.getElementById("about-close-btn");
 
     aboutBtn.onclick = function(){
             modal.style.display = "block"

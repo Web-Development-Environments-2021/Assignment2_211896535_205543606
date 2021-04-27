@@ -34,14 +34,14 @@
 		<!--MENU BAR-->
 		<div id="Menu-container">
 			<ul id="menu">	
-				<li><button class="btn1" data-text="color" onClick="switchScreens(`home-screen`)"> Home</button></li>
-				<li><button class="btn1" data-text="color" onClick="switchScreens(`register-screen`)"> Register</button></li>
-				<li><button class="btn1" data-text="color" onClick="switchScreens(`Login-screen`)"> Login</button></li>
-				<li><button class="btn1" data-text="color" id="aboutBtn"> About</button></li>
+				<li><button id="home-menu-btn" class="btn1" data-text="color" onClick="switchScreens(`home-screen`)"> Home</button></li>
+				<li><button id="register-menu-btn" class="btn1" data-text="color" onClick="switchScreens(`register-screen`)"> Register</button></li>
+				<li><button id="login-menu-btn" class="btn1" data-text="color" onClick="switchScreens(`Login-screen`)"> Login</button></li>
+				<li><button id="about-menu-btn" class="btn1" data-text="color"> About</button></li>
 				<!--ABOUT-->
-				<div class="modal">
-					<div class="modal-content">
-						<span class="close-btn">&times;</span>
+				<div id="about-modal" class="modal">
+					<div id="about-content" class="modal-content">
+						<span id="about-close-btn" class="close-btn1">&times;</span>
 						<p>Ben Margalit</p>
 						<p>Mor Saranga</p>
 					</div>
@@ -300,6 +300,32 @@
 			</div>
 		</div>
 
+		<div id="losing-ghost-modal" class="modal">
+			<div id="losing-ghost-modal-content" class="modal-content-end">
+					<span id="close-ghost-lose-btn" class="close-btn2">&times;</span>
+					<p>Game Over, Loser</p>
+					<label id="losing-ghost-score-text">Your Score:</label>
+					<label id="losing-ghost-score-val"></label>
+			</div>
+		</div>
+		<div id="win-time-modal" class="modal">
+			<div id="win-time-modal-content" class="modal-content-end">
+				<span id="close-win-time-btn" class="close-btn2">&times;</span>
+				<p>Winner!</p>
+				<label id="win-time-score-text">Your Score: </label>
+				<label id="win-time-score-val"></label>
+			</div>
+		</div>
+		<div id="lose-time-modal">
+			<div id="lose-time-modal-content" class="modal-content-end">
+				<span id="close-lose-time-btn" class="close-btn2">&times;</span>
+				<p>Game Over!</p>
+				<label id="lose-time-score-text1">You can do better than</label>
+				<label id="lose-time-score-val"></label>
+				<label id="lose-time-score-text2"> points</label>
+			</div>
+		</div>
+
 		<!--FOOTER-->
 
 		<div id="div-footer">
@@ -395,6 +421,7 @@
 		<script type="text/javascript" src="scripts/sounds.js"> </script>
 		<script type="text/javascript" src="scripts/board.js"> </script>
 		<script type="text/javascript" src="scripts/pacman.js"> </script>
+		<script type="text/javascript" src="scripts/ghost.js"> </script>
 		<script type="text/javascript" src="scripts/food.js"> </script>
 		<script type="text/javascript" src="scripts/jquery-3.4.1.slim.min.js"></script>
 		<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.3.min.js"></script>
@@ -405,6 +432,7 @@
 		<script type="text/javascript" src="scripts/login.js"> </script>
 		<script type="text/javascript" src="scripts/about.js"> </script>
 		<script type="text/javascript" src="scripts/settings.js"> </script>
+
 		
 	</body>
 </html>

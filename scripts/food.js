@@ -15,3 +15,4 @@ class BigFood{
         this.remain = 50;
     }
 }
+            
