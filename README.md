@@ -23,7 +23,9 @@ This game is pacman simple game for our web development course. We used Javascri
 * Eat food for score. There are 3 kinds of food points, smaller worth 5 points, medium worth 15 points and big worth 25 points.
 * If a ghost catches the pacman, you lose 1 life and 10 points off the score.
 * If you eat the special moving canfy, you get 50 points.
-* Game ends when pacman loses all it's lives, or the time's up.
+* Game ends when:
+ * Win: if pacman eats all the food on the board or time's up and the score is above 100 points.
+ * Lose: if pacman loses all it's life (Loser) or time's up and the score is below 100 poins (You can do better...)
 
 ## Special Functionality
 We've added the following special functionality:
