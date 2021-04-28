@@ -67,8 +67,7 @@ $(document).ready(function(){
 			},
 			password: {
 				required: "Please enter a password.",
-				minlength: "Password must be at least 6 characters.",
-				strongPassword: "Password must contain at least one number, uppercase and lowercase."
+				strongPassword: "6 chars long and at least one number, upper and lower."
 			},
 			fullname: {
 				required: "Please enter your name.",
