@@ -114,52 +114,47 @@ function updateSettingsKeys(setting){
     key_code = event.keyCode;
     switch (setting){
         case "UP":
-            if(key_code == 38)
-	        {
-		        chosen_key_up= "⇧";
-	        }
-            else {
-                chosen_key_up =  String.fromCharCode(key_code);
-            }
+            if (key_code==chosen_key_code_down || key_code==chosen_key_code_left || key_code==chosen_key_code_right)
+                break;
+            chosen_key_up=  DisplaychosenKey(key_code);
             chosen_key_code_up = key_code;
             document.getElementById("moveUpBtn").value = chosen_key_up;
             break;
         case "DOWN":
-            if(key_code == 40)
-	        {
-		        chosen_key_down= "⇩";
-	        }
-            else {
-                chosen_key_down =  String.fromCharCode(key_code);
-            }
+            if (key_code==chosen_key_code_up || key_code==chosen_key_code_left || key_code==chosen_key_code_right)
+            break;
+            chosen_key_down=  DisplaychosenKey(key_code);
             chosen_key_code_down = key_code;
             document.getElementById("moveDownBtn").value = chosen_key_down;
             break;
         case "LEFT":
-            if(key_code == 37)
-	        {
-		        chosen_key_left= "⇦";
-	        }
-            else {
-                chosen_key_left=  String.fromCharCode(key_code);
-            }
+            if (key_code==chosen_key_code_down || key_code==chosen_key_code_up || key_code==chosen_key_code_right)
+            break;
+            chosen_key_left=  DisplaychosenKey(key_code);
             chosen_key_code_left = key_code;
             document.getElementById("moveLeftBtn").value = chosen_key_left;
             break;
         case "RIGHT":
-            if(key_code == 39)
-	        {
-		        chosen_key_right= "➪";
-	        }
-            else {
-                chosen_key_right=  String.fromCharCode(key_code);
-            }
+            if (key_code==chosen_key_code_down || key_code==chosen_key_code_left || key_code==chosen_key_code_up)
+            break;
+            chosen_key_right=  DisplaychosenKey(key_code);
             chosen_key_code_right = key_code;
             document.getElementById("moveRightBtn").value = chosen_key_right;
             break;
     }
     $(document).unbind();
 });
+
+
+function DisplaychosenKey(key_code)
+{
+	if(key_code == 38) return "⇧";
+	else if(key_code == 40) return "⇩";
+	else if(key_code == 39) return "➪";
+	else if(key_code == 37) return "⇦";
+	else return String.fromCharCode(event.keyCode);
+}
+
 
 }
 function randomValues(){

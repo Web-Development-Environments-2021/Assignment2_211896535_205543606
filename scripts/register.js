@@ -3,10 +3,10 @@ $(document).ready(function(){
 
 	$.validator.addMethod('strongPassword', function(value, element) {
 		return this.optional(element)
+		  || value.length >=6
 		  && /\d/.test(value)
 		  && /[a-z]/i.test(value);
 	  },)
-
 
 	//check if username already exists
 	$.validator.addMethod('validateUsername', function (value, element) {
@@ -20,6 +20,21 @@ $(document).ready(function(){
 	jQuery.validator.addMethod("lettersonly", function(value, element) {
 		return this.optional(element) || /^[a-zA-Z\s]*$/.test(value);
 	},); 
+
+// 	jQuery.validator.addMethod("fullname", function(value, element) {
+//   	if (/^[a-z][- a-z]*[- ]{2}[- a-z]*[a-z]$/i.test(value))
+//     	return true;
+//   	 else
+//     	return false;
+// 	},);
+
+// 	$(function() {
+//         $('#fullname').on('keydown', function(e) {
+//             if (e.which == 32){
+//                 window.alert('Space Detected');
+//             }
+//         });
+// });
 	
 	//REGISTER
 	$("#register-form").validate({
@@ -30,7 +45,7 @@ $(document).ready(function(){
 			},
 			password: {
 				required: true,
-				minlength: 6,
+				//minlength: 6,
 				strongPassword: true
 			},
 			fullname: {
