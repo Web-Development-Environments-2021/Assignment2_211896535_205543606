@@ -10,9 +10,9 @@ let time_elapsed;
 let cur_username;
 let food_remain;
 let try_remain;
-let gameSound = new Audio("assets/pacmanremix.mp3");
-let quackSound = new Audio("assets/quack.mp3");
-let teleportSound = new Audio("assets/teleport.mp3");
+let gameSound = new Audio("assets/sounds/pacmanremix.mp3");
+let quackSound = new Audio("assets/sounds/quack.mp3");
+let teleportSound = new Audio("assets/sounds/teleport.mp3");
 let lastKey;
 let ghost_array;
 let curr_i
@@ -159,6 +159,7 @@ function createGhosts(){
 function Start() {
 	pacman = new Pacman();
 	pacman.lives_remain = 5;
+	changeLivesImg();
 	doly= new Doll();
 	createBoard();
 	createMovingDoll();
@@ -271,17 +272,17 @@ function Draw() {
 			}
 			else if (board.arr[i][j] == "W") {
 				wall_img = new Image(10,10);
-				wall_img.src = "./assets/wall.png";
+				wall_img.src = "./assets/images/wall2.png";
 				context.drawImage(wall_img,center.x-15, center.y-15, board.cell_width, board.cell_height);
 			}
 			else if (board.arr[i][j] == "T") {
 				teleport_img = new Image(10,10);
-				teleport_img.src = "./assets/teleport.png";
+				teleport_img.src = "./assets/images/teleport.png";
 				context.drawImage(teleport_img,center.x-15, center.y-15, board.cell_width, board.cell_height);
 			}
 			else if(board.arr[i][j] == "D"){
 				doll_img = new Image(10,10);
-				doll_img.src = "./assets/candy.png";
+				doll_img.src = "./assets/images/candy.png";
 				context.drawImage(doll_img,center.x-15, center.y-15, board.cell_width, board.cell_height);
 			}
 			else if(board.arr[i][j] == "G"){
@@ -296,22 +297,22 @@ function DrawGhost(center,col_pos,row_pos){
 		if(ghost_array[k].i == col_pos && ghost_array[k].j == row_pos){
 			if(ghost_array[k].color == "RED"){
 				ghost_img = new Image(10,10);
-				ghost_img.src = "./assets/ghost1-right.png";
+				ghost_img.src = "./assets/images/ghost1-right.png";
 				context.drawImage(ghost_img,center.x-15, center.y-15, 0.75*board.cell_width, 0.75*board.cell_height);
 			}
 			else if(ghost_array[k].color == "GREEN"){
 				ghost_img = new Image(10,10);
-				ghost_img.src = "./assets/ghost2-right.png";
+				ghost_img.src = "./assets/images/ghost2-right.png";
 				context.drawImage(ghost_img,center.x-15, center.y-15, 0.75*board.cell_width, 0.75*board.cell_height);
 			}
 			else if(ghost_array[k].color == "BLUE"){
 				ghost_img = new Image(10,10);
-				ghost_img.src = "./assets/ghost3-right.png";
+				ghost_img.src = "./assets/images/ghost3-right.png";
 				context.drawImage(ghost_img,center.x-15, center.y-15, 0.75*board.cell_width, 0.75*board.cell_height);
 			}
 			else if(ghost_array[k].color == "PINK"){
 				ghost_img = new Image(10,10);
-				ghost_img.src = "./assets/ghost4-right.png";
+				ghost_img.src = "./assets/images/ghost4-right.png";
 				context.drawImage(ghost_img,center.x-15, center.y-15, 0.75*board.cell_width, 0.75*board.cell_height);
 			}
 		}
@@ -447,6 +448,7 @@ function updateGhostPosition(){
 function resetAfterCaught(){
 	gameSound.play();
 	pacman.lives_remain--;
+	changeLivesImg();
 	score-=10;
 	for (let i=0; i<ghost_array.length; i++){
 		ghost_array[i].prevCell = "E";
@@ -604,6 +606,7 @@ function endGame(){
 		modal = document.getElementById("losing-ghost-modal");
 		document.getElementById("losing-ghost-score-val").innerHTML=score;
 		closeBtn = document.getElementById("close-ghost-lose-btn");
+		modal.style.background
 		modal.style.display = "block";
 	}
 	else if(time_elapsed >= chosen_game_time){
@@ -645,6 +648,28 @@ function resetGame(){
 	window.clearInterval(interval3);
 	if(timer != undefined && timer != null){
 		window.clearInterval(timer);
+	}
+}
+
+function changeLivesImg(){
+	let lives_img = document.getElementById("lives_img");
+	if(pacman.lives_remain == 5){
+		lives_img.src="assets/images/5lives.png";
+	}
+	else if(pacman.lives_remain == 4){
+		lives_img.src="assets/images/4lives.png";
+	}
+	else if(pacman.lives_remain == 3){
+		lives_img.src="assets/images/3lives.png";
+	}
+	else if(pacman.lives_remain == 2){
+		lives_img.src="assets/images/2lives.png";
+	}
+	else if(pacman.lives_remain == 1){
+		lives_img.src="assets/images/1lives.png";
+	}
+	else{
+		lives_img.src="assets/images/0lives.png";
 	}
 }
 

@@ -80,9 +80,9 @@ let chosen_key_code_down = 40;
 let chosen_key_code_left = 37;
 let chosen_key_code_right = 39;
 let chosen_num_of_food_points=60;
-let chosen_color5 = "#dc143c"
+let chosen_color5 = "#dc143c";
 let chosen_color15 = "#00FFFF";
-let chosen_color25 = "#7FFF00"
+let chosen_color25 = "#7FFF00";
 let chosen_game_time = 60;
 let chosen_num_of_monsters=2;
 
@@ -160,11 +160,6 @@ function updateSettingsKeys(setting){
     }
     $(document).unbind();
 });
-
-function setValFromScale(label,scale){
-    valfrom = document.getElementById(scale).value
-    document.getElementById(label).innerHTML = valfrom
-}
 
 }
 function randomValues(){

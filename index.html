@@ -17,7 +17,7 @@
 		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 		<meta content="utf-8" http-equiv="encoding">
 		<title> Pacman B&M</title>
-		<link rel="icon" href="assets/icon.ico">
+		<link rel="icon" href="assets/images/icon.ico">
 	</head>
 
 	<body>
@@ -25,7 +25,7 @@
 			<!--HEADER-->
 			<header>
 				<center>
-					<img id="logo3" src="assets/title.png">
+					<img id="logo3" src="assets/images/title.png">
 				</center>
 				<h3 id="personal_details">Ben Margalit & Mor Saranga</h3>
 			</header>
@@ -49,7 +49,7 @@
 				<p id="about-us-p">This Game was made by Ben Margalit and Mor Saranga</p>
 				<div class="image-container">
 					<center>
-						<img class="modal-img" src="assets/us.jpg" width=300px>
+						<img class="modal-img" src="assets/images/us.jpg" width=300px>
 					</center>
 				</div>
 			</div>
@@ -60,7 +60,7 @@
 
 			<!--Home-->
 			<div id="home-screen" class="screen">
-				<img id="logo2" src="assets/home2.png">
+				<img id="logo2" src="assets/images/home2.png">
 				</br>
 				<button class=btn1 id="btn-register" onClick="switchScreens(`register-screen`)"><span class="btn1-text">Register</span></button>
 				<button class=btn1 id="btn-Login" onClick="switchScreens(`Login-screen`)"><span class="btn1-text">Login</span></button>
@@ -187,13 +187,13 @@
 							<label><b>select colors of food points:</b></label>
 							<br>
 							<label> select color for 5 points ball</label>
-							<input class="color-set" type="color" id="5-point-color" name="pointsColor5" onchange="updateSettings(`COLOR5`)" required>
+							<input class="color-set" type="color" id="5-point-color" value="#dc143c" name="pointsColor5" onchange="updateSettings(`COLOR5`)" required>
 							<br>
 							<label> select color for 15 points ball</label>
-							<input class="color-set" type="color" id="15-point-color" name="pointsColor15" onchange="updateSettings(`COLOR15`)" required>
+							<input class="color-set" type="color" id="15-point-color" value="#00FFFF" name="pointsColor15" onchange="updateSettings(`COLOR15`)" required>
 							<br>
 							<label> select color for 25 points ball</label>
-							<input class="color-set" type="color" id="25-point-color" name="pointsColor25" onchange="updateSettings(`COLOR25`)" required>
+							<input class="color-set" type="color" id="25-point-color" value="#7FFF00" name="pointsColor25" onchange="updateSettings(`COLOR25`)" required>
 							<br>
 							<label><b> select time of the game:</b></label>
 							<br>
@@ -215,20 +215,29 @@
 
 				</div>
 				<div id="game-container">
-					<div id="score">
-						<label for="lblScore-text">SCORE:</label>
-						<label id="lblScore_val" type="text"></label>
-					</div>
-					<div id="time">
-						<label for="lblTime">TIME:</label>
-						<label id="lblTime_val" type="text"></label>
-						<br>
-						<label for="timer"> COUNTDOWN TIMER:</label>
-						<label id="timer" type="text"></label>
-					</div>
-					<div id="username-title">
-						<label>Username:</label>
-						<label id="username_title"> </label>
+					<div id="show-info">
+						<div id="username-show" class="show-info-content">
+							<label>USERNAME: </label>
+							<label id="username_title"> </label>
+						</div>
+						<div id="score-show" class="show-info-content">
+							<label for="lblScore-text">SCORE: </label>
+							<label id="lblScore_val" type="text"></label>
+						</div>
+						<div id="time-show" class="show-info-content">
+							<label for="lblTime">TIME: </label>
+							<label id="lblTime_val" type="text"></label>
+							
+						</div>
+						<div id="countdown-show" class="show-info-content">
+							<label for="timer">TIMER: </label>
+							<label id="timer" type="text"></label>
+						</div>
+
+						<div id="lives-show" class="show-info-content">
+							<label id="lives_label">LIVES: </label>
+							<img id="lives_img" src="assets/images/5lives.png">
+						</div>
 					</div>
 					<div id="settings-show">
 						<ul id="show-keys-chosen-list">
@@ -306,32 +315,38 @@
 		<div id="losing-ghost-modal" class="modal">
 			<div id="losing-ghost-modal-content" class="modal-content-end">
 					<span id="close-ghost-lose-btn" class="close-btn2">&times;</span>
-					<p>Game Over, Loser</p>
-					<label id="losing-ghost-score-text">Your Score:</label>
-					<label id="losing-ghost-score-val"></label>
+					<label id="lose-ghost-text" class="end-text">Loser!</p>
+					<label id="losing-ghost-score-text" class="end-text">Your Score:</label>
+					<label id="losing-ghost-score-val" class="end-text"></label>
 					<br>
-					<button id="new-game-losing-ghost" class="btn1" onclick="newGameShowSettings()">New Game</button>
+					<div class="back-color-btn1">
+						<button id="new-game-losing-ghost" class="btn1" onclick="newGameShowSettings()">New Game</button>
+					</div>
 			</div>
 		</div>
 		<div id="win-time-modal" class="modal">
 			<div id="win-time-modal-content" class="modal-content-end">
 				<span id="close-win-time-btn" class="close-btn2">&times;</span>
-				<p>Winner!</p>
-				<label id="win-time-score-text">Your Score: </label>
-				<label id="win-time-score-val"></label>
+				<label id="win-time-text" class="end-text">Winner!</label>
 				<br>
-				<button id="new-game-win-time" class="btn1" onclick="newGameShowSettings()">New Game</button>
+				<label id="win-time-score-text" class="end-text">Your Score: </label>
+				<label id="win-time-score-val" class="end-text"></label>
+				<br>
+				<div class="back-color-btn1">
+					<button id="new-game-win-time" class="btn1" onclick="newGameShowSettings()">New Game</button>
+				</div>
 			</div>
 		</div>
 		<div id="lose-time-modal">
 			<div id="lose-time-modal-content" class="modal-content-end">
 				<span id="close-lose-time-btn" class="close-btn2">&times;</span>
-				<p>Game Over!</p>
-				<label id="lose-time-score-text1">You can do better than</label>
-				<label id="lose-time-score-val"></label>
-				<label id="lose-time-score-text2"> points</label>
+				<label id="lose-time-score-text1" class="end-text">You can do better than</label>
+				<label id="lose-time-score-val" class="end-text"></label>
+				<label id="lose-time-score-text2" class="end-text"> points</label>
 				<br>
-				<button id="new-game-win-lose" class="btn1" onclick="newGameShowSettings()">New Game</button>
+				<div class="back-color-btn1">
+					<button id="new-game-win-lose" class="btn1" onclick="newGameShowSettings()">New Game</button>
+				</div>
 			</div>
 		</div>
 
@@ -349,22 +364,22 @@
 						<ul class="social-links">
 							<li>
 								<a href="https://www.linkedin.com/">
-									<img class="contact-logo" id="linkein-logo-ben" src="assets/linkedin-ben.png" width="25px" height="25px">
+									<img class="contact-logo" id="linkein-logo-ben" src="assets/images/linkedin-ben.png" width="25px" height="25px">
 								</a>
 							</li>
 							<li>
 								<a href="https://www.facebook.com/ben.margalit.21">
-									<img class="contact-logo" id="facebook-logo-ben" src="assets/facebook-ben.png" width="25px" height="25px">
+									<img class="contact-logo" id="facebook-logo-ben" src="assets/images/facebook-ben.png" width="25px" height="25px">
 								</a>
 							</li>
 							<li>
 								<a href="https://www.instagram.com/benmargalit21/">
-									<img class="contact-logo" id="instagram-logo-ben" src="assets/instagram-ben.png" width="25px" height="25px">
+									<img class="contact-logo" id="instagram-logo-ben" src="assets/images/instagram-ben.png" width="25px" height="25px">
 								</a>
 							</li>
 							<li>
 								<a href="https://github.com/benmarga">
-									<img class="contact-logo" id="github-logo-ben" src="assets/github-ben.png" width="25px" height="25px">
+									<img class="contact-logo" id="github-logo-ben" src="assets/images/github-ben.png" width="25px" height="25px">
 								</a>
 							</li>
 						</ul>
@@ -374,22 +389,22 @@
 						<ul class="social-links">
 							<li>
 								<a href="https://www.linkedin.com/in/mor-saranga/">
-									<img class="contact-logo" id="linkein-logo-mor" src="assets/linkedin-mor.png" width="25px" height="25px">
+									<img class="contact-logo" id="linkein-logo-mor" src="assets/images/linkedin-mor.png" width="25px" height="25px">
 								</a>
 							</li>	
 							<li>
 								<a href="https://www.facebook.com/mor.saranga">
-									<img class="contact-logo" id="facebook-logo-mor" src="assets/facebook-mor.png" width="25px" height="25px">
+									<img class="contact-logo" id="facebook-logo-mor" src="assets/images/facebook-mor.png" width="25px" height="25px">
 								</a>
 							</li>
 							<li>
 								<a href="https://www.instagram.com/mor_sa/">
-									<img class="contact-logo" id="instagram-logo-mor" src="assets/instagram-mor.png" width="25px" height="25px">
+									<img class="contact-logo" id="instagram-logo-mor" src="assets/images/instagram-mor.png" width="25px" height="25px">
 								</a>
 							</li>
 							<li>
 								<a href="https://github.com/mor-sa">
-									<img class="contact-logo" id="github-logo-mor" src="assets/github-mor.png" width="25px" height="25px">
+									<img class="contact-logo" id="github-logo-mor" src="assets/images/github-mor.png" width="25px" height="25px">
 								</a>
 							</li>
 						</ul>

@@ -40,19 +40,22 @@
     font-size: 1.2em;
 }
 
+
 #settings-show{
-    background-color: rgb(70, 108, 139);
-    display: inline-block;
+    background: url("../assets/images/darkbg3.png");
+    float: left;
     position:absolute;
     width: 10%;
     height: 300px;
     text-align: center;
     left: 20px;
     margin-top: 15px;
+    font-size: 1.2em;
+
 }
 
 #game{
-    display: inline-block;
+    float: left;
 }
 
 #show-keys-chosen-list{
