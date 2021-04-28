@@ -96,6 +96,12 @@ function createBoard(){
 			}
 		}
 	}
+
+	let pacman_cell = findRandomEmptyCell(board);
+	score = 0;
+	pacman.i=pacman_cell[0];
+	pacman.j=pacman_cell[1];
+
 	while (food_remain > 0) {
 		let emptyCell = findRandomEmptyCell(board);
 		const random_food = Math.random();
@@ -110,10 +116,7 @@ function createBoard(){
 		}
 		food_remain--
 	}
-	let pacman_cell = findRandomEmptyCell(board);
-	score = 0;
-	pacman.i=pacman_cell[0]
-	pacman.j=pacman_cell[1]
+
 	// set empty for teleport
 	board.arr[0][8]="E"
 	board.arr[26][8]="E"
@@ -144,6 +147,7 @@ function createGhosts(){
 function Start() {
 	//init important things
 	pacman = new Pacman();
+	pacman.food_eaten = 0;
 	dolly= new Doll();
 	pacman.lives_remain = 5;
 	changeLivesImg();
@@ -371,12 +375,15 @@ function UpdatePosition() {
 		}
 	}
 	if (board.arr[pacman.i][pacman.j] == "F5") {
+		pacman.food_eaten +=1;
 		score+=5;
 	}
 	if (board.arr[pacman.i][pacman.j] == "F15") {
+		pacman.food_eaten +=1;
 		score+=15;
 	}
 	if (board.arr[pacman.i][pacman.j] == "F25") {
+		pacman.food_eaten +=1;
 		score+=25;
 	}
 	if(board.arr[pacman.i][pacman.j] == "T"){
@@ -388,7 +395,7 @@ function UpdatePosition() {
 	board.arr[pacman.i][pacman.j] = "P";
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
-	if(pacman.lives_remain <= 0 || time_elapsed >= chosen_game_time){
+	if(pacman.lives_remain <= 0 || time_elapsed >= chosen_game_time || pacman.food_eaten == chosen_num_of_food_points){
 		endGame();
 	}
 	else{
@@ -574,15 +581,7 @@ function startTimer(duration, display) {
 	timer = duration;
 	window.clearInterval(timer);
 	setInterval(function () {
-		// minutes = parseInt(timer / 60, 10)
-		// seconds = parseInt(timer % 60, 10);
 
-		// minutes = minutes < 10 ? "0" + minutes : minutes;
-		// seconds = seconds < 10 ? "0" + seconds : seconds;
-
-		// display.innerHTML = minutes + ":" + seconds;
-		display.innerHTML = timer
-		--timer;
 	}, 1000);
 }
 
@@ -593,6 +592,12 @@ function endGame(){
 		document.getElementById("losing-ghost-score-val").innerHTML=score;
 		closeBtn = document.getElementById("close-ghost-lose-btn");
 		modal.style.background
+		modal.style.display = "block";
+	}
+	else if(pacman.food_eaten == chosen_num_of_food_points){
+		modal = document.getElementById("win-time-modal");
+		document.getElementById("win-time-score-val").innerHTML = score;
+		closeBtn = document.getElementById("close-win-time-btn");
 		modal.style.display = "block";
 	}
 	else if(time_elapsed >= chosen_game_time){
@@ -632,11 +637,7 @@ function resetGame(){
 	window.clearInterval(pacman.interval);
 	window.clearInterval(ghost_interval);
 	window.clearInterval(doll_interval);
-	// if(timer != undefined && timer != null){
-	// 	window.clearInterval(timer);
-	// }
 	window.clearInterval(timer);
-	//startTimer(chosen_game_time, document.getElementById("timer"));
 }
 
 function changeLivesImg(){

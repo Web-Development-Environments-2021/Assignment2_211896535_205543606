@@ -10,5 +10,6 @@ class Pacman{
         this.img_left.src = "./assets/images/pacman2-left.png";
         this.img_right = new Image(10,10);
         this.img_right.src = "./assets/images/pacman2-right.png";
+        this.food_eaten = 0;
     }
 }
