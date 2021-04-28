@@ -10,6 +10,7 @@ Website URL: https://web-development-environments-2021.github.io/Assignment2_211
 ### Overview
 
 This game is pacman simple game for our web development course. We used Javascript, Jquery, HTML and CSS.
+The game is built according to the instruction given by course staff.
 
 ## What's in the site?
 * **Home** - a page that contains a logo, Legister and Login buttons.
