@@ -1,16 +1,44 @@
-#home-screen{
-    /* display: block;
+/* #home-screen{
+    display: block;
     height: 500px;
     overflow: hidden;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    font-family: 'Anton', sans-serif; */
-}
+    font-family: 'Anton', sans-serif; 
+} */
 
 
 #logo2{
     margin: 5em;
     width: 350px;
     height: 200px;
+}
+
+.home-button-container{
+    width: inherit;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-flow: row;
+}
+
+#btn-register{
+    padding-top: 1em;
+    padding-bottom: 1em;
+    text-align: center;
+    font-size: 1.3em;
+    justify-content: center;
+    width: 100%;
+    float: left;
+}
+
+#btn-Login{
+    padding-top: 1em;
+    padding-bottom: 1em;
+    text-align: center;
+    font-size: 1.3em;
+    justify-content: center;
+    width: 100%;
+    float: left;
 }

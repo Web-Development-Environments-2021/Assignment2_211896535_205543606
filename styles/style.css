@@ -79,6 +79,7 @@ body{
 }
 
 .btn1{
+    text-align: center;
     width: max-content;
     color: rgba(255,255,255,1);
 	background: none;

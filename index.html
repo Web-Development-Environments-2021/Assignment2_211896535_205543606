@@ -70,8 +70,10 @@
 			<div id="home-screen" class="screen">
 				<img id="logo2" src="assets/images/home2.png">
 				</br>
-				<button class=btn1 id="btn-register" onClick="switchScreens(`register-screen`)"><span class="btn1-text">Register</span></button>
-				<button class=btn1 id="btn-Login" onClick="switchScreens(`Login-screen`)"><span class="btn1-text">Login</span></button>
+				<div class="home-button-container">
+					<button class=btn1 id="btn-register" onClick="switchScreens(`register-screen`)"><span class="btn1-text">Register</span></button>
+					<button class=btn1 id="btn-Login" onClick="switchScreens(`Login-screen`)"><span class="btn1-text">Login</span></button>
+				</div>
 			</div>
 
 			<!--Register-->
@@ -165,29 +167,28 @@
 					<form id ="settings-form">
 						<div class="settings-container">
 							<h2>Game Settings</h2>
-							<label><b>Choose your game controlers</b></label>
+							<label><b>Choose your game controlers:</b></label>
 							<br>
-							<center>
-								<ul id="keyboards-select">
-									<li>
-										<input class="keyboard-option" type="button" value="⇧" placeholder="Enter Up key" name="moveUpBtn" id="moveUpBtn" onclick="updateSettingsKeys(`UP`)" required>
-									</li>
-									<br>
-									<li>
-										<input class="keyboard-option" type="button" value="⇦" placeholder="Enter Left key" name="moveLeftBtn" id="moveLeftBtn"onclick="updateSettingsKeys(`LEFT`)" required>
-									</li>
-									<li>
-										<img src="assets/images/0lives.png" width="45px">
-									</li>								
-									<li>
-										<input class="keyboard-option" type="button" value="➪" placeholder="Enter Right key" name="moveRightBtn" id="moveRightBtn" onclick="updateSettingsKeys(`RIGHT`)" required>
-									</li>	
-									<br>
-									<li>
-										<input class="keyboard-option" type="button" value="⇩" placeholder="Enter Down key" name="moveDownBtn" id="moveDownBtn"onclick="updateSettingsKeys(`DOWN`)" required>
-									</li>
-								</ul>
-							</center>
+							<br>
+							<ul id="keyboards-select">
+								<li>
+									<input class="keyboard-option" type="button" value="⇧" placeholder="Enter Up key" name="moveUpBtn" id="moveUpBtn" onclick="updateSettingsKeys(`UP`)" required>
+								</li>
+								<br>
+								<li>
+									<input class="keyboard-option" type="button" value="⇦" placeholder="Enter Left key" name="moveLeftBtn" id="moveLeftBtn"onclick="updateSettingsKeys(`LEFT`)" required>
+								</li>
+								<li>
+									<img src="assets/images/0lives.png" width="45px">
+								</li>								
+								<li>
+									<input class="keyboard-option" type="button" value="➪" placeholder="Enter Right key" name="moveRightBtn" id="moveRightBtn" onclick="updateSettingsKeys(`RIGHT`)" required>
+								</li>	
+								<br>
+								<li>
+									<input class="keyboard-option" type="button" value="⇩" placeholder="Enter Down key" name="moveDownBtn" id="moveDownBtn"onclick="updateSettingsKeys(`DOWN`)" required>
+								</li>
+							</ul>
 							<br>
 							<label><b>Number of Food points:</b></label>
 							<br>
@@ -197,34 +198,36 @@
 							<br>
 							<label id="food-points-label" > </label>
 							<br>
-							<label><b>Select colors of food points:</b></label>
+							<label><b>Select colors of food points: </b></label>
 							<br>
-							<label> Select color for 5 points ball</label>
+							<label> Select color for 5 points ball: </label>
 							<input class="color-set" type="color" id="5-point-color" value="#dc143c" name="pointsColor5" onchange="updateSettings(`COLOR5`)" required>
 							<br>
-							<label> Select color for 15 points ball</label>
+							<label> Select color for 15 points ball: </label>
 							<input class="color-set" type="color" id="15-point-color" value="#00FFFF" name="pointsColor15" onchange="updateSettings(`COLOR15`)" required>
 							<br>
-							<label> Select color for 25 points ball</label>
+							<label> Select color for 25 points ball: </label>
 							<input class="color-set" type="color" id="25-point-color" value="#7FFF00" name="pointsColor25" onchange="updateSettings(`COLOR25`)" required>
 							<br>
 							<br>
-							<label><b> Select time of the game:</b></label>
+							<label><b> Select the time duration the game: </b></label>
 							<br>
 							<input type="range" id="game-time-scale" name="gameTimeScale" min="60" value="60" max="360" step="1" onchange="setValFromScale('game-time-label','game-time-scale');updateSettings(`TIME`);" required>
 							<br>
 							<label id="game-time-label" > </label>
 							<br>
-							<label><b> Selct num of monsters:</b></label>
+							<label><b> Selct number of ghosts: </b></label>
 							<br>
 							<input type="range" id="monsters-scale" name="monstersScale" min="1" value="2" max="4" step="1" onchange="setValFromScale('monsters-label','monsters-scale');updateSettings(`MONSTERS`);" required>
 							<br>
 							<label id="monsters-label" > </label>
 							<br>
-							<input class="btn1" type="submit" id="submit-settings" value="Start Game">
 						</div>
 					</form>
-					<button class="btn1" id="randomBtn" onclick="randomValues()">Random</button>
+					<div id="settings-btns-container">
+						<input class="btn1" type="submit" id="submit-settings" value="Start Game" form="settings-form">
+						<button class="btn1" id="randomBtn" onclick="randomValues()">Random</button>
+					</div>
 				</div>
 				<div id="game-container">
 					<div id="game-content">
@@ -257,8 +260,10 @@
 						</div>
 					</div>
 					<div id="settings-show">
-						<center>
 							<h1>Your Settings</h1>
+							<br>
+							<label>Chosen Keyboards:</label>
+							<br>
 							<ul id="show-keys-chosen-list">
 								<li id="show-key-up-chosen">
 									<label id="show-key-up-chosen-name">Up:</label>
@@ -280,7 +285,6 @@
 									<label id="show-key-down-chosen-val"></label>
 								</li>
 							</ul>
-						</center>
 						<table id="set-show-table" align="center">
 							<tr>
 								<th>
@@ -314,6 +318,7 @@
 									<input class="color-set" id="5-points-color-val" type="color" disabled>
 								</th>
 							</tr>
+							<br>
 							<tr>
 								<th>
 									<label id="15-points-color-name">15 points:</label>
@@ -322,6 +327,7 @@
 									<input class="color-set" id="15-points-color-val" type="color" disabled>
 								</th>
 							</tr>
+							<br>
 							<tr>
 								<th>
 									<label id="25-points-color-name">15 points:</label>
@@ -331,6 +337,7 @@
 								</th>
 							</tr>
 						</table>
+						<br>
 						<center>
 							<img id="sound-off-img" class="sound-imgs" src="assets/images/soundOff.png" onclick="changeSound()">
 							<img id="sound-on-img" class="sound-imgs" src="assets/images/soundOn.png" onclick="changeSound()">

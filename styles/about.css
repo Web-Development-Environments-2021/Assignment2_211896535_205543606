@@ -43,13 +43,13 @@
 }
 
 .image-container img {
-  width: 35%;
+  width: 20%;
   height: auto;
 }
 
 .about-text{
   text-align: center;
   color: rgba(255,255,255,1);
-	letter-spacing: 0.35em;
+	letter-spacing: 0.1em;
 	font-size: 1.2em;
 }

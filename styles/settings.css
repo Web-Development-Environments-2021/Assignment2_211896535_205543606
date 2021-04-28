@@ -1,7 +1,40 @@
-#keyboards-select{
-    list-style: none;
-    display: block;
+#settings-btns-container{
+    width: inherit;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-flow: row;
 }
+
+#submit-settings{
+    text-align: center;
+    font-size: 1.3em;
+    justify-content: center;
+    padding-right: 1.2em;
+    padding-left: 1.2em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    width: 12em;
+    float: left;
+    font-size: 1em;
+}
+#randomBtn{
+    text-align: center;
+    font-size: 1.3em;
+    justify-content: center;
+    padding-right: 1.2em;
+    padding-left: 1.2em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    width: 12em;
+    float: left;
+    font-size: 1em;
+}
+
+#keyboards-select{
+    margin: 2px auto;
+    padding-left: 0;
+    list-style: none;}
 
 #keyboards-select > li{
     margin: 0;
@@ -58,26 +91,33 @@
     float: left;
 }
 
-#settings-container > label{
+#settings-form > label{
     font-size: 1.5em;
+    line-height: 2em;
 }
 
 #show-keys-chosen-list{
-    text-align: center;
-    justify-content: center;
+    margin: 2px auto;
+    padding-left: 0;
     list-style: none;
-    display: block;
 }
 
 #show-keys-chosen-list > li{
-    margin: 0;
-    padding: 0;
-    display: inline-block;
+    display: inline;
+    text-align: center;
 }
 
+
+
 #new-game-set-show{
-    width: 80px;
+    width: 65%;
+    height: 10%;
+    float:center;
+    padding: 0px;
+    bottom: 2em;
     text-align: center;
+    font-size: 1.1em;
+    justify-content: center;
 }
 
 .color-set{
