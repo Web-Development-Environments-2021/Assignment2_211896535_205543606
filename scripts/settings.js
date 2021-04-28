@@ -222,3 +222,23 @@ function newGameShowSettings(){
     $("#game-container").hide();
     $("#settings-change").show();
 }
+
+function changeSound(){
+
+    sound_off_img = document.getElementById("sound-off-img");
+    sound_on_img = document.getElementById("sound-on-img");
+    if(sound_off_img.style.display == "block"){
+        sound_off_img.style.display = "none";
+        sound_on_img.style.display = "block";
+        gameSound.muted = true;
+        quackSound.muted = true;
+        teleportSound = true;
+    }
+    else{
+        sound_off_img.style.display = "block";
+        sound_on_img.style.display = "none";
+        gameSound.muted = false;
+        quackSound.muted = false;
+        teleportSound = false;
+    }
+}

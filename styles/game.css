@@ -73,16 +73,27 @@
 
 #losing-ghost-modal-content{
     background: url("../assets/images/gameover.png");
-    background-size: cover;
+    background-size:     cover; 
+    background-repeat:   no-repeat;
+    background-position: center center;
 }
 
-#win-time-modal-content > label{
+#win-time-modal-content, #lose-time-modal-content > label{
     color: black;
 }
 
 #win-time-modal-content{
     background: url("../assets/images/win.png");
-    background-size: cover;
+    background-size:     cover; 
+    background-repeat:   no-repeat;
+    background-position: center center;
+}
+
+#lose-time-modal-content{
+    background: url("../assets/images/losetime2.jpg");
+    background-size:     cover; 
+    background-repeat:   no-repeat;
+    background-position: center center;
 }
 
 /* The Close Button */
@@ -119,4 +130,17 @@
     width: 170px;
     float: left;
     font-size: 1.5em;
+}
+
+.sound-imgs{
+    width: 60px;
+    height: 60px;
+}
+
+#sound-off-img{
+    display: block;
+}
+
+#sound-on-img{
+    display: none;
 }
