@@ -225,31 +225,36 @@
 						</div>
 					</form>
 					<button class="btn1" id="randomBtn" onclick="randomValues()">Random</button>
-
 				</div>
 				<div id="game-container">
-					<div id="show-info">
-						<div id="username-show" class="show-info-content">
-							<label>USERNAME: </label>
-							<label id="username_title"> </label>
-						</div>
-						<div id="score-show" class="show-info-content">
-							<label for="lblScore-text">SCORE: </label>
-							<label id="lblScore_val" type="text"></label>
-						</div>
-						<div id="time-show" class="show-info-content">
-							<label for="lblTime">TIME: </label>
-							<label id="lblTime_val" type="text"></label>
-							
-						</div>
-						<div id="countdown-show" class="show-info-content">
-							<label for="timer">TIMER: </label>
-							<label id="timer" type="text"></label>
-						</div>
+					<div id="game-content">
+						<div id="show-info">
+							<div id="username-show" class="show-info-content">
+								<label>USERNAME: </label>
+								<label id="username_title"> </label>
+							</div>
+							<div id="score-show" class="show-info-content">
+								<label for="lblScore-text">SCORE: </label>
+								<label id="lblScore_val" type="text"></label>
+							</div>
+							<div id="time-show" class="show-info-content">
+								<label for="lblTime">TIME: </label>
+								<label id="lblTime_val" type="text"></label>
+								
+							</div>
+							<div id="countdown-show" class="show-info-content">
+								<label for="timer">TIMER: </label>
+								<label id="timer" type="text"></label>
+							</div>
 
-						<div id="lives-show" class="show-info-content">
-							<label id="lives_label">LIVES: </label>
-							<img id="lives_img" src="assets/images/5lives.png">
+							<div id="lives-show" class="show-info-content">
+								<label id="lives_label">LIVES: </label>
+								<img id="lives_img" src="assets/images/5lives.png">
+							</div>
+						</div>
+						<br>
+						<div id="game">
+							<canvas id="canvas" width="850" height="600"></canvas>
 						</div>
 					</div>
 					<div id="settings-show">
@@ -333,9 +338,6 @@
 						</center>
 						<br>
 						<button id="new-game-set-show" class="btn1" onclick="newGameShowSettings()">New Game</button>
-					</div>
-					<div id="game">
-						<canvas id="canvas" width="850" height="600"></canvas>
 					</div>
 				</div>
 			</div>

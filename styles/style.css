@@ -43,7 +43,7 @@ body{
 
 #Menu-container{
     margin: 0;
-    background-color: #1b2735;
+    background-color: #1e202b;
     height: 60px;
     padding-top: 20px;
 }
@@ -51,7 +51,7 @@ body{
 #Menu-container > #menu{
     margin: 0;
     padding-top: 20px;
-    background-color: #1b2735;
+    background-color: #1e202b;
     padding: 0 0px;
     height: 60px;
     line-height: 60px;
@@ -61,7 +61,7 @@ body{
 }
 
 #Menu-container > #menu.fixed {
-    background-color: #1b2735;
+    background-color: #1e202b;
     z-index: 10000;
     top: 0;
     left:0;
@@ -131,7 +131,7 @@ h1{
 }
 
 #content-container{
-    background-color: #1b2735;
+    background-color: #1e202b;
     text-align: center;
     height: max-content;
     padding-top: 10px;
