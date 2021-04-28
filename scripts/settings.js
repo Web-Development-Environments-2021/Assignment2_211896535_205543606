@@ -163,6 +163,10 @@ function updateSettingsKeys(setting){
 
 }
 function randomValues(){
+    chosen_key_code_up = 38;
+    chosen_key_code_down = 40;
+    chosen_key_code_left = 37;
+    chosen_key_code_right = 39;
     chosen_key_up="⇧";
     document.getElementById("moveUpBtn").value = chosen_key_up;
     chosen_key_down="⇩";
