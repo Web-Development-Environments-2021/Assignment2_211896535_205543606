@@ -17,7 +17,7 @@ let lastKey;
 let ghost_array;
 let curr_i
 let curr_j
-let doly;
+let dolly;
 
 
 $(document).ready(function() {
@@ -137,11 +137,11 @@ od 15
 
 }
 function createMovingDoll(){
-	doly.prevCell="E";
+	dolly.prevCell="E";
 	let dollCell = findRandomEmptyCell(board);
 	board.arr[dollCell[0]][dollCell[1]] = "D";
-	doly.i=dollCell[0];
-	doly.j=dollCell[1];
+	dolly.i=dollCell[0];
+	dolly.j=dollCell[1];
 }
 
 function createGhosts(){
@@ -160,7 +160,7 @@ function Start() {
 	pacman = new Pacman();
 	pacman.lives_remain = 5;
 	changeLivesImg();
-	doly= new Doll();
+	dolly= new Doll();
 	createBoard();
 	createMovingDoll();
 	createGhosts();
@@ -187,8 +187,8 @@ function Start() {
 		},
 		false
 	);
-	interval2 = setInterval(updateGhostPosition,350);
-	interval3 = setInterval(updateDollPosition,100);
+	ghost_interval = setInterval(updateGhostPosition,350);
+	doll_interval = setInterval(updateDollPosition,100);
 }
 
 function findRandomEmptyCell(board) {
@@ -328,8 +328,8 @@ function UpdatePosition() {
 
 	if(board.arr[pacman.i][pacman.j] == "D"){
 		// score+=50
-		window.clearInterval(interval3);
-		doly.prevCell= "E";
+		window.clearInterval(doll_interval);
+		dolly.prevCell= "E";
 		// if(board.arr[pacman.i][pacman.j] == "P"){
 			
 		// }
@@ -479,39 +479,39 @@ function resetAfterCaught(){
 
 	createMovingDoll();
 	pacman.interval = setInterval(UpdatePosition, 150);
-	interval2 = setInterval(updateGhostPosition,350);
-	interval3 = setInterval(updateDollPosition,200);
+	ghost_interval = setInterval(updateGhostPosition,350);
+	doll_interval = setInterval(updateDollPosition,200);
 }
 
 function updateDollPosition(){
-	if (doly==undefined){
+	if (dolly==undefined){
 		return
 	}
-	board.arr[doly.i][doly.j]=doly.prevCell;
+	board.arr[dolly.i][dolly.j]=dolly.prevCell;
 
 	//if pac touch doll
-	if(board.arr[doly.i][doly.j] == "P"){
+	if(board.arr[dolly.i][dolly.j] == "P"){
 		score+=50;
-		window.clearInterval(interval3);
-		doly.prevCell= "E";
+		window.clearInterval(doll_interval);
+		dolly.prevCell= "E";
 	}
 	else{
 		//DO A STEP!!!!!!!!!!!!!!!
-		let step =makeRandomValidStep(doly.i,doly.j);
-		doly.i=step[0];
-		doly.j=step[1];
-		// if Doly touch telport
-		if(board.arr[doly.i][doly.j] == "T"){
+		let step =makeRandomValidStep(dolly.i,dolly.j);
+		dolly.i=step[0];
+		dolly.j=step[1];
+		// if dolly touch telport
+		if(board.arr[dolly.i][dolly.j] == "T"){
 			let emptyCell = findRandomEmptyCell(board);
-			doly.i=emptyCell[0]
-			doly.j=emptyCell[1]
+			dolly.i=emptyCell[0]
+			dolly.j=emptyCell[1]
 		}
 		
-		doly.prevCell= board.arr[doly.i][doly.j]
-			if (doly.prevCell=="G")
-				board.arr[doly.i][doly.j] = "E";
+		dolly.prevCell= board.arr[dolly.i][dolly.j]
+			if (dolly.prevCell=="G")
+				board.arr[dolly.i][dolly.j] = "E";
 			else 
-				board.arr[doly.i][doly.j] = "D";
+				board.arr[dolly.i][dolly.j] = "D";
 	}
 		Draw();
 }	
@@ -644,8 +644,8 @@ function endGame(){
 function resetGame(){
 	gameSound.pause();
 	window.clearInterval(pacman.interval);
-	window.clearInterval(interval2);
-	window.clearInterval(interval3);
+	window.clearInterval(ghost_interval);
+	window.clearInterval(doll_interval);
 	if(timer != undefined && timer != null){
 		window.clearInterval(timer);
 	}
