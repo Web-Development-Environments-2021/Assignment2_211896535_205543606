@@ -19,7 +19,6 @@ let curr_i
 let curr_j
 let dolly;
 let timer;
-let num_food_exists;
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
@@ -129,25 +128,25 @@ function createGhosts(){
 		ghost_array[i].j = startingPoints[i][1]
 		ghost_array[i].prevCell="E"
 	}
+}
 
+function createFood(){
 	while (food_remain > 0) {
 		let emptyCell = findRandomEmptyCell(board);
 		const random_food = Math.random();
 		if(random_food<=0.6){
 			board.arr[emptyCell[0]][emptyCell[1]] = "F5";
-			// num_food_exists +=1;
 		}
 		else if(random_food>0.6 && random_food<=0.9){
 			board.arr[emptyCell[0]][emptyCell[1]] = "F15";
-			// num_food_exists +=1;
 		}
 		else{
 			board.arr[emptyCell[0]][emptyCell[1]] = "F25";
-			// num_food_exists +=1;
 		}
 		food_remain--
 	}
 }
+
 function Start() {
 	//init important things
 	pacman = new Pacman();
@@ -158,6 +157,7 @@ function Start() {
 	createBoard();
 	createMovingDoll();
 	createGhosts();
+	createFood();
 	gameSound.currentTime = 0;
 	gameSound.play();
 	start_time = new Date();
