@@ -27,7 +27,7 @@
   color: #aaa;
   text-align: right;
   float: left;
-  font-size: 50px;
+  font-size: 30px;
   font-weight: bold;
 }
 
@@ -43,11 +43,11 @@
 }
 
 .image-container img {
-  width: 60%;
+  width: 35%;
   height: auto;
 }
 
-#about-us-title{
+.about-title{
   text-align: center;
   color: rgba(255,255,255,1);
 	letter-spacing: 0.35em;
@@ -55,7 +55,7 @@
   text-transform: uppercase;
 }
 
-#about-us-p{
+.about-text{
   text-align: center;
   color: rgba(255,255,255,1);
 	letter-spacing: 0.35em;
