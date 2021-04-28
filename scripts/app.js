@@ -19,6 +19,7 @@ let curr_i
 let curr_j
 let dolly;
 let timer;
+let num_food_exists;
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
@@ -102,21 +103,6 @@ function createBoard(){
 	pacman.i=pacman_cell[0];
 	pacman.j=pacman_cell[1];
 
-	while (food_remain > 0) {
-		let emptyCell = findRandomEmptyCell(board);
-		const random_food = Math.random();
-		if(random_food<=0.6){
-			board.arr[emptyCell[0]][emptyCell[1]] = "F5";
-		}
-		else if(random_food>0.6 && random_food<=0.9){
-			board.arr[emptyCell[0]][emptyCell[1]] = "F15";
-		}
-		else{
-			board.arr[emptyCell[0]][emptyCell[1]] = "F25";
-		}
-		food_remain--
-	}
-
 	// set empty for teleport
 	board.arr[0][8]="E"
 	board.arr[26][8]="E"
@@ -142,6 +128,24 @@ function createGhosts(){
 		ghost_array[i].i=startingPoints[i][0]
 		ghost_array[i].j = startingPoints[i][1]
 		ghost_array[i].prevCell="E"
+	}
+
+	while (food_remain > 0) {
+		let emptyCell = findRandomEmptyCell(board);
+		const random_food = Math.random();
+		if(random_food<=0.6){
+			board.arr[emptyCell[0]][emptyCell[1]] = "F5";
+			// num_food_exists +=1;
+		}
+		else if(random_food>0.6 && random_food<=0.9){
+			board.arr[emptyCell[0]][emptyCell[1]] = "F15";
+			// num_food_exists +=1;
+		}
+		else{
+			board.arr[emptyCell[0]][emptyCell[1]] = "F25";
+			// num_food_exists +=1;
+		}
+		food_remain--
 	}
 }
 function Start() {
