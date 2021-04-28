@@ -25,8 +25,8 @@ The game is built according to the instruction given by course staff.
 * If a ghost catches the pacman, you lose 1 life and 10 points off the score.
 * If you eat the special moving candy, you get 50 points.
 * Game ends when:
- * Win: if pacman eats all the food on the board or time's up and the score is above 100 points.
- * Lose: if pacman loses all it's life (Loser) or time's up and the score is below 100 poins (You can do better...)
+    * Win: if pacman eats all the food on the board or time's up and the score is above 100 points.
+    * Lose: if pacman loses all it's life (Loser) or time's up and the score is below 100 poins (You can do better...)
 
 ## Special Functionality
 We've added the following special functionality:
