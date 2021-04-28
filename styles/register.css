@@ -45,7 +45,3 @@
 .input-text:focus{
   border-bottom: 2px solid rgb(0, 238, 255);
 }
-
-#birth-date-input::-webkit-datetime-edit-fields-wrapper{
-    /* background: silver;  */
-}

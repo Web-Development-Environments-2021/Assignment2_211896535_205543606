@@ -47,14 +47,6 @@
   height: auto;
 }
 
-.about-title{
-  text-align: center;
-  color: rgba(255,255,255,1);
-	letter-spacing: 0.35em;
-	font-size: 1.5em;
-  text-transform: uppercase;
-}
-
 .about-text{
   text-align: center;
   color: rgba(255,255,255,1);

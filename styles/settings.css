@@ -59,6 +59,8 @@
 }
 
 #show-keys-chosen-list{
+    text-align: center;
+    justify-content: center;
     list-style: none;
     display: block;
 }

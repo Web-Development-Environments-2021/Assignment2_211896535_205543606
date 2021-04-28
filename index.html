@@ -164,61 +164,67 @@
 				<div id="settings-change">
 					<form id ="settings-form">
 						<div class="settings-container">
-						<h1>Game Settings</h1>
-							<label><b>Select game buttons</b></label>
-							<br>
-							<ul id="keyboards-select">
-								<li>
-									<input class="keyboard-option" type="button" value="⇧" placeholder="Enter Up key" name="moveUpBtn" id="moveUpBtn" onclick="updateSettingsKeys(`UP`)" required>
-								</li>
+							<h2>Game Settings</h2>
+								<label><b>Select game buttons</b></label>
 								<br>
-								<li>
-									<input class="keyboard-option" type="button" value="⇦" placeholder="Enter Left key" name="moveLeftBtn" id="moveLeftBtn"onclick="updateSettingsKeys(`LEFT`)" required>
-								</li>
-								<div class="divider" width="40px"></div>
-								<li>
-									<input class="keyboard-option" type="button" value="➪" placeholder="Enter Right key" name="moveRightBtn" id="moveRightBtn" onclick="updateSettingsKeys(`RIGHT`)" required>
-								</li>	
+								<center>
+									<ul id="keyboards-select">
+										<li>
+											<input class="keyboard-option" type="button" value="⇧" placeholder="Enter Up key" name="moveUpBtn" id="moveUpBtn" onclick="updateSettingsKeys(`UP`)" required>
+										</li>
+										<br margin: 0 0;>
+										<li>
+											<input class="keyboard-option" type="button" value="⇦" placeholder="Enter Left key" name="moveLeftBtn" id="moveLeftBtn"onclick="updateSettingsKeys(`LEFT`)" required>
+										</li>
+										<li>
+											<img src="assets/images/0lives.png" width="42px">
+										</li>								
+										<li>
+											<input class="keyboard-option" type="button" value="➪" placeholder="Enter Right key" name="moveRightBtn" id="moveRightBtn" onclick="updateSettingsKeys(`RIGHT`)" required>
+										</li>	
+										<br>
+										<li>
+											<input class="keyboard-option" type="button" value="⇩" placeholder="Enter Down key" name="moveDownBtn" id="moveDownBtn"onclick="updateSettingsKeys(`DOWN`)" required>
+										</li>
+									</ul>
+								</center>
 								<br>
-								<li>
-									<input class="keyboard-option" type="button" value="⇩" placeholder="Enter Down key" name="moveDownBtn" id="moveDownBtn"onclick="updateSettingsKeys(`DOWN`)" required>
-								</li>
-							</ul>
-							<label><b>Number of Food points:</b></label>
-							<br>
-							<label>50</label>
-							<input type="range" id="food-points-scale" name="foodPointsScale" min="50" value="60" max="90" step="1" onchange="setValFromScale('food-points-label','food-points-scale');updateSettings(`FOOD`);" required>
-							<label>90</label>
-							<br>
-							<label id="food-points-label" > </label>
-							<br>
-							<label><b>select colors of food points:</b></label>
-							<br>
-							<label> select color for 5 points ball</label>
-							<input class="color-set" type="color" id="5-point-color" value="#dc143c" name="pointsColor5" onchange="updateSettings(`COLOR5`)" required>
-							<br>
-							<label> select color for 15 points ball</label>
-							<input class="color-set" type="color" id="15-point-color" value="#00FFFF" name="pointsColor15" onchange="updateSettings(`COLOR15`)" required>
-							<br>
-							<label> select color for 25 points ball</label>
-							<input class="color-set" type="color" id="25-point-color" value="#7FFF00" name="pointsColor25" onchange="updateSettings(`COLOR25`)" required>
-							<br>
-							<label><b> select time of the game:</b></label>
-							<br>
-							<input type="range" id="game-time-scale" name="gameTimeScale" min="60" value="60" max="360" step="1" onchange="setValFromScale('game-time-label','game-time-scale');updateSettings(`TIME`);" required>
-							<br>
-							<label id="game-time-label" > </label>
-							<br>
-							<label><b> selct num of monsters:</b></label>
-							<br>
-							<input type="range" id="monsters-scale" name="monstersScale" min="1" value="2" max="4" step="1" onchange="setValFromScale('monsters-label','monsters-scale');updateSettings(`MONSTERS`);" required>
-							<br>
-							<label id="monsters-label" > </label>
-							<br>
-						<input class="btn1" type="submit" id="submit-settings" value="Start Game">
+								<label><b>Number of Food points:</b></label>
+								<br>
+								<label>50</label>
+								<input type="range" id="food-points-scale" name="foodPointsScale" min="50" value="60" max="90" step="1" onchange="setValFromScale('food-points-label','food-points-scale');updateSettings(`FOOD`);" required>
+								<label>90</label>
+								<br>
+								<label id="food-points-label" > </label>
+								<br>
+								<label><b>select colors of food points:</b></label>
+								<br>
+								<label> select color for 5 points ball</label>
+								<input class="color-set" type="color" id="5-point-color" value="#dc143c" name="pointsColor5" onchange="updateSettings(`COLOR5`)" required>
+								<br>
+								<label> select color for 15 points ball</label>
+								<input class="color-set" type="color" id="15-point-color" value="#00FFFF" name="pointsColor15" onchange="updateSettings(`COLOR15`)" required>
+								<br>
+								<label> select color for 25 points ball</label>
+								<input class="color-set" type="color" id="25-point-color" value="#7FFF00" name="pointsColor25" onchange="updateSettings(`COLOR25`)" required>
+								<br>
+								<br>
+								<label><b> select time of the game:</b></label>
+								<br>
+								<input type="range" id="game-time-scale" name="gameTimeScale" min="60" value="60" max="360" step="1" onchange="setValFromScale('game-time-label','game-time-scale');updateSettings(`TIME`);" required>
+								<br>
+								<label id="game-time-label" > </label>
+								<br>
+								<label><b> selct num of monsters:</b></label>
+								<br>
+								<input type="range" id="monsters-scale" name="monstersScale" min="1" value="2" max="4" step="1" onchange="setValFromScale('monsters-label','monsters-scale');updateSettings(`MONSTERS`);" required>
+								<br>
+								<label id="monsters-label" > </label>
+								<br>
+							<input class="btn1" type="submit" id="submit-settings" value="Start Game">
 						</div>
 					</form>
-					<br>
+					<!-- <br> -->
 					<button class="btn1" id="randomBtn" onclick="randomValues()">Random</button>
 
 				</div>
@@ -359,34 +365,48 @@
 
 		<!--FOOTER-->
 		<div id="div-footer">
-			<footer id="footer">
-				<div id="footer-left">
+			<footer id="footer-cotainer">
+				<div id="footer-left" class="footer-content">
 					<h6>About</h6>
 					<p>A Pacman game we made in Web Course.</p>
+					<p> We used Javascript, Jquery, HTML and CSS.</p>
 				</div>
-				<div id="footer-right">
+				<div id="footer-mid" class="footer-content">
 					<h6>Contact Us</h6>
+					<br>
+					<a id="mail-ben" class="mail-us" href="mailto:benmarga@post.bgu.ac.il">
+						<img class="mail-logo" src="assets/images/mail-ben.png">
+						<p class="mail-details">benmarga@post.bgu.ac.il</p>
+					</a>
+					<br>
+					<a id="mail-mor" class="mail-us" href="mailto:morlisa@post.bgu.ac.il">
+						<img class="mail-logo" src="assets/images/mail-mor.png">
+						<p class="mail-details">morlisa@post.bgu.ac.il</p>
+					</a>
+				</div>
+				<div id="footer-right" class="footer-content">
+					<h6>Social Media</h6>
 					<div id="ben-info">
 						<h4 id="names-ben"> Ben Margalit</h4>
 						<ul class="social-links">
 							<li>
 								<a href="https://www.linkedin.com/">
-									<img class="contact-logo" id="linkein-logo-ben" src="assets/images/linkedin-ben.png" width="25px" height="25px">
+									<img class="contact-logo" id="linkein-logo-ben" src="assets/images/linkedin-ben.png" >
 								</a>
 							</li>
 							<li>
 								<a href="https://www.facebook.com/ben.margalit.21">
-									<img class="contact-logo" id="facebook-logo-ben" src="assets/images/facebook-ben.png" width="25px" height="25px">
+									<img class="contact-logo" id="facebook-logo-ben" src="assets/images/facebook-ben.png">
 								</a>
 							</li>
 							<li>
 								<a href="https://www.instagram.com/benmargalit21/">
-									<img class="contact-logo" id="instagram-logo-ben" src="assets/images/instagram-ben.png" width="25px" height="25px">
+									<img class="contact-logo" id="instagram-logo-ben" src="assets/images/instagram-ben.png">
 								</a>
 							</li>
 							<li>
 								<a href="https://github.com/benmarga">
-									<img class="contact-logo" id="github-logo-ben" src="assets/images/github-ben.png" width="25px" height="25px">
+									<img class="contact-logo" id="github-logo-ben" src="assets/images/github-ben.png">
 								</a>
 							</li>
 						</ul>
@@ -396,22 +416,22 @@
 						<ul class="social-links">
 							<li>
 								<a href="https://www.linkedin.com/in/mor-saranga/">
-									<img class="contact-logo" id="linkein-logo-mor" src="assets/images/linkedin-mor.png" width="25px" height="25px">
+									<img class="contact-logo" id="linkein-logo-mor" src="assets/images/linkedin-mor.png">
 								</a>
 							</li>	
 							<li>
 								<a href="https://www.facebook.com/mor.saranga">
-									<img class="contact-logo" id="facebook-logo-mor" src="assets/images/facebook-mor.png" width="25px" height="25px">
+									<img class="contact-logo" id="facebook-logo-mor" src="assets/images/facebook-mor.png">
 								</a>
 							</li>
 							<li>
 								<a href="https://www.instagram.com/mor_sa/">
-									<img class="contact-logo" id="instagram-logo-mor" src="assets/images/instagram-mor.png" width="25px" height="25px">
+									<img class="contact-logo" id="instagram-logo-mor" src="assets/images/instagram-mor.png">
 								</a>
 							</li>
 							<li>
 								<a href="https://github.com/mor-sa">
-									<img class="contact-logo" id="github-logo-mor" src="assets/images/github-mor.png" width="25px" height="25px">
+									<img class="contact-logo" id="github-logo-mor" src="assets/images/github-mor.png">
 								</a>
 							</li>
 						</ul>
