@@ -8,7 +8,7 @@ Website URL: https://web-development-environments-2021.github.io/Assignment2_211
 
 ### Overview
 
-This game is pacman simple game.
+This game is pacman simple game for our web development course. We used Javascript, Jquery, HTML and CSS.
 
 ## What's in the site?
 * **Home** - a page that contains a logo, Legister and Login buttons.
@@ -22,7 +22,7 @@ This game is pacman simple game.
 * Eat food for score. There are 3 kinds of food points, smaller worth 5 points, medium worth 15 points and big worth 25 points.
 * If a ghost catches the pacman, you lose 1 life and 10 points off the score.
 * If you eat the special moving canfy, you get 50 points.
-* Game ends when pacman loses all it's lives, or the time's up
+* Game ends when pacman loses all it's lives, or the time's up.
 
 ## Special Functionality
 We've added the following special functionality:
