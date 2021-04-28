@@ -3,7 +3,6 @@ $(document).ready(function(){
 
 	$.validator.addMethod('strongPassword', function(value, element) {
 		return this.optional(element)
-		  || value.length >= 6
 		  && /\d/.test(value)
 		  && /[a-z]/i.test(value);
 	  },)
@@ -19,7 +18,7 @@ $(document).ready(function(){
 	});
 
 	jQuery.validator.addMethod("lettersonly", function(value, element) {
-		return this.optional(element) || /^[a-z\s]+$/i.test(value);
+		return this.optional(element) || /^[a-zA-Z\s]*$/.test(value);
 	},); 
 	
 	//REGISTER
@@ -31,6 +30,7 @@ $(document).ready(function(){
 			},
 			password: {
 				required: true,
+				minlength: 6,
 				strongPassword: true
 			},
 			fullname: {
@@ -47,18 +47,19 @@ $(document).ready(function(){
 		},
 		messages: {
 			username: {
-				required: "Please enter valid username",
-				validateUsername: "This username already taken"
+				required: "Please enter a valid username.",
+				validateUsername: "This username already taken."
 			},
 			password: {
-				required: "Please enter an password",
-				strongPassword: "Password must be at least 6 characters long and contain at least one number"
+				required: "Please enter a password.",
+				minlength: "Password must be at least 6 characters.",
+				strongPassword: "Password must contain at least one number, uppercase and lowercase."
 			},
 			fullname: {
-				required: "Please enter a name.",
-				lettersonly: "Full name can be only letters."
+				required: "Please enter your name.",
+				lettersonly: "Full name can be only letters and spaces."
 			},
-			email: {
+			email:{
 				required: "Please enter an email address",
 				email: "Please enter a valid email."
 			},
@@ -66,7 +67,7 @@ $(document).ready(function(){
 				required: "Please enter your birth date"
 			}
 		}
-		,submitHandler: function () {
+		,submitHandler: function (){
 			register();
 			switchScreens(`Login-screen`);
 			//reset form details
