@@ -188,7 +188,7 @@ function Start() {
 		false
 	);
 	ghost_interval = setInterval(updateGhostPosition,350);
-	doll_interval = setInterval(updateDollPosition,100);
+	doll_interval = setInterval(updateDollPosition,150);
 }
 
 function findRandomEmptyCell(board) {
@@ -327,7 +327,6 @@ function UpdatePosition() {
 	board.arr[13][8] = "T";
 
 	if(board.arr[pacman.i][pacman.j] == "D"){
-		// score+=50
 		window.clearInterval(doll_interval);
 		dolly.prevCell= "E";
 		// if(board.arr[pacman.i][pacman.j] == "P"){
@@ -480,7 +479,7 @@ function resetAfterCaught(){
 	createMovingDoll();
 	pacman.interval = setInterval(UpdatePosition, 150);
 	ghost_interval = setInterval(updateGhostPosition,350);
-	doll_interval = setInterval(updateDollPosition,200);
+	doll_interval = setInterval(updateDollPosition,150);
 }
 
 function updateDollPosition(){
@@ -493,7 +492,8 @@ function updateDollPosition(){
 	if(board.arr[dolly.i][dolly.j] == "P"){
 		score+=50;
 		window.clearInterval(doll_interval);
-		dolly.prevCell= "E";
+		board.arr[dolly.i][dolly.j] = "E";
+		// dolly.prevCell = "E";
 	}
 	else{
 		//DO A STEP!!!!!!!!!!!!!!!
