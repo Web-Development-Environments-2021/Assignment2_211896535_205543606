@@ -203,6 +203,7 @@ function getRandomColor() {
 
 function showSettings(){
     // if(chosen_key_up == || chosen_key_down == || chosen_key_left == || chosen_key_right)
+    document.getElementById("game-time-val").innerHTML = chosen_game_time;
     document.getElementById("show-key-up-chosen-val").innerHTML= chosen_key_up;
     document.getElementById("show-key-down-chosen-val").innerHTML= chosen_key_down;
     document.getElementById("show-key-left-chosen-val").innerHTML= chosen_key_left;
@@ -224,7 +225,6 @@ function newGameShowSettings(){
 }
 
 function changeSound(){
-
     sound_off_img = document.getElementById("sound-off-img");
     sound_on_img = document.getElementById("sound-on-img");
     if(sound_off_img.style.display == "block"){

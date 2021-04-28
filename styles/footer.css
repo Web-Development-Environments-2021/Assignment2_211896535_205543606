@@ -9,6 +9,7 @@
 }
 
 .mail-logo{
+    opacity: 0.6;
     width:33px;
     height: auto;
     cursor:pointer;
@@ -22,6 +23,12 @@
     text-decoration: none;
     cursor:pointer; 
 }
+
+.mail-logo:hover{
+    opacity: 1;
+
+}
+
 .mail-us,.mail-us:hover,.mail-logo, .mail-logo:hover,.mail-details, .mail-details:hover{
     cursor:pointer; 
     text-decoration: none;
@@ -40,12 +47,13 @@
     bottom: 10px;
     width: 100%;
     /* display: block; */
+    /* justify-content: center; */
     width: inherit;
     margin: 0 auto;
     text-align: center;
-    /* justify-content: center; */
     display: flex;
     flex-flow: row;
+
 }
 
 #footer-cotainer h6{

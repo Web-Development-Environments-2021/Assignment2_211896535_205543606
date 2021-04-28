@@ -165,62 +165,62 @@
 					<form id ="settings-form">
 						<div class="settings-container">
 							<h2>Game Settings</h2>
-								<label><b>Select game buttons</b></label>
-								<br>
-								<center>
-									<ul id="keyboards-select">
-										<li>
-											<input class="keyboard-option" type="button" value="⇧" placeholder="Enter Up key" name="moveUpBtn" id="moveUpBtn" onclick="updateSettingsKeys(`UP`)" required>
-										</li>
-										<br margin: 0 0;>
-										<li>
-											<input class="keyboard-option" type="button" value="⇦" placeholder="Enter Left key" name="moveLeftBtn" id="moveLeftBtn"onclick="updateSettingsKeys(`LEFT`)" required>
-										</li>
-										<li>
-											<img src="assets/images/0lives.png" width="42px">
-										</li>								
-										<li>
-											<input class="keyboard-option" type="button" value="➪" placeholder="Enter Right key" name="moveRightBtn" id="moveRightBtn" onclick="updateSettingsKeys(`RIGHT`)" required>
-										</li>	
-										<br>
-										<li>
-											<input class="keyboard-option" type="button" value="⇩" placeholder="Enter Down key" name="moveDownBtn" id="moveDownBtn"onclick="updateSettingsKeys(`DOWN`)" required>
-										</li>
-									</ul>
-								</center>
-								<br>
-								<label><b>Number of Food points:</b></label>
-								<br>
-								<label>50</label>
-								<input type="range" id="food-points-scale" name="foodPointsScale" min="50" value="60" max="90" step="1" onchange="setValFromScale('food-points-label','food-points-scale');updateSettings(`FOOD`);" required>
-								<label>90</label>
-								<br>
-								<label id="food-points-label" > </label>
-								<br>
-								<label><b>select colors of food points:</b></label>
-								<br>
-								<label> select color for 5 points ball</label>
-								<input class="color-set" type="color" id="5-point-color" value="#dc143c" name="pointsColor5" onchange="updateSettings(`COLOR5`)" required>
-								<br>
-								<label> select color for 15 points ball</label>
-								<input class="color-set" type="color" id="15-point-color" value="#00FFFF" name="pointsColor15" onchange="updateSettings(`COLOR15`)" required>
-								<br>
-								<label> select color for 25 points ball</label>
-								<input class="color-set" type="color" id="25-point-color" value="#7FFF00" name="pointsColor25" onchange="updateSettings(`COLOR25`)" required>
-								<br>
-								<br>
-								<label><b> select time of the game:</b></label>
-								<br>
-								<input type="range" id="game-time-scale" name="gameTimeScale" min="60" value="60" max="360" step="1" onchange="setValFromScale('game-time-label','game-time-scale');updateSettings(`TIME`);" required>
-								<br>
-								<label id="game-time-label" > </label>
-								<br>
-								<label><b> selct num of monsters:</b></label>
-								<br>
-								<input type="range" id="monsters-scale" name="monstersScale" min="1" value="2" max="4" step="1" onchange="setValFromScale('monsters-label','monsters-scale');updateSettings(`MONSTERS`);" required>
-								<br>
-								<label id="monsters-label" > </label>
-								<br>
+							<label><b>Choose your game controlers</b></label>
+							<br>
+							<center>
+								<ul id="keyboards-select">
+									<li>
+										<input class="keyboard-option" type="button" value="⇧" placeholder="Enter Up key" name="moveUpBtn" id="moveUpBtn" onclick="updateSettingsKeys(`UP`)" required>
+									</li>
+									<br>
+									<li>
+										<input class="keyboard-option" type="button" value="⇦" placeholder="Enter Left key" name="moveLeftBtn" id="moveLeftBtn"onclick="updateSettingsKeys(`LEFT`)" required>
+									</li>
+									<li>
+										<img src="assets/images/0lives.png" width="45px">
+									</li>								
+									<li>
+										<input class="keyboard-option" type="button" value="➪" placeholder="Enter Right key" name="moveRightBtn" id="moveRightBtn" onclick="updateSettingsKeys(`RIGHT`)" required>
+									</li>	
+									<br>
+									<li>
+										<input class="keyboard-option" type="button" value="⇩" placeholder="Enter Down key" name="moveDownBtn" id="moveDownBtn"onclick="updateSettingsKeys(`DOWN`)" required>
+									</li>
+								</ul>
+							</center>
+							<br>
+							<label><b>Number of Food points:</b></label>
+							<br>
+							<label>50</label>
+							<input type="range" id="food-points-scale" name="foodPointsScale" min="50" value="60" max="90" step="1" onchange="setValFromScale('food-points-label','food-points-scale');updateSettings(`FOOD`);" required>
+							<label>90</label>
+							<br>
+							<label id="food-points-label" > </label>
+							<br>
+							<label><b>Select colors of food points:</b></label>
+							<br>
+							<label> Select color for 5 points ball</label>
+							<input class="color-set" type="color" id="5-point-color" value="#dc143c" name="pointsColor5" onchange="updateSettings(`COLOR5`)" required>
+							<br>
+							<label> Select color for 15 points ball</label>
+							<input class="color-set" type="color" id="15-point-color" value="#00FFFF" name="pointsColor15" onchange="updateSettings(`COLOR15`)" required>
+							<br>
+							<label> Select color for 25 points ball</label>
+							<input class="color-set" type="color" id="25-point-color" value="#7FFF00" name="pointsColor25" onchange="updateSettings(`COLOR25`)" required>
+							<br>
+							<br>
+							<label><b> Select time of the game:</b></label>
+							<br>
+							<input type="range" id="game-time-scale" name="gameTimeScale" min="60" value="60" max="360" step="1" onchange="setValFromScale('game-time-label','game-time-scale');updateSettings(`TIME`);" required>
+							<br>
+							<label id="game-time-label" > </label>
+							<br>
+							<label><b> Selct num of monsters:</b></label>
+							<br>
+							<input type="range" id="monsters-scale" name="monstersScale" min="1" value="2" max="4" step="1" onchange="setValFromScale('monsters-label','monsters-scale');updateSettings(`MONSTERS`);" required>
+							<br>
+							<label id="monsters-label" > </label>
+							<br>
 							<input class="btn1" type="submit" id="submit-settings" value="Start Game">
 						</div>
 					</form>
@@ -253,28 +253,39 @@
 						</div>
 					</div>
 					<div id="settings-show">
-						<ul id="show-keys-chosen-list">
-							<li id="show-key-up-chosen">
-								<label id="show-key-up-chosen-name">Up:</label>
-								<label id="show-key-up-chosen-val"></label>
-							</li>
-							<br>
-							<li id="show-key-left-chosen">
-								<label id="show-key-left-chosen-name">Left:</label>
-								<label id="show-key-left-chosen-val"></label>
-							</li>
-							<div class="divider width="10px"></div>
-							<li id="show-key-right-chosen">
-								<label id="show-key-right-chosen-name">Right:</label>
-								<label id="show-key-right-chosen-val"></label>
-							</li>
-							<br>
-							<li id="show-key-down-chosen">
-								<label id="show-key-down-chosen-name">Down:</label>
-								<label id="show-key-down-chosen-val"></label>
-							</li>
-						</ul>
+						<center>
+							<h1>Your Settings</h1>
+							<ul id="show-keys-chosen-list">
+								<li id="show-key-up-chosen">
+									<label id="show-key-up-chosen-name">Up:</label>
+									<label id="show-key-up-chosen-val"></label>
+								</li>
+								<br>
+								<li id="show-key-left-chosen" >
+									<label id="show-key-left-chosen-name">Left:</label>
+									<label id="show-key-left-chosen-val"></label>
+								</li>
+								<br>
+								<li id="show-key-right-chosen">
+									<label id="show-key-right-chosen-name">Right:</label>
+									<label id="show-key-right-chosen-val"></label>
+								</li>
+								<br>
+								<li id="show-key-down-chosen">
+									<label id="show-key-down-chosen-name">Down:</label>
+									<label id="show-key-down-chosen-val"></label>
+								</li>
+							</ul>
+						</center>
 						<table id="set-show-table" align="center">
+							<tr>
+								<th>
+									<label id="game-time-name">Game Time:</label>
+								</th>
+								<th>
+									<label id="game-time-val"></label>
+								</th>
+							</tr>
 							<tr>
 								<th>
 									<label id="total-food-count-name">Total num of food:</label>
@@ -351,7 +362,7 @@
 				<button id="new-game-win-time" class="btn3" onclick="newGameShowSettings()">New Game</button>
 			</div>
 		</div>
-		<div id="lose-time-modal">
+		<div id="lose-time-modal" class="modal">
 			<div id="lose-time-modal-content" class="modal-content-end">
 				<span id="close-lose-time-btn" class="close-btn2">&times;</span>
 				<label id="lose-time-score-text1" class="end-text">You can do better than</label>

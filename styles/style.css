@@ -13,17 +13,14 @@ html{
 }
 
 body{
-    background-color: #1b2735;
+    background-color:#1e202b;
     max-width: 98%;
     max-height: 100%;
     justify-content: center;
-    /* margin: auto;     */
     align-items: center;
-    /* flex-wrap: wrap; */
 	color: #eee;
 	font-family: 'Lato', sans-serif;
 	font-size: 62.5%;
-	/* box-sizing: border-box; */
 }
 
 #logo3{
@@ -38,7 +35,6 @@ body{
     font-family: 'Lato', sans-serif;
     text-transform: uppercase;
     letter-spacing:2px;
-    /* display: flex; */
 	justify-content: center;
     text-align: center;
     padding-bottom: 20px;
@@ -83,6 +79,7 @@ body{
 }
 
 .btn1{
+    width: max-content;
     color: rgba(255,255,255,1);
 	background: none;
 	border-radius: 0;
@@ -121,12 +118,20 @@ body{
 h2{
     text-align: center;
     color: rgba(255,255,255,1);
-      letter-spacing: 0.35em;
-      font-size: 1.5em;
+    letter-spacing: 0.35em;
+    font-size: 1.5em;
     text-transform: uppercase;
   }
+h1{
+    text-align: center;
+    color: rgba(255,255,255,1);
+    letter-spacing: 0.35em;
+    font-size: 1em;
+    text-transform: uppercase;
+}
 
 #content-container{
+    background-color: #1b2735;
     text-align: center;
     height: max-content;
     padding-top: 10px;

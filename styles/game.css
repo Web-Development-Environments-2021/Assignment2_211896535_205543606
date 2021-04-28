@@ -144,3 +144,22 @@
 #sound-on-img{
     display: none;
 }
+
+#game-container{
+    width: 70%;
+    margin: 0 auto;
+    text-align: left;
+    display: flex;
+    flex-flow: row;
+}
+
+#settings-show{
+    width: 10%;
+    float: left;
+    left:15em;
+}
+#game{
+    width: 90%;
+    float: left;
+    right: 5em;
+}
