@@ -17,7 +17,7 @@ The game is built according to the instruction given by course staff.
 * **Register** - a page that allows the user to register to the site, using jquery validation to make sure the inputs are valid.
 * **Login** - a page that allows the user to login, using jquery validation to make sure the inputs are valid.
 * **Settings** - a page that asks the user to select preferences for the game, such as keys to play, number of food balls, number of ghosts, time of the game, colors for the food points. There is a random button that randomly changes the prefernces.
-* **Game** - a page that has the game itself, at the top of the game it shows the username, score, time passed from the game's beginning, timer, and how many lives the user has. at the side, the user sees the preferences he has chosen and a new game button.
+* **Game** - a page that has the game itself and at the top of the game it shows: the username, score, time passed from the game's beginning, and how many lives the user has. On the side, the user sees the preferences he has chosen and a new game button.
 
 ## Game Rules:
 * Use the keys selected to move around the board.
@@ -32,6 +32,3 @@ The game is built according to the instruction given by course staff.
 We've added the following special functionality:
 * **Teleport** - at the center of the board there is a teleport cell. If pacman or one of the ghosts or the candy walks into it, they get thrown into a random position in the board.
 * **Move to other side of the board** - There are holes in the walls sides, if pacman goes into it and walks past it, it comes out of the oopposite side of the board. The ghosts and candy can't go through it.
-
-
- 
