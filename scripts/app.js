@@ -18,7 +18,7 @@ let ghost_array;
 let curr_i
 let curr_j
 let dolly;
-
+let timer;
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
@@ -32,9 +32,9 @@ $(document).ready(function() {
 function createBoard(){
 	/** W - WALL
 	 * F5 - Food 5
-	 * F15 - 
-od 15
-	 * F25 - Food 25	 * P - Pacoman
+	 * F15 - Food 15
+	 * F25 - Food 25	 
+	 * P - Pac-man
 	 * E - EMPTY
 	 * D -DOLL
 	 * G - GHOST 
@@ -44,23 +44,18 @@ od 15
 	food_remain = chosen_num_of_food_points
 	for (var i = 0; i < board.cols_num; i++) {
 		board.arr[i] = new Array();
-		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
 		for (var j = 0; j < board.rows_num; j++) {
 			if (
-				// 
+				// insert beautiful walls
 				(i == 0) || (j==0) || 	(i == board.cols_num-1) || (j== board.rows_num-1)||
 				(i == 3 && j == 3) || (i==3&&j==4) || (i==3&&j==5) || (i==3&&j==6)|| 
 				(i==4&&j==3) || (i==5&&j==3) || (i==6&&j==3)||
 				(i == 3 && j == 13) || (i==3&&j==12) || (i==3&&j==11) || (i==3&&j==10)||
 				(i == 3 && j == 13) || (i==4&&j==13) || (i==5&&j==13) || (i==6&&j==13)||
-
-
 				(i == 23 && j == 3) || (i==23 && j==4) || (i==23&&j==5) || (i==23&&j==6)||
 				(i == 22 && j == 3) || (i==21&&j==3) || (i==20&&j==3)||
-
 				(i == 23 && j == 13) || (i==22 && j==13) || (i==21&&j==13) || (i==20&&j==13)||
 				(i == 23 && j == 13) || (i==23&&j==12) || (i==23&&j==11) || (i==23&&j==10)||
-
 				(i == 12 && j == 3) || (i==13&&j==3) || (i==14&&j==3) ||
 				(i == 12 && j == 13) || (i==13&&j==13) || (i==14&&j==13) ||
 				(i == 9 && j == 1) || (i==9&&j==2) || (i==9&&j==3) || (i == 9 && j == 13) || (i==9&&j==15) || (i==9&&j==14)||
@@ -71,8 +66,7 @@ od 15
 				||(i == 8 && j == 7) ||(i == 8 && j == 9) ||(i == 18 && j == 7) ||(i == 18 && j == 9) ||
 				(i==12&&j==11) || (i == 14 && j == 11) || (i==12&&j==5) || (i == 14 && j == 5)||
 				(i==7&&j==7) || (i == 7 && j == 9) || (i==19&&j==7) || (i == 19 && j == 9)||
-				(i==3&&j==8) || (i == 23 && j == 8) || (i==12&&j==5) || (i == 14 && j == 5)
-			)
+				(i==3&&j==8) || (i == 23 && j == 8) || (i==12&&j==5) || (i == 14 && j == 5))
 			{
 				board.arr[i][j] = "W";
 			} 
@@ -86,24 +80,15 @@ od 15
 					const random_food = Math.random();
 					if(random_food<=0.6){
 						board.arr[i][j] = "F5";
-						//small_food.remain--;
 					}
 					else if(random_food>0.6 && random_food<=0.9){
 						board.arr[i][j] = "F15";
-						//small_food.remain--;
 					}
 					else{
 						board.arr[i][j] = "F25";
-						//small_food.remain--;
 					}
 					food_remain--	
 				} 
-				// else if (randomNum < (1.0 * (pacman.lives_remain + food_remain)) / board.cnt) {
-				// 	pacman.i = i;
-				// 	pacman.j = j;
-				// 	pacman.lives_remain--;
-				// 	board.arr[i][j] = "P";
-				// } 
 				else {
 					board.arr[i][j] = "E";
 				}
@@ -126,9 +111,9 @@ od 15
 		food_remain--
 	}
 	let pacman_cell = findRandomEmptyCell(board);
-		score = 0;
-		pacman.i=pacman_cell[0]
-		pacman.j=pacman_cell[1]
+	score = 0;
+	pacman.i=pacman_cell[0]
+	pacman.j=pacman_cell[1]
 	// set empty for teleport
 	board.arr[0][8]="E"
 	board.arr[26][8]="E"
@@ -157,21 +142,24 @@ function createGhosts(){
 	}
 }
 function Start() {
+	//init important things
 	pacman = new Pacman();
+	dolly= new Doll();
 	pacman.lives_remain = 5;
 	changeLivesImg();
-	dolly= new Doll();
 	createBoard();
 	createMovingDoll();
 	createGhosts();
 	gameSound.currentTime = 0;
 	gameSound.play();
 	start_time = new Date();
-	startTimer(chosen_game_time, document.getElementById("timer"));
+	let timer = chosen_game_time
+	startTimer(timer, document.getElementById("timer"));
 	document.getElementById("username_title").innerHTML= username_curr;
 	small_food.color = chosen_color5;
 	med_food.color = chosen_color15;
 	big_food.color = chosen_color25;
+	// check keyboard input
 	keysDown = {};
 	addEventListener(
 		"keydown",
@@ -187,6 +175,7 @@ function Start() {
 		},
 		false
 	);
+	//start moving ghost and doll
 	ghost_interval = setInterval(updateGhostPosition,350);
 	doll_interval = setInterval(updateDollPosition,150);
 }
@@ -227,6 +216,7 @@ function GetKeyPressed() {
 }
 
 function DrawPacman(center){
+	// draw pacman by direction
 	if (pacman.direction == "U"){
 		context.drawImage(pacman.img_up, center.x-10, center.y-10, board.cell_width*0.7, 0.7*board.cell_height);
 	}
@@ -293,6 +283,7 @@ function Draw() {
 }
 
 function DrawGhost(center,col_pos,row_pos){
+	//draw ghost by color
 	for(let k=0; k<ghost_array.length; k++){
 		if(ghost_array[k].i == col_pos && ghost_array[k].j == row_pos){
 			if(ghost_array[k].color == "RED"){
@@ -320,6 +311,7 @@ function DrawGhost(center,col_pos,row_pos){
 }
 
 function UpdatePosition() {
+	//update board every interval
 	if (pacman.i==undefined || pacman.j==undefined){
 		return
 	}
@@ -329,11 +321,7 @@ function UpdatePosition() {
 	if(board.arr[pacman.i][pacman.j] == "D"){
 		window.clearInterval(doll_interval);
 		dolly.prevCell= "E";
-		// if(board.arr[pacman.i][pacman.j] == "P"){
-			
-		// }
 	}
-
 	lastKey = GetKeyPressed();
 	if(lastKey == undefined){
 		lastKey = 0;
@@ -382,7 +370,6 @@ function UpdatePosition() {
 			pacman.i++;
 		}
 	}
-	
 	if (board.arr[pacman.i][pacman.j] == "F5") {
 		score+=5;
 	}
@@ -523,8 +510,9 @@ function pacmanCaught(){
 	}
 	return false
 }
-// return a good step [x,y] to make
+
 function makeGhostStep(curr_i,curr_j){
+	// return a good step [x,y] to make
 	let goodSteps=new Array();
 	//UP
 	if (board.arr[curr_i][curr_j+1]!="W" && board.arr[curr_i][curr_j+1]!="G"&& board.arr[curr_i][curr_j+1]!="D"  &&  goodStep(curr_i,curr_j,curr_i,curr_j+1))
@@ -568,13 +556,12 @@ function makeRandomValidStep(curr_i,curr_j){
 	let random_valid_step = validSteps[rand_int]
 	return random_valid_step;
 }
-//check if get ghost closer to pacman
+
 function goodStep(curr_i,curr_j,next_i,next_j){
+	//check if get ghost closer to pacman
 	let i_distance = curr_i - pacman.i;
 	let j_distance = curr_j - pacman.j;
-
 	let old_distance = Math.abs(i_distance) + Math.abs(j_distance);
-
 	i_distance = next_i - pacman.i;
 	j_distance = next_j - pacman.j;
 	let new_distance = Math.abs(i_distance) + Math.abs(j_distance);
@@ -584,24 +571,23 @@ function goodStep(curr_i,curr_j,next_i,next_j){
 		return false;
 	}
 function startTimer(duration, display) {
-	var timer = duration, minutes, seconds;
+	timer = duration;
 	window.clearInterval(timer);
 	setInterval(function () {
-		minutes = parseInt(timer / 60, 10)
-		seconds = parseInt(timer % 60, 10);
+		// minutes = parseInt(timer / 60, 10)
+		// seconds = parseInt(timer % 60, 10);
 
-		minutes = minutes < 10 ? "0" + minutes : minutes;
-		seconds = seconds < 10 ? "0" + seconds : seconds;
+		// minutes = minutes < 10 ? "0" + minutes : minutes;
+		// seconds = seconds < 10 ? "0" + seconds : seconds;
 
-		display.innerHTML = minutes + ":" + seconds;
-
+		// display.innerHTML = minutes + ":" + seconds;
+		display.innerHTML = timer
 		--timer;
 	}, 1000);
 }
 
 function endGame(){
 	resetGame();
-
 	if(pacman.lives_remain == 0){
 		modal = document.getElementById("losing-ghost-modal");
 		document.getElementById("losing-ghost-score-val").innerHTML=score;
@@ -646,9 +632,11 @@ function resetGame(){
 	window.clearInterval(pacman.interval);
 	window.clearInterval(ghost_interval);
 	window.clearInterval(doll_interval);
-	if(timer != undefined && timer != null){
-		window.clearInterval(timer);
-	}
+	// if(timer != undefined && timer != null){
+	// 	window.clearInterval(timer);
+	// }
+	window.clearInterval(timer);
+	//startTimer(chosen_game_time, document.getElementById("timer"));
 }
 
 function changeLivesImg(){
