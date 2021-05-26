@@ -55,7 +55,8 @@ const auth = require("./routes/auth");
 const users = require("./routes/users");
 const league = require("./routes/league");
 const teams = require("./routes/teams");
-const players = require("./routes/players")
+const players = require("./routes/players");
+const coaches = require("./routes/coaches")
 
 //#endregion
 
@@ -92,6 +93,7 @@ app.use("/players",players)
 app.use("/users", users);
 app.use("/league", league);
 app.use("/teams", teams);
+app.use("/coaches",coaches);
 app.use(auth);
 
 // ---> for displaying errors
