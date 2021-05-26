@@ -81,10 +81,12 @@ app.use(function (req, res, next) {
 app.get("/alive", (req, res) => res.send("I'm alive"));
 
 // --> For Displaying username/guest on NavBar
-app.get("/connected",(req,res) => {
-  if(req.session) 
+app.get("/",(req,res) => {
+  if(req.session.user_id)
+    //console.log("ben") 
     res.send(req.session.user_id);
   else
+    //console.log("benben") 
     res.send("guest")
   });
 
