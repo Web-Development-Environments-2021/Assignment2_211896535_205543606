@@ -1,5 +1,6 @@
 const axios = require("axios");
 const api_domain = "https://soccer.sportmonks.com/api/v2.0";
+const teams_utils = require("./teams_utils");
 // const TEAM_ID = "85";
 
 async function getPlayerIdsByTeam(team_id) {
@@ -61,9 +62,10 @@ async function getPlayerDetailsById(player_id){
       },
     }
   );
+  const team_name= await teams_utils.getTeamNameByID(player.data.data.team_id);
   return {
     player_full_name: player.data.data.fullname,
-    player_team: player.data.data.team_id,
+    player_team:team_name,
     player_image: player.data.data.image_path,
     player_position:player.data.data.position_id,
     player_common_name:player.data.data.common_name,
