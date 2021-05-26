@@ -26,7 +26,7 @@ router.post("/Register", async (req, res, next) => {
 
     // add the new username
     await DButils.execQuery(
-      `INSERT INTO dbo.Users (username, password) VALUES ('${req.body.username}', '${hash_password}')`
+      `INSERT INTO dbo.Users (username,firstname,lastname,country,password,email,image_url) VALUES ('${req.body.username}','${req.body.firstname}','${req.body.lastname}','${req.body.country}','${hash_password}','${req.body.email}','${req.body.image_url}')`
     );
     res.status(201).send("user created");
   } catch (error) {
