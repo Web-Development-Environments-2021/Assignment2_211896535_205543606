@@ -55,6 +55,7 @@ const auth = require("./routes/auth");
 const users = require("./routes/users");
 const league = require("./routes/league");
 const teams = require("./routes/teams");
+const players = require("./routes/players")
 
 //#endregion
 
@@ -78,7 +79,16 @@ app.use(function (req, res, next) {
 // ----> For cheking that our server is alive
 app.get("/alive", (req, res) => res.send("I'm alive"));
 
+// --> For Displaying username/guest on NavBar
+app.get("/connected",(req,res) => {
+  if(req.session) 
+    res.send(req.session.user_id);
+  else
+    res.send("guest")
+  });
+
 // Routings
+app.use("/players",players)
 app.use("/users", users);
 app.use("/league", league);
 app.use("/teams", teams);

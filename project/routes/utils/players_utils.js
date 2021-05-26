@@ -51,5 +51,15 @@ async function getPlayersByTeam(team_id) {
   return players_info;
 }
 
+// OUR NEW FUNCTIONS
+async function getPlayerDetailsById(player_id){
+  let player = await axios.get(`${api_domain}/teams/${team_id}`, {
+    params: {
+      include: "squad",
+      api_token: process.env.api_token,
+    },
+  });
+}
+
 exports.getPlayersByTeam = getPlayersByTeam;
 exports.getPlayersInfo = getPlayersInfo;
