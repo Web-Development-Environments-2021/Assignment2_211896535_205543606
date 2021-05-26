@@ -6,13 +6,19 @@ GO
 -- Create the table in the specified schema
 CREATE TABLE dbo.Matches
 (
-    match_id DATE NOT NULL ,
+    match_id INT NOT NULL PRIMARY KEY,
+    match_date DATE NOT NULL ,
     match_hour DATETIME NOT NULL,
     home_team VARCHAR(255) NOT NULL,
     away_team VARCHAR(255) NOT NULL,
+    referee_id INT NOT NULL,
     stadium VARCHAR(255) NOT NULL,
     result VARCHAR(255),
-    event_calendar xml
+    event_calendar xml,
+    FOREIGN KEY (referee_id)
+    REFERENCES Referees (referee_id)
+    ON DELETE NO ACTION ON UPDATE NO ACTION
+
     -- specify more columns here
 );
 GO
