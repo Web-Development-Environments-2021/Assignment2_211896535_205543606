@@ -4,6 +4,7 @@ const axios = require("axios");
 const bcrypt = require("bcryptjs");
 require("dotenv").config();
 //#endregion
+
 //#region express configures
 var express = require("express");
 var path = require("path");
@@ -11,6 +12,7 @@ const session = require("client-sessions");
 var logger = require("morgan");
 var cors = require("cors");
 
+//#create an express object
 var app = express();
 app.use(logger("dev")); //logger
 app.use(express.json()); // parse application/json
@@ -18,7 +20,6 @@ app.use(
   session({
     cookieName: "session", // the cookie key name
     secret: process.env.COOKIE_SECRET, // the encryption key
-    //secret: "benben",
     duration: 24 * 60 * 60 * 1000, // expired after 20 sec
     activeDuration: 1000 * 60 * 5, // if expiresIn < activeDuration,
     cookie: {
@@ -34,6 +35,7 @@ app.use(express.static(path.join(__dirname, "public"))); //To serve static files
 // https://expressjs.com/en/starter/static-files.html
 app.use(express.static("dist"));
 
+// handle GET method for API visualization
 app.get("/api", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
@@ -48,6 +50,7 @@ app.options("*", cors(corsConfig));
 
 const port = process.env.PORT || "3000";
 
+// create all the routes
 const auth = require("./routes/auth");
 const users = require("./routes/users");
 const league = require("./routes/league");
@@ -81,11 +84,13 @@ app.use("/league", league);
 app.use("/teams", teams);
 app.use(auth);
 
+// ---> for displaying errors
 app.use(function (err, req, res, next) {
   console.error(err);
   res.status(err.status || 500).send(err.message);
 });
 
+// ---> Server init
 const server = app.listen(port, () => {
   console.log(`Server listen on port ${port}`);
 });
