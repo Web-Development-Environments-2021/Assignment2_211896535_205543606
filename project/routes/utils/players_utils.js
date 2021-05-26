@@ -34,9 +34,10 @@ async function getPlayersInfo(players_ids_list) {
 }
 
 function extractRelevantPlayerData(players_info) {
-  return players_info.map((player_info) => {
+  return  players_info.map((player_info) => {
     const { fullname, image_path, position_id } = player_info.data.data;
     const { name } = player_info.data.data.team.data;
+    
     return {
       name: fullname,
       image: image_path,
