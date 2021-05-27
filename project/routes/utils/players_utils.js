@@ -75,8 +75,25 @@ async function getPlayerDetailsById(player_id){
     player_weight:player.data.data.weight
   };
 }
-  
 
+async function getPlayerPreviewById(player_id){
+  const player = await axios.get(
+    `${api_domain}/players/${player_id}`,
+    {
+      params: {
+        api_token: process.env.api_token
+      },
+    }
+  );
+  const team_name= await teams_utils.getTeamNameByID(player.data.data.team_id);
+  return {
+    player_full_name: player.data.data.fullname,
+    player_team:team_name,
+    player_image: player.data.data.image_path,
+    player_position:player.data.data.position_id
+  };
+}
+exports.getPlayerPreviewById = getPlayerPreviewById;
 exports.getPlayersByTeam = getPlayersByTeam;
 exports.getPlayersInfo = getPlayersInfo;
 exports.getPlayerDetailsById = getPlayerDetailsById;

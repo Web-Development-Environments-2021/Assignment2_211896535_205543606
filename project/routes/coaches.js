@@ -11,4 +11,13 @@ router.get("/:coachId", async (req, res, next) => {
   }
 });
 
+router.get("/getPreview/:coachId", async (req, res, next) => {
+  try {
+    const coach_preview = await coach_utils.getCoachPreviewById(req.params.coachId);
+    res.send(coach_preview);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
