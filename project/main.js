@@ -62,11 +62,11 @@ const coaches = require("./routes/coaches")
 
 //#region cookie middleware
 app.use(function (req, res, next) {
-  if (req.session && req.session.user_id) {
-    DButils.execQuery("SELECT user_id FROM users")
+  if (req.session && req.session.username) {
+    DButils.execQuery("SELECT username FROM users")
       .then((users) => {
-        if (users.find((x) => x.user_id === req.session.user_id)) {
-          req.user_id = req.session.user_id;
+        if (users.find((x) => x.username === req.session.username)) {
+          req.username = req.session.username;
         }
         next();
       })
@@ -82,9 +82,9 @@ app.get("/alive", (req, res) => res.send("I'm alive"));
 
 // --> For Displaying username/guest on NavBar
 app.get("/",(req,res) => {
-  if(req.session.user_id)
+  if(req.session.username)
     //console.log("ben") 
-    res.send(req.session.user_id);
+    res.send(req.session.username);
   else
     //console.log("benben") 
     res.send("guest")
