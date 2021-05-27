@@ -80,15 +80,7 @@ app.use(function (req, res, next) {
 // ----> For cheking that our server is alive
 app.get("/alive", (req, res) => res.send("I'm alive"));
 
-// --> For Displaying username/guest on NavBar
-app.get("/",(req,res) => {
-  if(req.session.username)
-    //console.log("ben") 
-    res.send(req.session.username);
-  else
-    //console.log("benben") 
-    res.send("guest")
-  });
+
 
 // Routings
 app.use("/players",players)

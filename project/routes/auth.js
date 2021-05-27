@@ -64,4 +64,12 @@ router.post("/Logout", function (req, res) {
   res.send({ success: true, message: "logout succeeded" });
 });
 
+// --> For Displaying username/guest on NavBar
+router.get("/getUserId",(req,res) => {
+  if(req.session.username)
+    res.send(req.session.username);
+  else
+    res.send("guest")
+  });
+
 module.exports = router;
