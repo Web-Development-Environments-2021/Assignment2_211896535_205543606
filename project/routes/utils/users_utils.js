@@ -9,7 +9,7 @@ async function markPlayerAsFavorite(user_id, player_id) {
 
 async function getFavoritePlayers(user_id) {
   const player_ids = await DButils.execQuery(
-    `select player_id from FavoritePlayers where user_id='${user_id}'`
+    `select player_id from FavoritePlayers where username='${user_id}'`
   );
   return player_ids;
 }
@@ -30,7 +30,7 @@ async function getFavoriteMatches(user_id) {
 
 async function getUpTo3favoriteMatches(user_id) {
   const match_ids = await DButils.execQuery(
-    `select TOP 3 match_id from FavoriteMatches where user_id='${user_id}'`
+    `select TOP 3 match_id from FavoriteMatches where username='${user_id}'`
   );
   return match_ids;
 }
@@ -45,7 +45,7 @@ async function markTeamAsFavorite(user_id, team_id) {
 
 async function getFavoriteTeams(user_id) {
   const team_ids = await DButils.execQuery(
-    `select team_id from FavoriteTeams where user_id='${user_id}'`
+    `select team_id from FavoriteTeams where username='${user_id}'`
   );
   return team_ids;
 }

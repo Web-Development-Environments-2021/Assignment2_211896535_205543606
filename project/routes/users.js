@@ -159,7 +159,7 @@ router.get("/favoriteTeams", async (req, res, next) => {
     let favorite_teams = {};
     const team_ids = await users_utils.getFavoriteTeams(user_id);
     let team_ids_array = [];
-    team_ids.map((element) => team_ids_array.push(element.match_id)); //extracting the matches ids into array
+    team_ids.map((element) => team_ids_array.push(element.team_id)); //extracting the matches ids into array
     //const results = await players_utils.getPlayersInfo(player_ids_array);
     // insert function get MATCH INFO
     const results = team_ids_array;
