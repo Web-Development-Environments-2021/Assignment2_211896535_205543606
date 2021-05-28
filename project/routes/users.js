@@ -33,6 +33,11 @@ router.post("/favoritePlayers", async (req, res, next) => {
   try {
     const user_id = req.session.username;
     const player_id = req.body.playerId;
+
+    const player_ids = await users_utils.getFavoritePlayers(user_id);
+    if (player_ids && player_ids.find((x) => parseInt(x.player_id) === parseInt(player_id)))
+            throw { status: 409, message: "player_id already exist" };
+
     await users_utils.markPlayerAsFavorite(user_id, player_id);
     res.status(201).send("The player successfully saved as favorite");
   } catch (error) {
@@ -68,6 +73,11 @@ router.get("/favoritePlayers", async (req, res, next) => {
   try {
     const user_id = req.session.username;
     const match_id = req.body.matchId;
+
+    const match_ids = await users_utils.getFavoriteMatches(user_id);
+    if (match_ids && match_ids.find((x) => parseInt(x.match_id) === parseInt(match_id)))
+            throw { status: 409, message: "macth_id already exist" };
+    console.log("ben");
     await users_utils.markMatchAsFavorite(user_id, match_id);
     res.status(201).send("The match successfully saved as favorite");
   } catch (error) {
@@ -127,6 +137,11 @@ router.get("/UpTo3favoriteMatches", async (req, res, next) => {
   try {
     const user_id = req.session.username;
     const team_id = req.body.teamId;
+
+    const team_ids = await users_utils.getFavoriteTeams(user_id);
+    if (team_ids && team_ids.find((x) => parseInt(x.team_id) === parseInt(team_id)))
+            throw { status: 409, message: "team_id already exist" };
+
     await users_utils.markTeamAsFavorite(user_id, team_id);
     res.status(201).send("The Team successfully saved as favorite");
   } catch (error) {
