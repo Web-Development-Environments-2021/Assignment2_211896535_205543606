@@ -54,26 +54,32 @@ async function getPlayersByTeam(team_id) {
 
 // OUR NEW FUNCTIONS
 async function getPlayerDetailsById(player_id){
-  const player = await axios.get(
-    `${api_domain}/players/${player_id}`,
-    {
-      params: {
-        api_token: process.env.api_token
-      },
-    }
-  );
-  const team_name= await teams_utils.getTeamNameByID(player.data.data.team_id);
-  return {
-    player_full_name: player.data.data.fullname,
-    player_team:team_name,
-    player_image: player.data.data.image_path,
-    player_position:player.data.data.position_id,
-    player_common_name:player.data.data.common_name,
-    player_nationality:player.data.data.nationality,
-    player_birthdate:player.data.data.birthdate,
-    player_height:player.data.data.height,
-    player_weight:player.data.data.weight
-  };
+  try{
+    const player = await axios.get(
+      `${api_domain}/players/${player_id}`,
+      {
+        params: {
+          api_token: process.env.api_token
+        },
+      }
+    );
+    const team_name= await teams_utils.getTeamNameByID(player.data.data.team_id);
+    return {
+      player_full_name: player.data.data.fullname,
+      player_team:team_name,
+      player_image: player.data.data.image_path,
+      player_position:player.data.data.position_id,
+      player_common_name:player.data.data.common_name,
+      player_nationality:player.data.data.nationality,
+      player_birthdate:player.data.data.birthdate,
+      player_height:player.data.data.height,
+      player_weight:player.data.data.weight
+    };
+  }
+  catch{
+    return ("player not found in API");
+  }
+  
 }
 
 async function getPlayerPreviewById(player_id){

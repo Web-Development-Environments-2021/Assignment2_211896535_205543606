@@ -1,4 +1,6 @@
 const DButils = require("./DButils");
+const axios = require("axios");
+
 
 //----->ADD MATCHES<------//
 async function addMatch(match_id,match_date,match_hour,home_team,away_team,match_referee,match_stadium) {
@@ -43,6 +45,18 @@ async function getMatchPreviewById(match_id) {
   return preview;
 }
 
+async function getMatchesInfo(matches_ids_list) {
+  let promises = [];
+  matches_ids_list.map((id) =>
+    promises.push(
+      getMatchPreviewById(id)
+    )
+  );
+  let macthes_info = await Promise.all(promises);
+  return macthes_info;
+}
+
+exports.getMatchesInfo= getMatchesInfo;
 exports.getMatchPreviewById = getMatchPreviewById;
 exports.addResult = addResult;
 exports.getResultById = getResultById;

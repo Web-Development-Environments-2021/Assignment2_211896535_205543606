@@ -4,7 +4,7 @@ const DButils = require("./utils/DButils");
 const users_utils = require("./utils/users_utils");
 const players_utils = require("./utils/players_utils");
 const matches_utils = require("./utils/matches_utils");
-
+const teams_utils = require("./utils/teams_utils");
 
 /**
  * Authenticate all incoming requests by middleware
@@ -91,20 +91,11 @@ router.get("/favoritePlayers", async (req, res, next) => {
 router.get("/favoriteMatches", async (req, res, next) => {
   try {
     const user_id = req.session.username;
-    let favorite_matches = {};
+    let favorite_plfavorite_matchesayers = {};
     const match_ids = await users_utils.getFavoriteMatches(user_id);
     let match_ids_array = [];
     match_ids.map((element) => match_ids_array.push(element.match_id)); //extracting the matches ids into array
-    //const results = await players_utils.getPlayersInfo(player_ids_array);
-    // insert function get MATCH INFO
-    //const results = match_ids_array;
-    console.log(match_ids_array);
-    let results = match_ids_array;
-    // await Promise.all(match_ids_array.forEach(element => {
-    //   let preview = await matches_utils.getMatchPreviewById(element);
-    //   console.log(preview);
-    //   results.push(preview);
-    // }));
+    const results = await matches_utils.getMatchesInfo(match_ids_array);
     res.status(200).send(results);
   } catch (error) {
     next(error);
@@ -137,7 +128,6 @@ router.get("/UpTo3favoriteMatches", async (req, res, next) => {
   try {
     const user_id = req.session.username;
     const team_id = req.body.teamId;
-
     const team_ids = await users_utils.getFavoriteTeams(user_id);
     if (team_ids && team_ids.find((x) => parseInt(x.team_id) === parseInt(team_id)))
             throw { status: 409, message: "team_id already exist" };
@@ -154,15 +144,12 @@ router.get("/UpTo3favoriteMatches", async (req, res, next) => {
  */
 router.get("/favoriteTeams", async (req, res, next) => {
   try {
-    console.log("here")
     const user_id = req.session.username;
     let favorite_teams = {};
     const team_ids = await users_utils.getFavoriteTeams(user_id);
     let team_ids_array = [];
     team_ids.map((element) => team_ids_array.push(element.team_id)); //extracting the matches ids into array
-    //const results = await players_utils.getPlayersInfo(player_ids_array);
-    // insert function get MATCH INFO
-    const results = team_ids_array;
+    const results = await teams_utils.getTeamsInfo(team_ids_array);
     res.status(200).send(results);
   } catch (error) {
     next(error);
