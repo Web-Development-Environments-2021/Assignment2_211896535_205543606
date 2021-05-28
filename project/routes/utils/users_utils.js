@@ -23,7 +23,14 @@ async function markMatchAsFavorite(user_id, match_id) {
 
 async function getFavoriteMatches(user_id) {
   const match_ids = await DButils.execQuery(
-    `select match_id from FavoriteMatches where user_id='${user_id}'`
+    `select match_id from FavoriteMatches where username='${user_id}'`
+  );
+  return match_ids;
+}
+
+async function getUpTo3favoriteMatches(user_id) {
+  const match_ids = await DButils.execQuery(
+    `select TOP 3 match_id from FavoriteMatches where user_id='${user_id}'`
   );
   return match_ids;
 }

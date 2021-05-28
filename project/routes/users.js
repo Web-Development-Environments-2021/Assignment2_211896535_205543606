@@ -3,6 +3,8 @@ var router = express.Router();
 const DButils = require("./utils/DButils");
 const users_utils = require("./utils/users_utils");
 const players_utils = require("./utils/players_utils");
+const matches_utils = require("./utils/matches_utils");
+
 
 /**
  * Authenticate all incoming requests by middleware
@@ -85,7 +87,30 @@ router.get("/favoriteMatches", async (req, res, next) => {
     match_ids.map((element) => match_ids_array.push(element.match_id)); //extracting the matches ids into array
     //const results = await players_utils.getPlayersInfo(player_ids_array);
     // insert function get MATCH INFO
-    const results = match_ids_array;
+    //const results = match_ids_array;
+    console.log(match_ids_array);
+    let results = match_ids_array;
+    // await Promise.all(match_ids_array.forEach(element => {
+    //   let preview = await matches_utils.getMatchPreviewById(element);
+    //   console.log(preview);
+    //   results.push(preview);
+    // }));
+    res.status(200).send(results);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/UpTo3favoriteMatches", async (req, res, next) => {
+  try {
+    const user_id = req.session.username;
+    let favorite_matches = {};
+    const match_ids = await users_utils.getUpTo3favoriteMatches(user_id);
+    let match_ids_array = [];
+    match_ids.map((element) => match_ids_array.push(element.match_id)); //extracting the matches ids into array
+    let results = []
+    for (x in match_ids_array)
+      results.push(matches_utils.getMatchPreviewById(x));
     res.status(200).send(results);
   } catch (error) {
     next(error);
