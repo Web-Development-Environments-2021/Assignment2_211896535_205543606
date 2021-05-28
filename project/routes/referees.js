@@ -7,9 +7,8 @@ const referees_utils = require("./utils/referees_utils")
 router.post("/addReferee", async (req, res, next) => {
   try {
     const referees = await referees_utils.getReferees();
-    if (referees)
-        if (referees.find((x) => x.referee_id === req.body.referee_id))
-        throw { status: 409, message: "referee_id taken" };
+        if (referees && referees.find((x) => x.referee_id === req.body.referee_id))
+            throw { status: 409, message: "referee_id taken" };
 
     // //hash the password
     // let hash_password = bcrypt.hashSync(
@@ -17,8 +16,6 @@ router.post("/addReferee", async (req, res, next) => {
     //   parseInt(process.env.bcrypt_saltRounds)
     // );
     // req.body.password = hash_password;
-
-
     await referees_utils.addReferee(req.body.referee_id,req.body.fullname);
     res.status(201).send("referee created");
   } catch (error) {

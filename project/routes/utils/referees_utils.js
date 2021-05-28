@@ -7,9 +7,10 @@ async function addReferee(referee_id,fullname) {
   );
 }
 async function getReferees() {
-    await DButils.execQuery(
-        "SELECT referee_id FROM dbo.Referees"
+    const referees = await DButils.execQuery(
+        `SELECT referee_id FROM Referees`
     );
+    return referees;
   }
 
 exports.addReferee = addReferee;

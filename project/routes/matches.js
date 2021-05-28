@@ -1,3 +1,4 @@
+const e = require("express");
 var express = require("express");
 var router = express.Router();
 const DButils = require("./utils/DButils");
@@ -25,6 +26,10 @@ router.use(async function (req, res, next) {
 
 router.post("/addMatch", async (req, res, next) => {
   try {
+    const matches = await matches_utils.getMatches();
+        if (matches && matches.find((x) => x.match_id === req.body.match_id))
+            throw { status: 409, message: "match_id taken" };
+
     const match_id = req.body.match_id;
     const match_date = req.body.match_date;
     const match_hour = req.body.match_hour;
@@ -38,6 +43,24 @@ router.post("/addMatch", async (req, res, next) => {
     next(error);
   }
 });
+
+//---->add Result<----//
+
+router.post("/addResult", async (req, res, next) => {
+  try {
+    const result = await matches_utils.getResultById(req.body.match_id);
+        if (result[0].result==null){
+          await matches_utils.addResult(req.body.match_id,req.body.match_result);
+          res.status(201).send("result successfully updateded");
+        }
+        else{
+          throw { status: 409, message: "match already has a result" };
+        } 
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 module.exports = router;
 
