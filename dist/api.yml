@@ -6,10 +6,12 @@ info:
 tags:
   - name: Users
   - name: Auth
-  - name: League
+  - name: league
   - name: Players
+  - name: Coaches
   - name: Teams
-  - name: Games
+  - name: matches
+  - name: referees
 paths:
   /Register:
     post:
@@ -69,15 +71,59 @@ paths:
       summary: Return the details about the current league
       responses:
         "200":
-          description: data about the current league returned
+          description: data about the current league returned. includes league name, league current season name, league current stage name,
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/League"
+                  $ref: "#/components/schemas/league"
         "400":
           description: wrong input parameters
+  /players/{playerId}:
+    get:
+      summary: get all details about a player
+      description: useful for player's page
+      tags:
+        - Players
+      parameters:
+        - in: path
+          name: playerId
+          description: player's id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: data about the player
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Player"
+        "404":
+          description: playerId does not exist
+  /players/getPreview/{playerId}:
+    get:
+      summary: get the preview details of a player
+      description: useful for player search
+      tags:
+        - Players
+      parameters:
+        - in: path
+          name: playerId
+          description: player's id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: preview data about the player
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlayerPreview"
+        "404":
+          description: playerId does not exist
   /users/favoritePlayers:
     get:
       tags:
@@ -108,7 +154,7 @@ paths:
               type: object
               properties:
                 playerId:
-                  type: string
+                  type: integer
                   description: player's id which the user saved
                   example: 85
       responses:
@@ -116,6 +162,144 @@ paths:
           description: The player successfully saved as favorite
         "401":
           description: user is not authorized
+  /users/favoriteMatches:
+    get:
+      tags:
+        - Users
+        - Matches
+      summary: Return the favorite matches that were saved by user
+      parameters:
+      responses:
+        "200":
+          description: data about the user's favorites matches returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MatchPreview"
+        "401":
+          description: user is not authorized
+    post:
+      summary: save match in the favorites list of a user
+      tags:
+        - Users
+        - Matches
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+               matchId:
+                  type: integer
+                  description: matches's id which the user saved
+                  example: 33
+      responses:
+        "201":
+          description: The match successfully saved as favorite
+        "401":
+          description: user is not authorized
+  /users/UpTo3favoriteMatches:
+    get:
+      tags:
+        - Users
+        - Matches
+      summary: Returns up to 3 favorites matches that were saved by the logged-in user
+      parameters:
+      responses:
+        "200":
+          description: data about the user's 3 favorites matches returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MatchPreview"
+        "401":
+          description: user is not authorized
+  /users/favoriteTeams:
+    get:
+      tags:
+        - Users
+        - Teams
+      summary: Return the favorite teams that were saved by user
+      parameters:
+      responses:
+        "200":
+          description: data about the user's favorites teams returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Team"
+        "401":
+          description: user is not authorized
+    post:
+      summary: save team in the favorites list of a user
+      tags:
+        - Users
+        - Teams
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                teamId:
+                  type: integer
+                  description: team's id which the user saved
+                  example: 33
+      responses:
+        "201":
+          description: The match successfully saved as favorite
+        "401":
+          description: user is not authorized
+  /coaches/{coachId}:
+    get:
+      summary: get all details about a coach
+      description: useful for coach page
+      tags:
+        - Coaches
+      parameters:
+        - in: path
+          name: coachId
+          description: coach's id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: data about the coach
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Coach"
+        "404":
+          description: coachId does not exist
+  /coaches/getPreview/{coachId}:
+    get:
+      summary: get the preview details of a coach
+      description: useful for coach search
+      tags:
+        - Coaches
+      parameters:
+        - in: path
+          name: coachId
+          description: coach's id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: preview data about the coach
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CoachPreview"
+        "404":
+          description: coachId does not exist
   /teams/teamFullDetails/{teamId}:
     get:
       summary: get full deatils about a team
@@ -137,7 +321,237 @@ paths:
               schema:
                 $ref: "#/components/schemas/Team"
         "404":
-          description: teamId is not exists
+          description: teamId does not exists
+  /matches/addMatch:
+    post:
+      summary: add a match to MATCHES table by body params
+      description: adding matches
+      tags:
+        - matches
+      parameters:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match_id:
+                  type: integer
+                  description: the match id to add
+                  example: 23
+                match_date:
+                  type: date
+                  description: the date of the match
+                  example: 25/04/2021
+                match_hour:
+                  type: dateTime
+                  description: the date and exact hour of the match
+                  example: 25/04/2021 21:30:00
+                home_team:
+                  type: string
+                  description: 3 letters of the home team
+                  example: FCB
+                away_team:
+                  type: string
+                  description: 3 letters of the away team
+                  example: RMA
+                match_referee:
+                  type: integer
+                  description: id of the match referee
+                  example: 21323
+                match_stadium:
+                  type: string
+                  description: the name of the match's stadium
+                  example: Santiago Bernabeu
+      responses:
+        "200":
+          description: Succesfully added this match
+        "404":
+          description: Could not add this match due to an error
+  /matches/addResult:
+    post:
+      summary: add a result to a match by body params
+      description: adding results to matches
+      tags:
+        - matches
+      parameters:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match_id:
+                  type: integer
+                  description: the match id to add result to
+                  example: 23
+                match_result:
+                  type: string
+                  description: the result to add to the match
+                  example: 3-2
+      responses:
+        "200":
+          description: Succesfully added result to the match
+        "404":
+          description: Could not add result to this match due to an error
+  /matches/addEventCalendar:
+    post:
+      summary: add an event calendar to a match by body params
+      description: adding event calendars to matches
+      tags:
+        - matches
+      parameters:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match_id:
+                  type: integer
+                  description: the match id to add result to
+                  example: 23
+                event_id:
+                  type: integer
+                  description: the event's id to add to the match
+                  example: 1
+                event_date:
+                  type: date
+                  description: the event's date to add to the match
+                  example: 11-11-2021
+                event_hour:
+                  type: dateTime
+                  description: the event's date and time to add to the match
+                  exmple: 11-11-2021 21:37:57
+                event_minute:
+                  type: int
+                  description: the even'ts minute it happened on the match
+                  example: 67
+                event_description:
+                  type: string
+                  description: the event's description
+                  example: goal
+      responses:
+        "200":
+          description: Succesfully added event to the match
+        "404":
+          description: Could not add event to this match due to an error
+  /matches/getAllMatches:
+    get:
+      summary: get all of the matches in the system
+      description: returns an array with all the matches in the system
+      tags:
+        - matches
+      parameters:
+      responses:
+        "200":
+          description: Succesfully returned all the matches
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Match"
+        "404":
+          description: Could not get matches
+  /matches/getAllMatchesSortByDate:
+    get:
+      summary: get all return all the matches in the system sorted by date
+      description: returns an array with all the matches in the system sorted by date
+      tags:
+        - matches
+      parameters:
+      responses:
+        "200":
+          description: Succesfully returned all the matches sorted by date
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Match"
+        "404":
+          description: Could not get matches sorted by date
+  /matches/getAllMatchesSortByTeam:
+    get:
+      summary: get all return all the matches in the system sorted by team
+      description: returns an array with all the matches in the system sorted by team
+      tags:
+        - matches
+      parameters:
+      responses:
+        "200":
+          description: Succesfully returned all the matches sorted by team
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Match"
+        "404":
+          description: Could not get matches sorted by team
+  /matches/getPastMatches:
+    get:
+      summary: get all return all the past matches
+      description: returns an array with all the past matches in the system
+      tags:
+        - matches
+      parameters:
+      responses:
+        "200":
+          description: Succesfully returned all the past matches
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Match"
+        "404":
+          description: Could not get past matches
+  /matches/getFutureMatches:
+    get:
+      summary: get all return all the future matches
+      description: returns an array with all the future matches in the system
+      tags:
+        - matches
+      parameters:
+      responses:
+        "200":
+          description: Succesfully returned all the future matches
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Match"
+        "404":
+          description: Could not get future matches
+  /referees/addReferee:
+    post:
+      summary: add a referee to the Referees table by body params
+      description: adding referees to the system
+      tags:
+        - referees
+      parameters:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                referee_id:
+                  type: integer
+                  description: the referee id to add
+                  example: 23
+                fullname:
+                  type: string
+                  description: the referee's full name to add
+                  example: Ben Barnes
+      responses:
+        "200":
+          description: Succesfully added referee to system
+        "404":
+          description: Could not add referee due to an error
 components:
   schemas:
     User:
@@ -197,7 +611,7 @@ components:
           format: password
           description: password conatins at least one number and one special char
           example: naor@55
-    League:
+    league:
       type: object
       properties:
         league_name:
@@ -212,6 +626,45 @@ components:
           type: string
           description: current stage name
           example: Championship Round
+    Player:
+      type: object
+      properties:
+        player_full_name:
+          type: string
+          description: player name
+          example: James Forrest
+        player_team:
+          type: string
+          description: team name
+          example: Celtic
+        player_image:
+          type: string
+          description: player's image
+          format: URL
+          example: https://cdn.sportmonks.com/images/soccer/players/8/172104.png
+        player_position:
+          type: integer
+          description: player's position on the team
+        player_common_name:
+          type: string
+          description: player's common name
+          example: J. Forrest
+        player_nationality:
+          type: string
+          description: player's nationality
+          example: Scotland
+        player_birthdate:
+          type: date
+          description: player's date of birth
+          example: 07/07/1991
+        player_height:
+          type: string
+          description: player's height
+          exapmle: 175 cm
+        player_weight:
+          type: string
+          description: player's weight
+          example: 71 kg
     PlayerPreview:
       type: object
       properties:
@@ -232,6 +685,50 @@ components:
           type: string
           description: player's team name
           example: København
+    Coach:
+      type: object
+      properties:
+        coach_full_name:
+          type: string
+          description: coach name
+          example: Neil Lennon
+        coach_team:
+          type: string
+          description: team name
+          example: Celtic
+        coach_image:
+          type: string
+          description: coach's image
+          format: URL
+          example: https://cdn.sportmonks.com/images/soccer/players/10/1467946.png
+        coach_common_name:
+          type: string
+          description: coach's common name
+          example: N. Lennon
+        coach_nationality:
+          type: string
+          description: coach's nationality
+          example: Northern Ireland
+        coach_birthdate:
+          type: date
+          description: coach's date of birth
+          example: 25/06/1971
+    CoachPreview:
+      type: object
+      properties:
+        coach_full_name:
+          type: string
+          description: coach name
+          example: Neil Lennon
+        coach_team:
+          type: string
+          description: team name
+          example: Celtic
+        coach_image:
+          type: string
+          description: coach's image
+          format: URL
+          example: https://cdn.sportmonks.com/images/soccer/players/10/1467946.png      
     Team:
       type: object
       properties:
@@ -244,3 +741,57 @@ components:
           items:
             type: object
             $ref: "#/components/schemas/PlayerPreview"
+    Match:
+      type: object
+      properties:
+        match_id:
+          type: integer
+          description: the match id to add
+          example: 23
+        match_date:
+          type: date
+          description: the date of the match
+          example: 25/04/2021
+        match_hour:
+          type: dateTime
+          description: the date and exact hour of the match
+          example: 25/04/2021 21:30:00
+        home_team:
+          type: string
+          description: 3 letters of the home team
+          example: FCB
+        away_team:
+          type: string
+          description: 3 letters of the away team
+          example: RMA
+        match_referee:
+          type: integer
+          description: id of the match referee
+          example: 21323
+        match_stadium:
+          type: string
+          description: the name of the match's stadium
+          example: Santiago Bernabeu
+    MatchPreview:
+      type: object
+      properties:
+        match_date:
+          type: date
+          description: the date of the match
+          example: 25/04/2021
+        match_hour:
+          type: dateTime
+          description: the date and exact hour of the match
+          example: 25/04/2021 21:30:00
+        home_team:
+          type: string
+          description: 3 letters of the home team
+          example: FCB
+        away_team:
+          type: string
+          description: 3 letters of the away team
+          example: RMA
+        match_stadium:
+          type: string
+          description: the name of the match's stadium
+          example: Santiago Bernabeu

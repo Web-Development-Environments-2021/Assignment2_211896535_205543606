@@ -79,7 +79,7 @@ router.post("/addResult", async (req, res, next) => {
 });
 
 /**
- * This path add a event calendar to a match by body params
+ * This path add an event calendar to a match by body params
  */
 router.post("/addEventCalendar", async (req, res, next) => {
   try {
@@ -95,7 +95,7 @@ router.post("/addEventCalendar", async (req, res, next) => {
 });
 
 /**
- * This path return all the games in the system
+ * This path return all the matchs in the system
  */
 //WORKS GOOD
 router.get("/getAllMatches", async (req, res, next) => {
@@ -108,7 +108,7 @@ router.get("/getAllMatches", async (req, res, next) => {
 });
 
 /**
- * This path return all the games in the system sort by date
+ * This path return all the matchs in the system sort by date
  */
 //WORKS GOOD
 router.get("/getAllMatchesSortByDate", async (req, res, next) => {
@@ -121,7 +121,7 @@ router.get("/getAllMatchesSortByDate", async (req, res, next) => {
 });
 
 /**
- * This path return all the games in the system sort by team
+ * This path return all the matchs in the system sort by team
  */
 //WORKS GOOD
 router.get("/getAllMatchesSortByTeam", async (req, res, next) => {
@@ -134,7 +134,7 @@ router.get("/getAllMatchesSortByTeam", async (req, res, next) => {
 });
 
 /**
- * This path return all the  past games
+ * This path return all the  past matchs
  */
 //WORKS GOOD
 router.get("/getPastMatches", async (req, res, next) => {
@@ -146,7 +146,7 @@ router.get("/getPastMatches", async (req, res, next) => {
   }
 });
 /**
- * This path return all the  future games
+ * This path return all the  future matchs
  */
 //WORKS GOOD
 router.get("/getFutureMatches", async (req, res, next) => {
