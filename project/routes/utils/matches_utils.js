@@ -2,7 +2,6 @@ const DButils = require("./DButils");
 const axios = require("axios");
 
 
-//----->ADD MATCHES<------//
 async function addMatch(match_id,match_date,match_hour,home_team,away_team,match_referee,match_stadium) {
   await DButils.execQuery(
     `insert into Matches values ('${match_id}','${match_date}','${match_hour}','${home_team}','${away_team}','${match_referee}','${match_stadium}',NULL,NULL)`
@@ -34,7 +33,6 @@ async function getResultById(match_id) {
 async function addResult(match_id,match_result) {
   await DButils.execQuery(
     `UPDATE Matches SET result = '${match_result}' WHERE match_id = '${match_id}'`
-
   );
 }
 
@@ -93,6 +91,7 @@ async function getFutureGames() {
   );
   return mathces;
 }
+
 exports.getFutureGames = getFutureGames;
 exports.getPastGames = getPastGames;
 exports.getAllMatches=getAllMatches;

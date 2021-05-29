@@ -5,6 +5,10 @@ var router = express.Router();
 const DButils = require("../routes/utils/DButils");
 const bcrypt = require("bcryptjs");
 
+/**
+ * This path register a user to the system
+ */
+//WORKS GOOD
 router.post("/Register", async (req, res, next) => {
   try {
     // parameters exists
@@ -34,6 +38,10 @@ router.post("/Register", async (req, res, next) => {
   }
 });
 
+/**
+ * This path login a user to the system
+ */
+//WORKS GOOD
 router.post("/Login", async (req, res, next) => {
   try {
     const user = (
@@ -59,12 +67,19 @@ router.post("/Login", async (req, res, next) => {
   }
 });
 
+/**
+ * This path logout a user from the system
+ */
+//WORKS GOOD
 router.post("/Logout", function (req, res) {
   req.session.reset(); // reset the session info --> send cookie when  req.session == undefined!!
   res.send({ success: true, message: "logout succeeded" });
 });
 
-// --> For Displaying username/guest on NavBar
+/**
+ * This path return username/guest for display on NAVBAR
+ */
+//WORKS GOOD
 router.get("/getUserId",(req,res) => {
   if(req.session.username)
     res.send(req.session.username);

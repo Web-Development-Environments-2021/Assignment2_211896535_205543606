@@ -16,10 +16,10 @@ async function getTeamNameByID(team_id){
   }
   catch{
     return "team not found in API";
-  }
-    
-  }
+  }  
+}
 
+//should add additional information maybe, not only name
 async function getTeamsInfo(team_ids_array){
   let promises = [];
   team_ids_array.map((id) =>

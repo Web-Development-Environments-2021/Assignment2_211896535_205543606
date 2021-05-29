@@ -4,8 +4,14 @@ const DButils = require("../routes/utils/DButils");
 const bcrypt = require("bcryptjs");
 const referees_utils = require("./utils/referees_utils")
 
+
+/**
+ * This path gets body with reffereID and name and save the it in referee table 
+ */
+//WORKS GOOD
 router.post("/addReferee", async (req, res, next) => {
   try {
+    //check if id already exist
     const referees = await referees_utils.getReferees();
         if (referees && referees.find((x) => x.referee_id === req.body.referee_id))
             throw { status: 409, message: "referee_id taken" };
@@ -22,43 +28,5 @@ router.post("/addReferee", async (req, res, next) => {
     next(error);
   }
 });
-
-// router.post("/Login", async (req, res, next) => {
-//   try {
-//     const user = (
-//       await DButils.execQuery(
-//         `SELECT * FROM dbo.Users WHERE username = '${req.body.username}'`
-//       )
-//     )[0];
-//     // user = user[0];
-//     console.log(user);
-
-//     // check that username exists & the password is correct
-//     if (!user || !bcrypt.compareSync(req.body.password, user.password)) {
-//       throw { status: 401, message: "Username or Password incorrect" };
-//     }
-
-//     // Set cookie
-//     req.session.username = user.username;
-
-//     // return cookie
-//     res.status(200).send("login succeeded");
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
-// router.post("/Logout", function (req, res) {
-//   req.session.reset(); // reset the session info --> send cookie when  req.session == undefined!!
-//   res.send({ success: true, message: "logout succeeded" });
-// });
-
-// // --> For Displaying username/guest on NavBar
-// router.get("/getUserId",(req,res) => {
-//   if(req.session.username)
-//     res.send(req.session.username);
-//   else
-//     res.send("guest")
-//   });
 
 module.exports = router;

@@ -23,10 +23,13 @@ router.use(async function (req, res, next) {
   }
 });
 
-//---->add Match<----//
-
+/**
+ * This path add a match to MATCHES table by body params
+ */
+//WORKS GOOD
 router.post("/addMatch", async (req, res, next) => {
   try {
+    //check if matchID already exist
     const matches = await matches_utils.getMatches();
         if (matches && matches.find((x) => x.match_id === req.body.match_id))
             throw { status: 409, message: "match_id taken" };
@@ -45,10 +48,10 @@ router.post("/addMatch", async (req, res, next) => {
   }
 });
 
-
-
-//---->add Result<----//
-
+/**
+ * This path add a result to a match by body params
+ */
+//WORKS GOOD
 router.post("/addResult", async (req, res, next) => {
   try {
     const result = await matches_utils.getResultById(req.body.match_id);
@@ -64,8 +67,10 @@ router.post("/addResult", async (req, res, next) => {
   }
 });
 
-//---->add Event Calendat<----//
-// should implement
+/**
+ * This path add a event calendar to a match by body params
+ */
+// should implement!!!!
 router.post("/addEventCalendar", async (req, res, next) => {
   try {
     none
@@ -74,7 +79,10 @@ router.post("/addEventCalendar", async (req, res, next) => {
   }
 });
 
-
+/**
+ * This path return all the games in the system
+ */
+//WORKS GOOD
 router.get("/getAllMatches", async (req, res, next) => {
   try {
     const matches = await matches_utils.getAllMatches();
@@ -84,7 +92,10 @@ router.get("/getAllMatches", async (req, res, next) => {
   }
 });
 
-
+/**
+ * This path return all the games in the system sort by date
+ */
+//WORKS GOOD
 router.get("/getAllMatchesSortByDate", async (req, res, next) => {
   try {
     const matches = await matches_utils.getAllMatchesSortByDate();
@@ -94,7 +105,10 @@ router.get("/getAllMatchesSortByDate", async (req, res, next) => {
   }
 });
 
-
+/**
+ * This path return all the games in the system sort by team
+ */
+//WORKS GOOD
 router.get("/getAllMatchesSortByTeam", async (req, res, next) => {
   try {
     const matches = await matches_utils.getAllMatchesSortByTeam();
@@ -104,7 +118,10 @@ router.get("/getAllMatchesSortByTeam", async (req, res, next) => {
   }
 });
 
-
+/**
+ * This path return all the  past games
+ */
+//WORKS GOOD
 router.get("/getPastMatches", async (req, res, next) => {
   try {
     const matches = await matches_utils.getPastGames();
@@ -113,6 +130,10 @@ router.get("/getPastMatches", async (req, res, next) => {
     next(error);
   }
 });
+/**
+ * This path return all the  future games
+ */
+//WORKS GOOD
 router.get("/getFutureMatches", async (req, res, next) => {
   try {
     const matches = await matches_utils.getFutureGames();

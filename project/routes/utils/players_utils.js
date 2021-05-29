@@ -1,7 +1,6 @@
 const axios = require("axios");
 const api_domain = "https://soccer.sportmonks.com/api/v2.0";
 const teams_utils = require("./teams_utils");
-// const TEAM_ID = "85";
 
 async function getPlayerIdsByTeam(team_id) {
   let player_ids_list = [];
@@ -18,19 +17,25 @@ async function getPlayerIdsByTeam(team_id) {
 }
 
 async function getPlayersInfo(players_ids_list) {
-  let promises = [];
-  players_ids_list.map((id) =>
-    promises.push(
-      axios.get(`${api_domain}/players/${id}`, {
-        params: {
-          api_token: process.env.api_token,
-          include: "team",
-        },
-      })
-    )
-  );
-  let players_info = await Promise.all(promises);
-  return extractRelevantPlayerData(players_info);
+  try{
+    let promises = [];
+    players_ids_list.map((id) =>
+      promises.push(
+        axios.get(`${api_domain}/players/${id}`, {
+          params: {
+            api_token: process.env.api_token,
+            include: "team",
+          },
+        })
+      )
+    );
+    let players_info = await Promise.all(promises);
+    return extractRelevantPlayerData(players_info);
+  }
+  catch{
+    return "ono or more of the players do not exist!"
+  }
+
 }
 
 function extractRelevantPlayerData(players_info) {
@@ -83,21 +88,26 @@ async function getPlayerDetailsById(player_id){
 }
 
 async function getPlayerPreviewById(player_id){
-  const player = await axios.get(
-    `${api_domain}/players/${player_id}`,
-    {
-      params: {
-        api_token: process.env.api_token
-      },
-    }
-  );
-  const team_name= await teams_utils.getTeamNameByID(player.data.data.team_id);
-  return {
-    player_full_name: player.data.data.fullname,
-    player_team:team_name,
-    player_image: player.data.data.image_path,
-    player_position:player.data.data.position_id
-  };
+  try{
+    const player = await axios.get(
+      `${api_domain}/players/${player_id}`,
+      {
+        params: {
+          api_token: process.env.api_token
+        },
+      }
+    );
+    const team_name= await teams_utils.getTeamNameByID(player.data.data.team_id);
+    return {
+      player_full_name: player.data.data.fullname,
+      player_team:team_name,
+      player_image: player.data.data.image_path,
+      player_position:player.data.data.position_id
+    };
+  }
+  catch{
+    return ("player not found in API");
+  }
 }
 exports.getPlayerPreviewById = getPlayerPreviewById;
 exports.getPlayersByTeam = getPlayersByTeam;

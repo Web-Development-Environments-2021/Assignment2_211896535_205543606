@@ -23,12 +23,10 @@ router.use(async function (req, res, next) {
     res.sendStatus(401);
   }
 });
-
-//---->FAVORITE PLAYERS<----//
-
 /**
  * This path gets body with playerId and save this player in the favorites list of the logged-in user
  */
+//WORKS GOOD
 router.post("/favoritePlayers", async (req, res, next) => {
   try {
     const user_id = req.session.username;
@@ -48,6 +46,7 @@ router.post("/favoritePlayers", async (req, res, next) => {
 /**
  * This path returns the favorites players that were saved by the logged-in user
  */
+//WORKS GOOD
 router.get("/favoritePlayers", async (req, res, next) => {
   try {
     const user_id = req.session.username;
@@ -62,13 +61,10 @@ router.get("/favoritePlayers", async (req, res, next) => {
   }
 });
 
-
-
-//---->FAVORITE Matches<----//
-
 /**
- * This path gets body with playerId and save this player in the favorites list of the logged-in user
+ * This path gets body with matchID and save this match in the favorites list of the logged-in user
  */
+//WORKS GOOD
  router.post("/favoriteMatches", async (req, res, next) => {
   try {
     const user_id = req.session.username;
@@ -86,8 +82,9 @@ router.get("/favoritePlayers", async (req, res, next) => {
 });
 
 /**
- * This path returns the favorites players that were saved by the logged-in user
+ * This path returns the favorites matches that were saved by the logged-in user
  */
+//WORKS GOOD
 router.get("/favoriteMatches", async (req, res, next) => {
   try {
     const user_id = req.session.username;
@@ -102,6 +99,10 @@ router.get("/favoriteMatches", async (req, res, next) => {
   }
 });
 
+/**
+ * This path returns up to 3 favorites matches that were saved by the logged-in user
+ */
+//WORKS GOOD
 router.get("/UpTo3favoriteMatches", async (req, res, next) => {
   try {
     const user_id = req.session.username;
@@ -116,12 +117,10 @@ router.get("/UpTo3favoriteMatches", async (req, res, next) => {
   }
 });
 
-
-//---->FAVORITE TEAMS<----//
-
 /**
  * This path gets body with teamID and save this Team in the favorites list of the logged-in user
  */
+//WORKS GOOD
  router.post("/favoriteTeams", async (req, res, next) => {
   try {
     const user_id = req.session.username;
@@ -138,8 +137,9 @@ router.get("/UpTo3favoriteMatches", async (req, res, next) => {
 });
 
 /**
- * This path returns the favorites players that were saved by the logged-in user
+ * This path returns the favorites teams that were saved by the logged-in user
  */
+//WORKS GOOD
 router.get("/favoriteTeams", async (req, res, next) => {
   try {
     const user_id = req.session.username;

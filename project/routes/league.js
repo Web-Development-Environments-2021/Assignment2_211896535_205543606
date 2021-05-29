@@ -3,7 +3,10 @@ var router = express.Router();
 const league_utils = require("./utils/league_utils");
 const matches_utils = require("./utils/matches_utils")
 
-//CHECK
+/**
+ * This path return all details about leagu
+ */
+// should implement!!!!
 router.get("/getDetails", async (req, res, next) => {
   try {
     let full_details = [];
