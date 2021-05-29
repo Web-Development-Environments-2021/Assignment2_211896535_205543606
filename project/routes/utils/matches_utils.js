@@ -108,6 +108,16 @@ async function getFutureMatchesByTeam(team_id) {
   );
   return mathces;
 }
+
+async function checkIfMatchExist(match_id) {
+  const match = await DButils.execQuery(
+    `select * from Matches where match_id ='${match_id}'`
+  );
+  console.log(match);
+  if (match && match.length>0) return true;
+  else return false;
+}
+exports.checkIfMatchExist = checkIfMatchExist;
 exports.getFutureMatchesByTeam = getFutureMatchesByTeam;
 exports.getPastMatchesByTeam = getPastMatchesByTeam;
 exports.getFutureGames = getFutureGames;

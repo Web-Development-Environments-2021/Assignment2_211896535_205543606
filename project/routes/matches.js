@@ -54,6 +54,10 @@ router.post("/addMatch", async (req, res, next) => {
 //WORKS GOOD
 router.post("/addResult", async (req, res, next) => {
   try {
+    const match_exist = await matches_utils.checkIfMatchExist(req.body.match_id);
+    console.log(match_exist);
+    if (!match_exist)
+      throw { status: 409, message: "add result to a non existing match its impossible" };
     const result = await matches_utils.getResultById(req.body.match_id);
         if (result[0].result==null){
           await matches_utils.addResult(req.body.match_id,req.body.match_result);
