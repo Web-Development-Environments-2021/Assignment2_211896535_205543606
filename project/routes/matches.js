@@ -3,6 +3,7 @@ var express = require("express");
 var router = express.Router();
 const DButils = require("./utils/DButils");
 const matches_utils = require("./utils/matches_utils");
+const axios = require("axios");
 
 /**
  * Authenticate all incoming requests by middleware
@@ -44,6 +45,8 @@ router.post("/addMatch", async (req, res, next) => {
   }
 });
 
+
+
 //---->add Result<----//
 
 router.post("/addResult", async (req, res, next) => {
@@ -61,6 +64,45 @@ router.post("/addResult", async (req, res, next) => {
   }
 });
 
+//---->add Event Calendat<----//
+// should implement
+router.post("/addEventCalendar", async (req, res, next) => {
+  try {
+    none
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+router.get("/getAllMatches", async (req, res, next) => {
+  try {
+    const matches = await matches_utils.getAllMatches();
+    res.send(matches);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+router.get("/getAllMatchesSortByDate", async (req, res, next) => {
+  try {
+    const matches = await matches_utils.getAllMatchesSortByDate();
+    res.send(matches);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+router.get("/getAllMatchesSortByTeam", async (req, res, next) => {
+  try {
+    const matches = await matches_utils.getAllMatchesSortByTeam();
+    res.send(matches);
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;
 

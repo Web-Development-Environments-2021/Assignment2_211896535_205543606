@@ -109,9 +109,7 @@ router.get("/UpTo3favoriteMatches", async (req, res, next) => {
     const match_ids = await users_utils.getUpTo3favoriteMatches(user_id);
     let match_ids_array = [];
     match_ids.map((element) => match_ids_array.push(element.match_id)); //extracting the matches ids into array
-    let results = []
-    for (x in match_ids_array)
-      results.push(matches_utils.getMatchPreviewById(x));
+    const results = await matches_utils.getMatchesInfo(match_ids_array);
     res.status(200).send(results);
   } catch (error) {
     next(error);

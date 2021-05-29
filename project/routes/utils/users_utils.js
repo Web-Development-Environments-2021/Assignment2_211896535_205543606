@@ -50,6 +50,7 @@ async function getFavoriteTeams(user_id) {
   return team_ids;
 }
 
+exports.getUpTo3favoriteMatches = getUpTo3favoriteMatches;
 exports.markPlayerAsFavorite = markPlayerAsFavorite;
 exports.getFavoritePlayers = getFavoritePlayers;
 

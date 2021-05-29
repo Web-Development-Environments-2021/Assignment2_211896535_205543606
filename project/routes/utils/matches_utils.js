@@ -42,7 +42,7 @@ async function getMatchPreviewById(match_id) {
   const preview = await DButils.execQuery(
     `SELECT match_date,match_hour,home_team,away_team,stadium FROM Matches WHERE Matches.match_id ='${match_id}'`
   );
-  return preview;
+  return preview[0]; //only one game not an table
 }
 
 async function getMatchesInfo(matches_ids_list) {
@@ -56,6 +56,32 @@ async function getMatchesInfo(matches_ids_list) {
   return macthes_info;
 }
 
+async function getAllMatches() {
+  const mathces = await DButils.execQuery(
+    `select * from Matches`
+  );
+  return mathces;
+}
+
+async function getAllMatchesSortByDate() {
+  const mathces = await DButils.execQuery(
+    `select * from Matches ORDER BY match_date`
+  );
+  return mathces;
+}
+
+
+async function getAllMatchesSortByTeam() {
+  const mathces = await DButils.execQuery(
+    `select * from Matches ORDER BY home_team`
+  );
+  return mathces;
+}
+
+
+exports.getAllMatches=getAllMatches;
+exports.getAllMatchesSortByDate=getAllMatchesSortByDate;
+exports.getAllMatchesSortByTeam = getAllMatchesSortByTeam;
 exports.getMatchesInfo= getMatchesInfo;
 exports.getMatchPreviewById = getMatchPreviewById;
 exports.addResult = addResult;
