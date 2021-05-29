@@ -13,6 +13,7 @@ async function getClosetMatch(CurrentDate) {
   const closest_match = await DButils.execQuery(
     `SELECT TOP 1 match_id, MIN(Matches.match_hour) FROM Matches WHERE Matches.match_hour>='${CurrentDate}' GROUP BY Matches.match_id`
   );
+  if (closest_match==null) return null;
   return closest_match;
 }
 
@@ -40,7 +41,8 @@ async function getMatchPreviewById(match_id) {
   const preview = await DButils.execQuery(
     `SELECT match_date,match_hour,home_team,away_team,stadium FROM Matches WHERE Matches.match_id ='${match_id}'`
   );
-  return preview[0]; //only one game not an table
+  if (preview)
+    return preview[0]; //only one game not an table
 }
 
 async function getMatchesInfo(matches_ids_list) {
