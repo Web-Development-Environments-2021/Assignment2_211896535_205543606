@@ -87,7 +87,7 @@ async function getPastGames() {
 async function getFutureGames() {
   const today = new Date();
   const mathces = await DButils.execQuery(
-    `select * from Matches where match_hour>'${today.toISOString()}'`
+    `select match_id,match_date,match_hour,home_team,away_team,referee_id,stadium from Matches where match_hour>'${today.toISOString()}'`
   );
   return mathces;
 }
@@ -102,7 +102,7 @@ async function getPastMatchesByTeam(team_id) {
 async function getFutureMatchesByTeam(team_id) {
   const today = new Date();
   const mathces = await DButils.execQuery(
-    `select * from Matches where match_hour>'${today.toISOString()}' and (home_team='${team_id}' or away_team='${team_id}')`
+    `select match_id,match_date,match_hour,home_team,away_team,referee_id,stadium from Matches where match_hour>'${today.toISOString()}' and (home_team='${team_id}' or away_team='${team_id}')`
   );
   return mathces;
 }
