@@ -12,5 +12,14 @@ async function getReferees() {
     return referees;
 }
 
+
+async function checkIfRefereeExist(referee_id) {
+  const referee = await DButils.execQuery(
+    `select * from Referees where referee_id ='${referee_id}'`
+  );
+  if (referee && referee.length>0) return true;
+  else return false;
+}
+exports.checkIfRefereeExist = checkIfRefereeExist;
 exports.addReferee = addReferee;
 exports.getReferees = getReferees;

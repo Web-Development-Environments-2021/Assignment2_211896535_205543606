@@ -3,6 +3,7 @@ var express = require("express");
 var router = express.Router();
 const DButils = require("./utils/DButils");
 const matches_utils = require("./utils/matches_utils");
+const referees_utils = require("./utils/referees_utils");
 const axios = require("axios");
 
 /**
@@ -29,11 +30,18 @@ router.use(async function (req, res, next) {
 //WORKS GOOD
 router.post("/addMatch", async (req, res, next) => {
   try {
+
     //check if matchID already exist
     const matches = await matches_utils.getMatches();
         if (matches && matches.find((x) => x.match_id === req.body.match_id))
             throw { status: 409, message: "match_id taken" };
 
+    const referee_exist = await referees_utils.checkIfRefereeExist(req.body.match_referee);
+    if (!referee_exist)
+      throw { status: 409, message: "add a non existing referee to match its impossible" };
+    
+    if (req.body.home_team ===req.body.away_team)
+      throw { status: 409, message: "team cannot play against herself" };
     const match_id = req.body.match_id;
     const match_date = req.body.match_date;
     const match_hour = req.body.match_hour;
