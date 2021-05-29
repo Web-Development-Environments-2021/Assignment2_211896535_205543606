@@ -4,7 +4,7 @@ const axios = require("axios");
 
 async function addMatch(match_id,match_date,match_hour,home_team,away_team,match_referee,match_stadium) {
   await DButils.execQuery(
-    `insert into Matches values ('${match_id}','${match_date}','${match_hour}','${home_team}','${away_team}','${match_referee}','${match_stadium}',NULL,NULL)`
+    `insert into Matches values ('${match_id}','${match_date}','${match_hour}','${home_team}','${away_team}','${match_referee}','${match_stadium}',NULL)`
   );
 }
 
@@ -34,6 +34,12 @@ async function getResultById(match_id) {
 async function addResult(match_id,match_result) {
   await DButils.execQuery(
     `UPDATE Matches SET result = '${match_result}' WHERE match_id = '${match_id}'`
+  );
+}
+
+async function addEventCalendar(event_id,event_date,event_hour,event_minute,event_description,match_id) {
+  await DButils.execQuery(
+    `insert into EventsCalendar values ('${event_id}','${event_date}','${event_hour}','${event_minute}','${event_description}','${match_id}')`
   );
 }
 
@@ -132,3 +138,4 @@ exports.getResultById = getResultById;
 exports.getMatches = getMatches;
 exports.getClosetMatch = getClosetMatch;
 exports.addMatch = addMatch;
+exports.addEventCalendar = addEventCalendar;

@@ -63,7 +63,6 @@ router.post("/addMatch", async (req, res, next) => {
 router.post("/addResult", async (req, res, next) => {
   try {
     const match_exist = await matches_utils.checkIfMatchExist(req.body.match_id);
-    console.log(match_exist);
     if (!match_exist)
       throw { status: 409, message: "add result to a non existing match its impossible" };
     const result = await matches_utils.getResultById(req.body.match_id);
@@ -82,10 +81,14 @@ router.post("/addResult", async (req, res, next) => {
 /**
  * This path add a event calendar to a match by body params
  */
-// should implement!!!!
 router.post("/addEventCalendar", async (req, res, next) => {
   try {
-    none
+    //check if event_id exist!!!!!!!!!!!!! 
+    const match_exist = await matches_utils.checkIfMatchExist(req.body.match_id);
+    if (!match_exist)
+      throw { status: 409, message: "add event to a non existing match its impossible" };
+    await matches_utils.addEventCalendar(req.body.event_id,req.body.event_date,req.body.event_hour,req.body.event_minute,req.body.event_description,req.body.match_id);
+    res.status(201).send("event successfully updateded");
   } catch (error) {
     next(error);
   }
