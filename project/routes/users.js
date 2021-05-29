@@ -70,9 +70,17 @@ router.get("/favoritePlayers", async (req, res, next) => {
     const user_id = req.session.username;
     const match_id = req.body.matchId;
 
+    const all_matches = await matches_utils.getAllMatches();
+    if (all_matches && all_matches.find((x) => parseInt(x.match_id) === parseInt(match_id))){
+      let nothing = true;
+    }
+    else  throw { status: 409, message: "match_id not exist" };
+
     const match_ids = await users_utils.getFavoriteMatches(user_id);
     if (match_ids && match_ids.find((x) => parseInt(x.match_id) === parseInt(match_id)))
             throw { status: 409, message: "macth_id already exist" };
+
+    
     console.log("ben");
     await users_utils.markMatchAsFavorite(user_id, match_id);
     res.status(201).send("The match successfully saved as favorite");
