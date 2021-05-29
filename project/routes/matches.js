@@ -104,5 +104,23 @@ router.get("/getAllMatchesSortByTeam", async (req, res, next) => {
   }
 });
 
+
+router.get("/getPastMatches", async (req, res, next) => {
+  try {
+    const matches = await matches_utils.getPastGames();
+    res.send(matches);
+  } catch (error) {
+    next(error);
+  }
+});
+router.get("/getFutureMatches", async (req, res, next) => {
+  try {
+    const matches = await matches_utils.getFutureGames();
+    res.send(matches);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
 

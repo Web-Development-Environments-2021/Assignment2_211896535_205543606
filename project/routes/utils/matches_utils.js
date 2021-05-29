@@ -79,6 +79,22 @@ async function getAllMatchesSortByTeam() {
 }
 
 
+async function getPastGames() {
+  const today = new Date();
+  const mathces = await DButils.execQuery(
+    `select * from Matches where match_hour<='${today.toISOString()}'`
+  );
+  return mathces;
+}
+async function getFutureGames() {
+  const today = new Date();
+  const mathces = await DButils.execQuery(
+    `select * from Matches where match_hour>'${today.toISOString()}'`
+  );
+  return mathces;
+}
+exports.getFutureGames = getFutureGames;
+exports.getPastGames = getPastGames;
 exports.getAllMatches=getAllMatches;
 exports.getAllMatchesSortByDate=getAllMatchesSortByDate;
 exports.getAllMatchesSortByTeam = getAllMatchesSortByTeam;
