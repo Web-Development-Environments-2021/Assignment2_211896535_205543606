@@ -30,6 +30,26 @@ async function getTeamsInfo(team_ids_array){
   let teams_info = await Promise.all(promises);
   return teams_info;
 }
-    
+
+
+
+async function getCoachByTeam(team_id){
+  try{
+    const team = await axios.get(
+      `${api_domain}/teams/${team_id}`,
+      {
+        params: {
+          api_token: process.env.api_token,
+          include: "coach"
+        },
+      }
+    );
+    return team.data.data.coach;
+  }
+  catch{
+    return "team not found in API";
+  }  
+}
+exports.getCoachByTeam = getCoachByTeam;
 exports.getTeamNameByID = getTeamNameByID;
 exports.getTeamsInfo =getTeamsInfo;

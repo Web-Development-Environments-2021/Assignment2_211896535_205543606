@@ -92,6 +92,22 @@ async function getFutureGames() {
   return mathces;
 }
 
+async function getPastMatchesByTeam(team_id) {
+  const today = new Date();
+  const mathces = await DButils.execQuery(
+    `select * from Matches where match_hour<='${today.toISOString()}' and (home_team='${team_id}' or away_team='${team_id}')`
+  );
+  return mathces;
+}
+async function getFutureMatchesByTeam(team_id) {
+  const today = new Date();
+  const mathces = await DButils.execQuery(
+    `select * from Matches where match_hour>'${today.toISOString()}' and (home_team='${team_id}' or away_team='${team_id}')`
+  );
+  return mathces;
+}
+exports.getFutureMatchesByTeam = getFutureMatchesByTeam;
+exports.getPastMatchesByTeam = getPastMatchesByTeam;
 exports.getFutureGames = getFutureGames;
 exports.getPastGames = getPastGames;
 exports.getAllMatches=getAllMatches;
