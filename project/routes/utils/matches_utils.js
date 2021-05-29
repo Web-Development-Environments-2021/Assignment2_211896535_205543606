@@ -11,7 +11,7 @@ async function addMatch(match_id,match_date,match_hour,home_team,away_team,match
 //should fix
 async function getClosetMatch(CurrentDate) {
   const closest_match = await DButils.execQuery(
-    `SELECT TOP 1 match_id, MIN(match_hour) FROM Matches GROUP BY match_id`
+    `SELECT TOP 1 match_id, MIN(Matches.match_hour) FROM Matches WHERE Matches.match_hour>='${CurrentDate}' GROUP BY Matches.match_id`
   );
   return closest_match;
 }
