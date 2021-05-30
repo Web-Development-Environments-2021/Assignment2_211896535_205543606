@@ -4,6 +4,7 @@ var router = express.Router();
 const DButils = require("./utils/DButils");
 const matches_utils = require("./utils/matches_utils");
 const referees_utils = require("./utils/referees_utils");
+const users_utils = require("./utils/users_utils");
 const axios = require("axios");
 
 /**
@@ -30,7 +31,8 @@ router.use(async function (req, res, next) {
 //WORKS GOOD
 router.post("/addMatch", async (req, res, next) => {
   try {
-
+    if(req.session.username!=="admin")
+    throw { status: 401, message: "not admin, action not allowed" };
     //check if matchID already exist
     const matches = await matches_utils.getMatches();
         if (matches && matches.find((x) => x.match_id === req.body.match_id))
@@ -62,6 +64,8 @@ router.post("/addMatch", async (req, res, next) => {
 //WORKS GOOD
 router.post("/addResult", async (req, res, next) => {
   try {
+    if(req.session.username!=="admin")
+    throw { status: 401, message: "not admin, action not allowed" };
     const match_exist = await matches_utils.checkIfMatchExist(req.body.match_id);
     if (!match_exist)
       throw { status: 409, message: "add result to a non existing match its impossible" };
@@ -83,7 +87,12 @@ router.post("/addResult", async (req, res, next) => {
  */
 router.post("/addEventCalendar", async (req, res, next) => {
   try {
-    //check if event_id exist!!!!!!!!!!!!! 
+    if(req.session.username!=="admin")
+    throw { status: 401, message: "not admin, action not allowed" };
+    //check if event_id exist!!!!!!!!!!!!!
+    const event_exist = await matches_utils.checkIfEventExist(req.body.event_id);
+    if (event_exist)
+      throw { status: 409, message: "event_id taken" };
     const match_exist = await matches_utils.checkIfMatchExist(req.body.match_id);
     if (!match_exist)
       throw { status: 409, message: "add event to a non existing match its impossible" };
