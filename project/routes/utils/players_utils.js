@@ -109,6 +109,24 @@ async function getPlayerPreviewById(player_id){
     return ("player not found in API");
   }
 }
+
+async function checkIfPlayerExist(player_id) {
+  try{
+    await axios.get(
+      `${api_domain}/players/${player_id}`,
+      {
+        params: {
+          api_token: process.env.api_token
+        },
+      }
+    );
+    return true;
+  }
+  catch{
+    return false;
+  }
+}
+exports.checkIfPlayerExist = checkIfPlayerExist;
 exports.getPlayerPreviewById = getPlayerPreviewById;
 exports.getPlayersByTeam = getPlayersByTeam;
 exports.getPlayersInfo = getPlayersInfo;
