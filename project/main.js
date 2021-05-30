@@ -59,6 +59,7 @@ const players = require("./routes/players");
 const coaches = require("./routes/coaches");
 const matches = require("./routes/matches");
 const referees = require("./routes/referees");
+const search = require("./routes/search");
 
 //#endregion
 
@@ -92,6 +93,7 @@ app.use("/teams", teams);
 app.use("/coaches",coaches);
 app.use("/matches",matches);
 app.use("/referees",referees);
+app.use("/search", search);
 app.use(auth);
 
 // ---> for displaying errors

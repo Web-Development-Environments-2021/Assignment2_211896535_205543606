@@ -166,7 +166,7 @@ paths:
     get:
       tags:
         - Users
-        - Matches
+        - matches
       summary: Return the favorite matches that were saved by user
       parameters:
       responses:
@@ -184,14 +184,14 @@ paths:
       summary: save match in the favorites list of a user
       tags:
         - Users
-        - Matches
+        - matches
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-               matchId:
+                matchId:
                   type: integer
                   description: matches's id which the user saved
                   example: 33
@@ -204,7 +204,7 @@ paths:
     get:
       tags:
         - Users
-        - Matches
+        - matches
       summary: Returns up to 3 favorites matches that were saved by the logged-in user
       parameters:
       responses:
@@ -333,36 +333,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                match_id:
-                  type: integer
-                  description: the match id to add
-                  example: 23
-                match_date:
-                  type: date
-                  description: the date of the match
-                  example: 25/04/2021
-                match_hour:
-                  type: dateTime
-                  description: the date and exact hour of the match
-                  example: 25/04/2021 21:30:00
-                home_team:
-                  type: string
-                  description: 3 letters of the home team
-                  example: FCB
-                away_team:
-                  type: string
-                  description: 3 letters of the away team
-                  example: RMA
-                match_referee:
-                  type: integer
-                  description: id of the match referee
-                  example: 21323
-                match_stadium:
-                  type: string
-                  description: the name of the match's stadium
-                  example: Santiago Bernabeu
+              $ref: "#/components/schemas/Match"
       responses:
         "200":
           description: Succesfully added this match
@@ -751,11 +722,11 @@ components:
         match_date:
           type: date
           description: the date of the match
-          example: 25/04/2021
+          example: "2021-04-21"
         match_hour:
           type: dateTime
           description: the date and exact hour of the match
-          example: 25/04/2021 21:30:00
+          example: "2021-04-21 21:30:00"
         home_team:
           type: string
           description: 3 letters of the home team
@@ -764,19 +735,27 @@ components:
           type: string
           description: 3 letters of the away team
           example: RMA
-        match_referee:
+        referee_id:
           type: integer
           description: id of the match referee
-          example: 21323
-        match_stadium:
+          example: 2
+        stadium:
           type: string
           description: the name of the match's stadium
           example: Santiago Bernabeu
+        result:
+          type: string
+          description: the match's result
+          example: 3-2
+        event_calendar:
+          type: string
+          description: event calendar
+          example: XML
     MatchPreview:
       type: object
       properties:
         match_date:
-          type: date
+          type: dateTime
           description: the date of the match
           example: 25/04/2021
         match_hour:

@@ -33,7 +33,7 @@ async function getPlayersInfo(players_ids_list) {
     return extractRelevantPlayerData(players_info);
   }
   catch{
-    return "ono or more of the players do not exist!"
+    return "one or more of the players do not exist!"
   }
 
 }

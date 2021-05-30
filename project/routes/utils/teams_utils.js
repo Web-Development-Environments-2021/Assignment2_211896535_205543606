@@ -1,7 +1,6 @@
 const axios = require("axios");
 const api_domain = "https://soccer.sportmonks.com/api/v2.0";
 
-
 async function getTeamNameByID(team_id){
   try{
     const team = await axios.get(
