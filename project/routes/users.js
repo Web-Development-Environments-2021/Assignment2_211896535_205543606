@@ -31,6 +31,8 @@ router.post("/favoritePlayers", async (req, res, next) => {
   try {
     const user_id = req.session.username;
     const player_id = req.body.playerId;
+    if(!await players_utils.checkIfPlayerExist(player_id))
+      throw { status: 403, message: "player_id not exist" };
 
     const player_ids = await users_utils.getFavoritePlayers(user_id);
     if (player_ids && player_ids.find((x) => parseInt(x.player_id) === parseInt(player_id)))
@@ -133,6 +135,10 @@ router.get("/UpTo3favoriteMatches", async (req, res, next) => {
   try {
     const user_id = req.session.username;
     const team_id = req.body.teamId;
+    
+    if(!await teams_utils.checkIfTeamExist(team_id))
+      throw { status: 403, message: "team_id not exist" };
+
     const team_ids = await users_utils.getFavoriteTeams(user_id);
     if (team_ids && team_ids.find((x) => parseInt(x.team_id) === parseInt(team_id)))
             throw { status: 409, message: "team_id already exist" };
