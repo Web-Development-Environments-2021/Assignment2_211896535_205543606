@@ -1,6 +1,7 @@
 const axios = require("axios");
 const api_domain = "https://soccer.sportmonks.com/api/v2.0";
 
+
 async function getTeamNameByID(team_id){
   try{
     const team = await axios.get(
@@ -49,24 +50,6 @@ async function getCoachByTeam(team_id){
     return "team not found in API";
   }  
 }
-
-async function checkIfTeamExist(team_id) {
-  try{
-    await axios.get(
-      `${api_domain}/teams/${team_id}`,
-      {
-        params: {
-          api_token: process.env.api_token
-        },
-      }
-    );
-    return true;
-  }
-  catch{
-    return false;
-  }
-}
-exports.checkIfTeamExist = checkIfTeamExist;
 exports.getCoachByTeam = getCoachByTeam;
 exports.getTeamNameByID = getTeamNameByID;
 exports.getTeamsInfo =getTeamsInfo;

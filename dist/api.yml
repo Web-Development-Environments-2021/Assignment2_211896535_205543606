@@ -12,6 +12,7 @@ tags:
   - name: Teams
   - name: matches
   - name: referees
+  - name: search
 paths:
   /Register:
     post:
@@ -523,6 +524,52 @@ paths:
           description: Succesfully added referee to system
         "404":
           description: Could not add referee due to an error
+  /search/players/{player_query}:
+    get:
+      summary: search for players on the system
+      description: searching players on the system
+      tags:
+        - search
+        - Players
+      parameters:
+        - in: path
+          name: player_query
+          description: player's name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: players results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlayerResult"
+        "404":
+          description: There seems to be a problem searching players
+  /search/teams/{team_query}:
+    get:
+      summary: search for players on the system
+      description: searching players on the system
+      tags:
+        - search
+        - Teams
+      parameters:
+        - in: path
+          name: team_query
+          description: team's name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: teams results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TeamResult"
+        "404":
+          description: There seems to be a problem searching teams
 components:
   schemas:
     User:
@@ -656,6 +703,30 @@ components:
           type: string
           description: player's team name
           example: København
+    PlayerResult:
+      type: object
+      properties:
+        player_id:
+          type: string
+          description: player's id
+          example: 5627
+        player_full_name:
+          type: string
+          description: player name
+          example: Mikkel Andersen
+        player_team_name:
+          type: string
+          description: team name
+          example: Midtjylland
+        player_image:
+          type: string
+          description: player's image
+          format: URL
+          example: https://cdn.sportmonks.com/images/soccer/players/27/5627.png
+        player_position:
+          type: string
+          description: player's position on the team
+          example: Goalkeeper
     Coach:
       type: object
       properties:
@@ -712,6 +783,22 @@ components:
           items:
             type: object
             $ref: "#/components/schemas/PlayerPreview"
+    TeamResult:
+      type: object
+      properties:
+        team_id:
+          type: integer
+          description: team's id
+          example: 2650
+        team_name:
+          type: string
+          description: team's name
+          example: Lyngby
+        team_logo:
+          type: string
+          description: team's logo path
+          format: URL
+          example: https://cdn.sportmonks.com/images//soccer/teams/26/2650.png
     Match:
       type: object
       properties:
