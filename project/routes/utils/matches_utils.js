@@ -1,10 +1,11 @@
 const DButils = require("./DButils");
 const axios = require("axios");
+const { nextTick } = require("process");
 
 
-async function addMatch(match_id,match_date,match_hour,home_team,away_team,match_referee,match_stadium) {
+async function addMatch(match_id,match_date,match_hour,home_team,away_team,referee_id,stadium) {
   await DButils.execQuery(
-    `insert into Matches values ('${match_id}','${match_date}','${match_hour}','${home_team}','${away_team}','${match_referee}','${match_stadium}',NULL, NULL)`
+    `insert into Matches values ('${match_id}','${match_date}','${match_hour}','${home_team}','${away_team}','${referee_id}','${stadium}',NULL, NULL)`
   );
 }
 
@@ -29,6 +30,17 @@ async function getResultById(match_id) {
     `SELECT result FROM Matches WHERE Matches.match_id ='${match_id}'`
   );
   return result;
+}
+
+/**
+ * This function gets a match id and returns all of it's events 
+ * @param {*} match_id 
+ */
+async function getEventsForMatch(match_id){
+  const events = await DButils.execQuery(
+    `SELECT * FROM EventsCalendar WHERE match_id = '${match_id}'`
+  );
+  return events;
 }
 
 async function addResult(match_id,match_result) {
@@ -62,18 +74,47 @@ async function getMatchesInfo(matches_ids_list) {
   return macthes_info;
 }
 
-async function getAllMatches() {
-  const mathces = await DButils.execQuery(
-    `select * from Matches`
-  );
-  return mathces;
+/**
+ * This function gets a list of matches and return the matches and events.
+ */
+async function getMatchesAndEvents(matches){
+  let matchesAndEvents = [];
+  try{
+    await Promise.all(matches.map(async (match)=>{
+      let events = await getEventsForMatch(match.match_id);
+      if (events != null && events.length > 0){
+        matchesAndEvents.push(
+        {
+          match: match,
+          match_events: events
+        }
+      )}
+      else{
+        matchesAndEvents.push(
+          {
+            match: match
+          }
+      )}
+    }));
+    return matchesAndEvents;
+  }
+  catch(error){
+    next(error);
+  }
+}
+
+async function getAllMatches() {  
+    const matches = await DButils.execQuery(
+      `select * from Matches`
+    );
+    return await getMatchesAndEvents(matches);
 }
 
 async function getAllMatchesSortByDate() {
   const mathces = await DButils.execQuery(
     `select * from Matches ORDER BY match_date`
   );
-  return mathces;
+  return await getMatchesAndEvents(matches);
 }
 
 
@@ -81,17 +122,17 @@ async function getAllMatchesSortByTeam() {
   const mathces = await DButils.execQuery(
     `select * from Matches ORDER BY home_team`
   );
-  return mathces;
+  return await getMatchesAndEvents(matches);
 }
-
 
 async function getPastGames() {
   const today = new Date();
   const mathces = await DButils.execQuery(
     `select * from Matches where match_hour<='${today.toISOString()}'`
   );
-  return mathces;
+  return await getMatchesAndEvents(matches);
 }
+
 async function getFutureGames() {
   const today = new Date();
   const mathces = await DButils.execQuery(
@@ -105,8 +146,9 @@ async function getPastMatchesByTeam(team_id) {
   const mathces = await DButils.execQuery(
     `select * from Matches where match_hour<='${today.toISOString()}' and (home_team='${team_id}' or away_team='${team_id}')`
   );
-  return mathces;
+  return await getMatchesAndEvents(matches);
 }
+
 async function getFutureMatchesByTeam(team_id) {
   const today = new Date();
   const mathces = await DButils.execQuery(
@@ -149,3 +191,5 @@ exports.getMatches = getMatches;
 exports.getClosetMatch = getClosetMatch;
 exports.addMatch = addMatch;
 exports.addEventCalendar = addEventCalendar;
+exports.getEventsForMatch = getEventsForMatch;
+exports.getMatchesAndEvents = getMatchesAndEvents;

@@ -38,7 +38,7 @@ router.post("/addMatch", async (req, res, next) => {
         if (matches && matches.find((x) => x.match_id === req.body.match_id))
             throw { status: 409, message: "match_id taken" };
 
-    const referee_exist = await referees_utils.checkIfRefereeExist(req.body.match_referee);
+    const referee_exist = await referees_utils.checkIfRefereeExist(req.body.referee_id);
     if (!referee_exist)
       throw { status: 409, message: "add a non existing referee to match its impossible" };
     
@@ -49,9 +49,9 @@ router.post("/addMatch", async (req, res, next) => {
     const match_hour = req.body.match_hour;
     const home_team = req.body.home_team;
     const away_team = req.body.away_team;
-    const match_referee = req.body.match_referee;
-    const match_stadium = req.body.match_stadium;
-    await matches_utils.addMatch(match_id,match_date,match_hour,home_team,away_team,match_referee,match_stadium);
+    const referee_id = req.body.referee_id;
+    const stadium = req.body.stadium;
+    await matches_utils.addMatch(match_id,match_date,match_hour,home_team,away_team,referee_id,stadium);
     res.status(201).send("The Match successfully added");
   } catch (error) {
     next(error);

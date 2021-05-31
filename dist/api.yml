@@ -131,10 +131,9 @@ paths:
         - Users
         - Players
       summary: Return the favorite players that were saved by user
-      parameters:
       responses:
         "200":
-          description: data about the user's favorites players returned
+          description: players results
           content:
             application/json:
               schema:
@@ -169,7 +168,6 @@ paths:
         - Users
         - matches
       summary: Return the favorite matches that were saved by user
-      parameters:
       responses:
         "200":
           description: data about the user's favorites matches returned
@@ -178,7 +176,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/MatchPreview"
+                  $ref: "#/components/schemas/PastMatch"
         "401":
           description: user is not authorized
     post:
@@ -216,7 +214,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/MatchPreview"
+                  $ref: "#/components/schemas/PastMatch"
         "401":
           description: user is not authorized
   /users/favoriteTeams:
@@ -225,7 +223,6 @@ paths:
         - Users
         - Teams
       summary: Return the favorite teams that were saved by user
-      parameters:
       responses:
         "200":
           description: data about the user's favorites teams returned
@@ -329,12 +326,11 @@ paths:
       description: adding matches
       tags:
         - matches
-      parameters:
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Match"
+              $ref: "#/components/schemas/PastMatch"
       responses:
         "200":
           description: Succesfully added this match
@@ -346,7 +342,6 @@ paths:
       description: adding results to matches
       tags:
         - matches
-      parameters:
       requestBody:
         content:
           application/json:
@@ -372,37 +367,11 @@ paths:
       description: adding event calendars to matches
       tags:
         - matches
-      parameters:
       requestBody:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                match_id:
-                  type: integer
-                  description: the match id to add result to
-                  example: 23
-                event_id:
-                  type: integer
-                  description: the event's id to add to the match
-                  example: 1
-                event_date:
-                  type: date
-                  description: the event's date to add to the match
-                  example: 11-11-2021
-                event_hour:
-                  type: dateTime
-                  description: the event's date and time to add to the match
-                  exmple: 11-11-2021 21:37:57
-                event_minute:
-                  type: int
-                  description: the even'ts minute it happened on the match
-                  example: 67
-                event_description:
-                  type: string
-                  description: the event's description
-                  example: goal
+              $ref: "#/components/schemas/Event"
       responses:
         "200":
           description: Succesfully added event to the match
@@ -414,7 +383,6 @@ paths:
       description: returns an array with all the matches in the system
       tags:
         - matches
-      parameters:
       responses:
         "200":
           description: Succesfully returned all the matches
@@ -423,7 +391,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Match"
+                  $ref: "#/components/schemas/PastMatch"
         "404":
           description: Could not get matches
   /matches/getAllMatchesSortByDate:
@@ -432,7 +400,6 @@ paths:
       description: returns an array with all the matches in the system sorted by date
       tags:
         - matches
-      parameters:
       responses:
         "200":
           description: Succesfully returned all the matches sorted by date
@@ -441,7 +408,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Match"
+                  $ref: "#/components/schemas/PastMatch"
         "404":
           description: Could not get matches sorted by date
   /matches/getAllMatchesSortByTeam:
@@ -450,7 +417,6 @@ paths:
       description: returns an array with all the matches in the system sorted by team
       tags:
         - matches
-      parameters:
       responses:
         "200":
           description: Succesfully returned all the matches sorted by team
@@ -459,7 +425,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Match"
+                  $ref: "#/components/schemas/PastMatch"
         "404":
           description: Could not get matches sorted by team
   /matches/getPastMatches:
@@ -468,7 +434,6 @@ paths:
       description: returns an array with all the past matches in the system
       tags:
         - matches
-      parameters:
       responses:
         "200":
           description: Succesfully returned all the past matches
@@ -477,7 +442,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Match"
+                  $ref: "#/components/schemas/PastMatch"
         "404":
           description: Could not get past matches
   /matches/getFutureMatches:
@@ -486,7 +451,6 @@ paths:
       description: returns an array with all the future matches in the system
       tags:
         - matches
-      parameters:
       responses:
         "200":
           description: Succesfully returned all the future matches
@@ -495,7 +459,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Match"
+                  $ref: "#/components/schemas/FutureMatch"
         "404":
           description: Could not get future matches
   /referees/addReferee:
@@ -504,7 +468,6 @@ paths:
       description: adding referees to the system
       tags:
         - referees
-      parameters:
       requestBody:
         content:
           application/json:
@@ -574,6 +537,7 @@ components:
   schemas:
     User:
       type: object
+      description: Model containing user info
       properties:
         username:
           maxLength: 8
@@ -612,7 +576,7 @@ components:
           type: string
           description: URL for the user's image
           example: https://cloudinary.com/
-      description: Model containing user info
+      
     LoginScheme:
       type: object
       properties:
@@ -696,7 +660,7 @@ components:
           format: URL
           example: https://cdn.sportmonks.com/images/soccer/players/11/84587.png
         position:
-          type: integer
+          type: string
           description: player's position in team
           example: 1
         team_name:
@@ -781,7 +745,6 @@ components:
         players:
           type: array
           items:
-            type: object
             $ref: "#/components/schemas/PlayerPreview"
     TeamResult:
       type: object
@@ -799,46 +762,49 @@ components:
           description: team's logo path
           format: URL
           example: https://cdn.sportmonks.com/images//soccer/teams/26/2650.png
-    Match:
+    PastMatch:
       type: object
       properties:
-        match_id:
-          type: integer
-          description: the match id to add
-          example: 23
-        match_date:
-          type: date
-          description: the date of the match
-          example: "2021-04-21"
-        match_hour:
-          type: dateTime
-          description: the date and exact hour of the match
-          example: "2021-04-21 21:30:00"
-        home_team:
-          type: string
-          description: 3 letters of the home team
-          example: FCB
-        away_team:
-          type: string
-          description: 3 letters of the away team
-          example: RMA
-        referee_id:
-          type: integer
-          description: id of the match referee
-          example: 2
-        stadium:
-          type: string
-          description: the name of the match's stadium
-          example: Santiago Bernabeu
-        result:
-          type: string
-          description: the match's result
-          example: 3-2
-        event_calendar:
-          type: string
-          description: event calendar
-          example: XML
-    MatchPreview:
+        match:
+          type: object
+          properties:
+            match_id:
+              type: integer
+              description: the match id to add
+              example: 23
+            match_date:
+              type: date
+              description: the date of the match
+              example: "2021-04-21"
+            match_hour:
+              type: dateTime
+              description: the date and exact hour of the match
+              example: "2021-04-21 21:30:00"
+            home_team:
+              type: string
+              description: 3 letters of the home team
+              example: FCB
+            away_team:
+              type: string
+              description: 3 letters of the away team
+              example: RMA
+            referee_id:
+              type: integer
+              description: id of the match referee
+              example: 2
+            stadium:
+              type: string
+              description: the name of the match's stadium
+              example: Santiago Bernabeu
+            result:
+              type: string
+              description: the result of the game, left is home team's score and right is away team's score
+              example: 3-2
+          match_events:
+            type: array
+            items:
+              $ref: "#/components/schemas/league"
+    FutureMatch:
       type: object
       properties:
         match_date:
@@ -857,7 +823,34 @@ components:
           type: string
           description: 3 letters of the away team
           example: RMA
-        match_stadium:
+        stadium:
           type: string
           description: the name of the match's stadium
           example: Santiago Bernabeu
+    Event:
+      type: object
+      properties:
+        match_id:
+          type: integer
+          description: the match id to add result to
+          example: 23
+        event_id:
+          type: integer
+          description: the event's id to add to the match
+          example: 1
+        event_date:
+          type: date
+          description: the event's date to add to the match
+          example: 11-11-2021
+        event_hour:
+          type: dateTime
+          description: the event's date and time to add to the match
+          exmple: 11-11-2021 21:37:57
+        event_minute:
+          type: int
+          description: the even'ts minute it happened on the match
+          example: 67
+        event_description:
+          type: string
+          description: the event's description
+          example: goal

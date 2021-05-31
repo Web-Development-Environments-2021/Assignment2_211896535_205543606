@@ -136,8 +136,8 @@ router.get("/UpTo3favoriteMatches", async (req, res, next) => {
     const user_id = req.session.username;
     const team_id = req.body.teamId;
     
-    if(!await teams_utils.checkIfTeamExist(team_id))
-      throw { status: 403, message: "team_id not exist" };
+    //if(!await teams_utils.checkIfTeamExist(team_id))
+      //throw { status: 403, message: "team_id not exist" };
 
     const team_ids = await users_utils.getFavoriteTeams(user_id);
     if (team_ids && team_ids.find((x) => parseInt(x.team_id) === parseInt(team_id)))
