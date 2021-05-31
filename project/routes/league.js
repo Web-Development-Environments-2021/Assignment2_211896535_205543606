@@ -12,7 +12,7 @@ router.get("/getDetails", async (req, res, next) => {
     const league_details = await league_utils.getLeagueDetails();
     //should add future games of user from OUR DB
     const today = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    const closest_match = await matches_utils.getClosetMatch(today);
+    const closest_match = await matches_utils.getClosestMatch(today);
     console.log(closest_match);
     full_details.push(league_details);
     if (closest_match.length!=null){

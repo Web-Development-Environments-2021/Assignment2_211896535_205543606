@@ -28,7 +28,6 @@ router.use(async function (req, res, next) {
 /**
  * This path add a match to MATCHES table by body params
  */
-//WORKS GOOD
 router.post("/addMatch", async (req, res, next) => {
   try {
     if(req.session.username!=="admin")
@@ -61,7 +60,6 @@ router.post("/addMatch", async (req, res, next) => {
 /**
  * This path add a result to a match by body params
  */
-//WORKS GOOD
 router.post("/addResult", async (req, res, next) => {
   try {
     if(req.session.username!=="admin")
@@ -119,7 +117,6 @@ router.get("/getAllMatches", async (req, res, next) => {
 /**
  * This path return all the matchs in the system sort by date
  */
-//WORKS GOOD
 router.get("/getAllMatchesSortByDate", async (req, res, next) => {
   try {
     const matches = await matches_utils.getAllMatchesSortByDate();
@@ -132,7 +129,6 @@ router.get("/getAllMatchesSortByDate", async (req, res, next) => {
 /**
  * This path return all the matchs in the system sort by team
  */
-//WORKS GOOD
 router.get("/getAllMatchesSortByTeam", async (req, res, next) => {
   try {
     const matches = await matches_utils.getAllMatchesSortByTeam();
@@ -145,7 +141,6 @@ router.get("/getAllMatchesSortByTeam", async (req, res, next) => {
 /**
  * This path return all the  past matchs
  */
-//WORKS GOOD
 router.get("/getPastMatches", async (req, res, next) => {
   try {
     const matches = await matches_utils.getPastGames();
@@ -157,7 +152,6 @@ router.get("/getPastMatches", async (req, res, next) => {
 /**
  * This path return all the  future matchs
  */
-//WORKS GOOD
 router.get("/getFutureMatches", async (req, res, next) => {
   try {
     const matches = await matches_utils.getFutureGames();

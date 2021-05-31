@@ -510,6 +510,64 @@ paths:
                 $ref: "#/components/schemas/PlayerResult"
         "404":
           description: There seems to be a problem searching players
+  /search/playersByPos/{player_query}/{position_query}:
+    get:
+      summary: search for players on the system filter by position
+      description: searching players on the system filter by position name
+      tags:
+        - search
+        - Players
+      parameters:
+        - in: path
+          name: player_query
+          description: player's name
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: position_query
+          description: position's name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: players results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlayerResult"
+        "404":
+          description: There seems to be a problem searching players
+  /search/playersByTeam/{player_query}/{team_query}:
+    get:
+      summary: search for players on the system filter by team
+      description: searching players on the system filter by team name
+      tags:
+        - search
+        - Players
+      parameters:
+        - in: path
+          name: player_query
+          description: player's name
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: team_query
+          description: team's name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: players results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlayerResult"
+        "404":
+          description: There seems to be a problem searching players
   /search/teams/{team_query}:
     get:
       summary: search for players on the system
