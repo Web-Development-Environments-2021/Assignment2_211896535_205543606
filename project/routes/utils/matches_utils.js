@@ -1,6 +1,6 @@
 const DButils = require("./DButils");
-const axios = require("axios");
-const { nextTick } = require("process");
+//const axios = require("axios");
+//const { nextTick } = require("process");
 
 /**
  * This function adds a new match to the Matches table
@@ -241,7 +241,20 @@ async function checkIfMatchExist(match_id) {
   if (match && match.length>0) return true;
   else return false;
 }
+async function checkIfMatchFuture(match_id){
+  const match_hour = await DButils.execQuery(
+    `select match_hour from Matches where match_id ='${match_id}'`
+  ); 
+  const today = new Date();
+  const match_date = new Date(match_hour[0].match_hour);
+    if (match_date > today)
+      return true;
+    else 
+      return false;
+  
+}
 
+exports.checkIfMatchFuture=checkIfMatchFuture;
 exports.checkIfEventExist = checkIfEventExist;
 exports.checkIfMatchExist = checkIfMatchExist;
 exports.getFutureMatchesByTeam = getFutureMatchesByTeam;

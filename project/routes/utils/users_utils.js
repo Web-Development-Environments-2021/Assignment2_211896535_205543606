@@ -1,4 +1,5 @@
 const DButils = require("./DButils");
+const matches_utils = require("./matches_utils");
 
 async function markPlayerAsFavorite(user_id, player_id) {
   await DButils.execQuery(
@@ -23,7 +24,12 @@ async function getFavoriteMatches(user_id) {
   const match_ids = await DButils.execQuery(
     `select match_id from FavoriteMatches where username='${user_id}'`
   );
-  return match_ids;
+  let future_matches =[];
+  for (match_id in match_ids){
+    if (await matches_utils.checkIfMatchFuture(match_ids[match_id].match_id))
+      future_matches.push(match_ids[match_id].match_id)
+  } 
+  return future_matches;
 }
 
 async function getUpTo3favoriteMatches(user_id) {

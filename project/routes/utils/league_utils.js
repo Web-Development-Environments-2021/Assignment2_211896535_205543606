@@ -6,7 +6,8 @@ const LEAGUE_ID = 271;
  * This function gets the league details
  */
 async function getLeagueDetails() {
-  const league = await axios.get(`${api_domain}/leagues/${LEAGUE_ID}`,
+  try{
+    const league = await axios.get(`${api_domain}/leagues/${LEAGUE_ID}`,
     {
       params: {
         include: "season",
@@ -27,5 +28,10 @@ async function getLeagueDetails() {
     current_stage_name: stage.data.data.name,
     // next game details should come from DB
   };
+  }
+  catch{
+    return "something went wrong with league details"
+  }
+
 }
 exports.getLeagueDetails = getLeagueDetails;

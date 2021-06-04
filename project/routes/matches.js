@@ -87,7 +87,6 @@ router.post("/addEventCalendar", async (req, res, next) => {
   try {
     if(req.session.username!=="admin")
     throw { status: 401, message: "not admin, action not allowed" };
-    //check if event_id exist!!!!!!!!!!!!!
     const event_exist = await matches_utils.checkIfEventExist(req.body.event_id);
     if (event_exist)
       throw { status: 409, message: "event_id taken" };
