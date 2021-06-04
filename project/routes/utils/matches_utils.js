@@ -153,7 +153,7 @@ async function getAllMatches() {
  * This function returns all matches (and events if they exist) sorted by match's date
  */
 async function getAllMatchesSortByDate() {
-  const mathces = await DButils.execQuery(
+  const matches = await DButils.execQuery(
     `select * from Matches ORDER BY match_date`
   );
   return await getMatchesAndEvents(matches);
@@ -174,7 +174,7 @@ async function getAllMatchesSortByTeam() {
  */
 async function getPastGames() {
   const today = new Date();
-  const mathces = await DButils.execQuery(
+  const matches = await DButils.execQuery(
     `select * from Matches where match_hour<='${today.toISOString()}'`
   );
   return await getMatchesAndEvents(matches);
@@ -197,9 +197,10 @@ async function getFutureGames() {
  */
 async function getPastMatchesByTeam(team_id) {
   const today = new Date();
-  const mathces = await DButils.execQuery(
+  const matches = await DButils.execQuery(
     `select * from Matches where match_hour<='${today.toISOString()}' and (home_team='${team_id}' or away_team='${team_id}')`
   );
+  
   return await getMatchesAndEvents(matches);
 }
 

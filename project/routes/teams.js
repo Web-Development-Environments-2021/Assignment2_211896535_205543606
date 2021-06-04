@@ -16,7 +16,9 @@ router.get("/teamFullDetails/:teamId", async (req, res, next) => {
     const coach_id = await teams_utils.getCoachByTeam(req.params.teamId);
     const coach_details = await coach_utils.getCoachDetailsById(coach_id.data.coach_id);
     const past_matches = await matches_utils.getPastMatchesByTeam(req.params.teamId);
+    console.log(past_matches);
     const future_matches = await matches_utils.getFutureMatchesByTeam(req.params.teamId);
+    console.log(future_matches);
     //insert to results
     results.push(team_details);
     results.push(coach_details);
