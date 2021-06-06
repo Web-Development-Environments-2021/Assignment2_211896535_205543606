@@ -1,6 +1,7 @@
 const axios = require("axios");
 const api_domain = "https://soccer.sportmonks.com/api/v2.0";
 const LEAGUE_ID = 271;
+const STAGE_ID = 77453565;
 
 /**
  * This function gets the league details
@@ -15,13 +16,25 @@ async function getLeagueDetails() {
       },
     }
   );
-  const stage = await axios.get(`${api_domain}/stages/${league.data.data.current_stage_id}`,
-    {
-      params: {
-        api_token: process.env.api_token,
-      },
-    }
-  );
+  let stage;
+  if (league.data.data.current_stage_id != null){
+    stage = await axios.get(`${api_domain}/stages/${league.data.data.current_stage_id}`,
+      {
+        params: {
+          api_token: process.env.api_token,
+        },
+      }
+    );
+  }
+  else{
+  stage = await axios.get(`${api_domain}/stages/${STAGE_ID}`,
+      {
+        params: {
+          api_token: process.env.api_token,
+        },
+      }
+    );
+  }
   return {
     league_name: league.data.data.name,
     current_season_name: league.data.data.season.data.name,

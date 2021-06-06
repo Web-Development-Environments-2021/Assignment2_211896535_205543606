@@ -14,7 +14,6 @@ CREATE TABLE dbo.Matches
     referee_id INT NOT NULL,
     stadium VARCHAR(255) NOT NULL,
     result VARCHAR(255),
-    event_calendar xml,
     FOREIGN KEY (referee_id)
     REFERENCES Referees (referee_id)
     ON DELETE NO ACTION ON UPDATE NO ACTION

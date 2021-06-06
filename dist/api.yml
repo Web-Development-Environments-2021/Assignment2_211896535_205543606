@@ -176,7 +176,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/PastMatch"
+                  $ref: "#/components/schemas/FutureMatch"
         "401":
           description: user is not authorized
     post:
@@ -330,7 +330,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PastMatch"
+              $ref: "#/components/schemas/FutureMatch"
       responses:
         "200":
           description: Succesfully added this match
@@ -865,6 +865,10 @@ components:
     FutureMatch:
       type: object
       properties:
+        match_id:
+          type: integer
+          description: match's id
+          example: 123
         match_date:
           type: dateTime
           description: the date of the match
@@ -881,6 +885,10 @@ components:
           type: string
           description: 3 letters of the away team
           example: RMA
+        referee_id:
+          type: integer
+          description: referee's id
+          example: 1
         stadium:
           type: string
           description: the name of the match's stadium
@@ -899,11 +907,11 @@ components:
         event_date:
           type: date
           description: the event's date to add to the match
-          example: 11-11-2021
+          example: "2021-04-21"
         event_hour:
           type: dateTime
           description: the event's date and time to add to the match
-          exmple: 11-11-2021 21:37:57
+          example: "2021-04-21 21:30:00"
         event_minute:
           type: int
           description: the even'ts minute it happened on the match

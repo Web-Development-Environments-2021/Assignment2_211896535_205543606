@@ -31,8 +31,6 @@ async function getTeamsInfo(team_ids_array){
   return teams_info;
 }
 
-
-
 async function getCoachByTeam(team_id){
   try{
     const team = await axios.get(

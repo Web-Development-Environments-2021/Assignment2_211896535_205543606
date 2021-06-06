@@ -12,6 +12,8 @@ const referees_utils = require("./utils/referees_utils")
 router.post("/addReferee", async (req, res, next) => {
   try {
     //check if id already exist
+    if(req.session.username!=="admin")
+    throw { status: 401, message: "not admin, action not allowed" };
     const referees = await referees_utils.getReferees();
         if (referees && referees.find((x) => x.referee_id === req.body.referee_id))
             throw { status: 409, message: "referee_id taken" };

@@ -13,9 +13,8 @@ router.get("/getDetails", async (req, res, next) => {
     //should add future games of user from OUR DB
     const today = new Date().toISOString().slice(0, 19).replace('T', ' ');
     const closest_match = await matches_utils.getClosestMatch(today);
-    console.log(closest_match);
     full_details.push(league_details);
-    if (closest_match.length!=null){
+    if (closest_match != null && closest_match.length > 0){
       const closest_match_preview = await matches_utils.getMatchPreviewById(closest_match[0].match_id);
       full_details.push(closest_match_preview);
     }

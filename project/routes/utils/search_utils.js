@@ -17,17 +17,16 @@ async function searchPlayers(player_query){
                 api_token: process.env.api_token,
             },
         });
-        // If name is 1 word or 2
-        let search_query = player_query.split(" ");
         players_results_array.data.data.map((player)=>{
-            if (player.team_id != null && player.position != null && player.team.data.league != null){
-                if (player.team.data.league.data.id == LEAGUE_ID){
-                    if (search_query.length === 1){
-                        addPlayerToArray(players_list, player);
-                    }
-                    else{
-                        if(search_query[0] === player.firstname && search_query[1] === player.lastname){
-                            addPlayerToArray(players_list, player);
+            if (player.team_id != null && player.position != null){
+                if(player.team != null){
+                    if(player.team.data != null){
+                        if(player.team.data.league != null){
+                            if (player.team.data.league.data.id == LEAGUE_ID){
+                                if (player.fullname.includes(player_query)){
+                                    addPlayerToArray(players_list, player);
+                                }
+                            }
                         }
                     }
                 }
@@ -54,18 +53,17 @@ async function searchPlayersFilterPos(player_query, position_query){
                 api_token: process.env.api_token,
             },
         });
-        // If name is 1 word or 2
-        let search_query = player_query.split(" ");
         players_results_array.data.data.map((player)=>{
-            if (player.team_id != null && player.position != null && player.team.data.league != null){
-                cur_player_pos = player.position.data.name;
-                if (player.team.data.league.data.id == LEAGUE_ID && cur_player_pos == position_query){
-                    if (search_query.length === 1){
-                        addPlayerToArray(players_list, player);
-                    }
-                    else{
-                        if(search_query[0] === player.firstname && search_query[1] === player.lastname){
-                            addPlayerToArray(players_list, player);
+            if (player.team_id != null && player.position != null){
+                if(player.team != null){
+                    if(player.team.data != null){
+                        if(player.team.data.league != null){
+                            cur_player_pos = player.position.data.name;
+                            if (player.team.data.league.data.id == LEAGUE_ID && cur_player_pos == position_query){
+                                if (player.fullname.includes(player_query)){
+                                    addPlayerToArray(players_list, player);
+                                }
+                            }
                         }
                     }
                 }
@@ -92,18 +90,17 @@ async function searchPlayersFilterTeam(player_query, team_query){
                 api_token: process.env.api_token,
             },
         });
-        // If name is 1 word or 2
-        let search_query = player_query.split(" ");
         players_results_array.data.data.map((player)=>{
-            if (player.team_id != null && player.position != null && player.team.data.league != null){
-                cur_player_team = player.team.data.name;
-                if (player.team.data.league.data.id == LEAGUE_ID && cur_player_team == team_query){
-                    if (search_query.length === 1){
-                        addPlayerToArray(players_list, player);
-                    }
-                    else{
-                        if(search_query[0] === player.firstname && search_query[1] === player.lastname){
-                            addPlayerToArray(players_list, player);
+            if (player.team_id != null && player.position != null){
+                if(player.team != null){
+                    if(player.team.data != null){
+                        if(player.team.data.league != null){
+                            cur_player_team = player.team.data.name;
+                            if (player.team.data.league.data.id == LEAGUE_ID && cur_player_team == team_query){
+                                if (player.fullname.includes(player_query)){
+                                    addPlayerToArray(players_list, player);
+                                }
+                            }
                         }
                     }
                 }
@@ -122,6 +119,7 @@ async function searchPlayersFilterTeam(player_query, team_query){
  * @param {Object} player 
  */
 function addPlayerToArray(players_arr, player){
+    const cur_player_pos = player.position.data.name;
     players_arr.push(
         {
             player_id: player.player_id,
@@ -147,12 +145,16 @@ async function searchTeams(team_query){
             },
         });
         teams_results_array.data.data.map((team)=>{
-            if(team.league.data.id == LEAGUE_ID){
-                teams_list.push({
-                    team_id: team.id,
-                    team_name: team.name,
-                    team_logo: team.logo_path
-                });
+            if(team.league != null){
+                if(team.league.data != null){
+                    if(team.league.data.id == LEAGUE_ID){
+                        teams_list.push({
+                            team_id: team.id,
+                            team_name: team.name,
+                            team_logo: team.logo_path
+                        });
+                    }
+                }
             }
         });
         return teams_list;

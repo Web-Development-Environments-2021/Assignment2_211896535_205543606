@@ -1,4 +1,4 @@
--- Create a new database called 'ProjectDB'
+-- Create a new database called 'Soccer'
 -- Connect to the 'master' database to run this snippet
 USE master
 GO
@@ -6,7 +6,7 @@ GO
 IF NOT EXISTS (
     SELECT name
         FROM sys.databases
-        WHERE name = N'ProjectDB'
+        WHERE name = N'Soccer'
 )
-CREATE DATABASE ProjectDB
+CREATE DATABASE Soccer
 GO

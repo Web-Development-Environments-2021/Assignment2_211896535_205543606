@@ -14,7 +14,7 @@ const DButils = require("./DButils");
  */
 async function addMatch(match_id,match_date,match_hour,home_team,away_team,referee_id,stadium) {
   await DButils.execQuery(
-    `insert into Matches values ('${match_id}','${match_date}','${match_hour}','${home_team}','${away_team}','${referee_id}','${stadium}',NULL, NULL)`
+    `insert into Matches values ('${match_id}','${match_date}','${match_hour}','${home_team}','${away_team}','${referee_id}','${stadium}',NULL)`
   );
 }
 
@@ -91,7 +91,7 @@ async function addEventCalendar(event_id,event_date,event_hour,event_minute,even
 
 async function getMatchPreviewById(match_id) {
   const preview = await DButils.execQuery(
-    `SELECT match_date,match_hour,home_team,away_team,stadium FROM Matches WHERE Matches.match_id ='${match_id}'`
+    `SELECT match_date,match_hour,home_team,away_team,referee_id,stadium FROM Matches WHERE Matches.match_id ='${match_id}'`
   );
   if (preview)
     return preview[0]; //only one game not an table
