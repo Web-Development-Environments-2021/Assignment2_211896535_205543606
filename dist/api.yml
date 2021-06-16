@@ -872,11 +872,11 @@ components:
         match_date:
           type: dateTime
           description: the date of the match
-          example: 2021-04-25
+          example: "2021-04-25"
         match_hour:
           type: dateTime
           description: the date and exact hour of the match
-          example: 2021-04-25T21:30:00
+          example: "2021-04-25T21:30:00"
         home_team:
           type: string
           description: 3 letters of the home team
