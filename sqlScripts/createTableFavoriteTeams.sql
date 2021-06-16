@@ -11,7 +11,7 @@ CREATE TABLE dbo.FavoriteTeams
     PRIMARY KEY (username, team_id),
     FOREIGN KEY (username) 
     REFERENCES Users (username)
-    ON DELETE NO ACTION ON UPDATE NO ACTION,
+    ON DELETE CASCADE ON UPDATE CASCADE,
     -- specify more columns here
 );
 GO

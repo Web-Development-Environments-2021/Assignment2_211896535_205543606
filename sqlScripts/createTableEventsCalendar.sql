@@ -14,6 +14,6 @@ CREATE TABLE dbo.EventsCalendar
     match_id INT NOT NULL,
     FOREIGN KEY (match_id)
     REFERENCES Matches (match_id)
-    ON DELETE NO ACTION ON UPDATE NO ACTION
+    ON DELETE CASCADE ON UPDATE CASCADE
 );
 GO

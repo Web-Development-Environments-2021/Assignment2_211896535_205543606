@@ -12,9 +12,9 @@ CREATE TABLE dbo.FavoriteMatches
     PRIMARY KEY (username, match_id),
     FOREIGN KEY (username) 
     REFERENCES Users (username)
-    ON DELETE NO ACTION ON UPDATE NO ACTION,
+    ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (match_id) 
     REFERENCES Matches (match_id)
-    ON DELETE NO ACTION ON UPDATE NO ACTION
-);
+    ON DELETE CASCADE ON UPDATE CASCADE
+    );
 GO

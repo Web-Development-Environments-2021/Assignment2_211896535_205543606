@@ -16,7 +16,7 @@ CREATE TABLE dbo.Matches
     result VARCHAR(255),
     FOREIGN KEY (referee_id)
     REFERENCES Referees (referee_id)
-    ON DELETE NO ACTION ON UPDATE NO ACTION
+    ON DELETE CASCADE ON UPDATE CASCADE
 
     -- specify more columns here
 );
