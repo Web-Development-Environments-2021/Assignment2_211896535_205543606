@@ -3,7 +3,6 @@ const axios = require("axios");
 const api_domain = "https://soccer.sportmonks.com/api/v2.0";
 const LEAGUE_ID = 271;
 
-
 /**
  * This function gets a player query and returns the list of player match the query
  * @param {string} player_query - player's name query
@@ -23,7 +22,7 @@ async function searchPlayers(player_query){
                     if(player.team.data != null){
                         if(player.team.data.league != null){
                             if (player.team.data.league.data.id == LEAGUE_ID){
-                                if (player.fullname.includes(player_query)){
+                                if (player.fullname.toLowerCase().indexOf(player_query.toLowerCase())!==-1){
                                     addPlayerToArray(players_list, player);
                                 }
                             }
@@ -60,7 +59,7 @@ async function searchPlayersFilterPos(player_query, position_query){
                         if(player.team.data.league != null){
                             cur_player_pos = player.position.data.name;
                             if (player.team.data.league.data.id == LEAGUE_ID && cur_player_pos == position_query){
-                                if (player.fullname.includes(player_query)){
+                                if (player.fullname.toLowerCase().includes(player_query.toLowerCase())){
                                     addPlayerToArray(players_list, player);
                                 }
                             }
@@ -97,7 +96,7 @@ async function searchPlayersFilterTeam(player_query, team_query){
                         if(player.team.data.league != null){
                             cur_player_team = player.team.data.name;
                             if (player.team.data.league.data.id == LEAGUE_ID && cur_player_team == team_query){
-                                if (player.fullname.includes(player_query)){
+                                if (player.fullname.toLowerCase().includes(player_query.toLowerCase())){
                                     addPlayerToArray(players_list, player);
                                 }
                             }
